@@ -9,6 +9,19 @@ var clean = require('gulp-clean');
 var autoprefixer = require('gulp-autoprefixer');
 var babel = require('gulp-babel');
 
+// videos
+gulp.task('clean-videos', function() {
+    return gulp.src('build/assets/videos/*', {
+            read: false
+        })
+        .pipe(clean());
+});
+gulp.task('videos', ['clean-videos'], function() {
+    return gulp.src('src/assets/videos/**')
+        .pipe(gulp.dest('build/assets/videos/'));
+});
+
+
 // image
 gulp.task('clean-images', function() {
     return gulp.src('build/assets/images/*', {
@@ -104,7 +117,7 @@ gulp.task('webserver', function() {
         }));
 });
 
-gulp.task('default', ['html', 'css', 'js', 'images'], function() {
+gulp.task('default', ['html', 'css', 'js', 'images', 'videos'], function() {
     gulp.start('webserver');
     gulp.start('watch');
 });
