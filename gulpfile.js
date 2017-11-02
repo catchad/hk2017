@@ -101,6 +101,7 @@ gulp.task('watch', function() {
     gulp.watch('src/assets/styles/*.scss', ['css']);
     gulp.watch('src/assets/scripts/*', ['js']);
     gulp.watch('src/assets/images/**', ['images']);
+    gulp.watch('src/assets/videos/**', ['videos']);
     gulp.watch('src/*', ['html']);
 });
 
@@ -108,7 +109,7 @@ gulp.task('watch', function() {
 gulp.task('webserver', function() {
     gulp.src('build/')
         .pipe(webserver({
-            // host: '0.0.0.0',
+            host: '0.0.0.0',
             port: 9527,
             livereload: true,
             directoryListing: false,
