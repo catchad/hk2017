@@ -3,6 +3,18 @@
 @import "compass/reset";
 
 .videoContainer {
+	position: relative;
 	display: inline-block;
 	font-size: 0;
+}
+.point {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 10px;
+	height: 10px;
+	margin-top: -5px;
+	margin-left: -5px;
+	background-color: #FF0000;
+	transition: transform 0.03s linear;
 }
