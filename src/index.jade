@@ -4,7 +4,83 @@ html(lang="zh-tw")
 		meta(charset="UTF-8")
 		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
 		link(rel="stylesheet", href="assets/styles/main.css")
-		title Document
+		title 旺福與你一起創作的聖誕曲
+
+
 	body
-		p test
-		
+		header
+			.logo
+				img(src="", alt="")
+
+			.menu-switch
+				span
+				span
+				span
+
+			nav#menu
+				li
+					a(href="")
+				li
+					a(href="")
+				li
+					a(href="")
+				li
+					a(href="")
+				li
+					a(href="")
+
+		main
+			canvas#bg_home
+				//- bg1 一開始放空
+				//- bg2 mami向前走
+				//- bg3 把卡片收起來（需要加入使用者輸入文字並對準位置	）
+
+				//- bg4 mami loading
+
+			.mask
+
+			section.step#step1
+				.title
+					h1 TITLE
+				.content
+					p 最新MV現在公開
+					.btn PLAY
+			section.step#step2
+				.title
+					h1 TITLE
+				.content
+					form(action="")
+						//- 限制三個字元
+						input#name(type="text" maxlength='3')
+
+					.btn 看MV
+			section.step#step3
+				.title
+					h1 TITLE
+					p.tips 等一下下喔 下載即將完成
+
+				.content
+					.btn 播放
+
+			section.step#step4
+				.title
+					h1 TITLE
+					p.tips 等一下下喔 下載即將完成
+
+				#video
+					//- for master Kuei
+
+				.content
+					.btn 求你，分享一下MV
+					.btn 看行程抽機票
+
+
+
+		footer
+
+
+		//- script(src='assets/scripts/lib.min.js')
+		script(src='assets/scripts/jquery-3.2.1.min.js')
+		script(src='assets/scripts/TweenMax.min.js')
+		script(src='assets/scripts/hammer.min.js')
+		script(src='assets/scripts/main.js')

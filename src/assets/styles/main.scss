@@ -1,3 +1,654 @@
 @charset "UTF-8";
-@import "compass/css3";
-@import "compass/reset";
+@import "compass/css3", "compass/reset";
+@import "mixin";
+@import url(//fonts.googleapis.com/earlyaccess/cwtexyen.css);
+
+$air_gary: #d9d6d4;
+$sky_blue: #020f3c;
+$red: #d81100;
+$bg_green: #87a401;
+
+// common
+body, html{
+	font-size: 12px;
+	font-weight: bold;
+	@include mobile_m {
+		font-size: 14px;
+	}
+	@include tablet {
+		font-size: 18px;
+	}
+}
+body{
+	font-family: 'cwTeXYen', sans-serif;
+	color: #fff;
+}
+
+
+main{
+	position: relative;
+	margin-top: 58px;
+	min-height: 100vh;
+	overflow: hidden;
+}
+section{
+	position: relative;
+}
+a{
+	color: inherit;
+	text-decoration: none;
+}
+.flex{
+	@include flex-box;
+}
+.row{
+	display: block;
+}
+.color_red{ color: $red; }
+
+.big_title{
+	position: relative;
+	display: inline-block;
+	margin-top: -1.5rem;
+	font-size: 1.8rem;
+	line-height: 2.5rem;
+
+	&:before, &:after{
+		content:'';
+		display: block;
+		width: 100%;
+		height: 0;
+		padding-top: 3%;
+		background: url('../images/deco-line.png') center no-repeat;
+		background-size: 100% auto;
+	}
+}
+.sub_title{
+	position: relative;
+	font-size: 1rem;
+	line-height: 1.25rem;
+	margin-top: 1.3rem;
+}
+
+.btn{
+	@include box-sizing(border-box);
+	cursor: pointer;
+}
+
+
+.quarter{
+	@include flex-box;
+	@include flex-center;
+	position: relative;
+
+	.flex_inner{
+		max-width: 21%;
+		margin: 0 2%;
+	}
+}
+
+.circle_box{
+	@include border-radius(50%);
+	@include flex-box;
+	@include flex-center;
+	position: relative;
+	width: 80px; height: 0px;
+	max-width: 100%;
+	padding-top: 100%;
+	margin: 0 auto;
+
+	@include mobile_s {
+		width: 70px;
+	}
+	@include tablet {
+		width: 100px;
+	}
+
+	.text{
+		@include translate(-50%, -50%);
+		position: absolute;
+		left: 50%; top: 50%;
+		display: block;
+		font-size: 1.2rem;
+		line-height: 1.4rem;
+		white-space: nowrap;
+		text-align: center;
+	}
+}
+
+// header
+header{
+	@include flex-box;
+	@include align-items(center);
+
+	position: fixed;
+	left: 0; top: 0;
+	width: 100%;
+	height: 55px;
+	background-color: #fff;
+	z-index: 500;
+
+	&:after{
+		content: '';
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 3px;
+		left: 0; top: 100%;
+		pointer-events: none;
+		background: url('../images/deco-menu.jpg') center no-repeat;
+		background-size: cover;
+	}
+
+	.logo{
+		height: 26px;
+		margin-left: 10px;
+	}
+
+	.menu-switch{
+		@include transition(.5s);
+		@include btn-close;
+		margin-left: auto;
+		margin-right: 10px;
+		.box{ background-color: transparent; }
+		span{
+			&:nth-child(1), &:nth-child(3){
+	      @include transform(translate(0, 0) rotate(0deg));
+	    }
+	    &:nth-child(2){
+	      opacity: 1;
+	    }
+		}
+
+		&.expend{
+			.box{ background-color: #229000; }
+			span{
+				&:nth-child(1){
+		      @include transform(translate(0, 6px) rotate(45deg));
+		    }
+		    &:nth-child(2){
+		      opacity: 0;
+		    }
+		    &:nth-child(3){
+		      @include transform(translate(0, -6px) rotate(-45deg));
+		    }
+			}
+		}
+	}
+}
+// menu
+#menu{
+	display: none;
+}
+
+
+// section
+
+// #tour
+#tour{
+	text-align: center;
+	background-color: $air_gary;
+
+	.deco-firework{
+		width: 95%;
+		max-width: 900px;
+		margin: 0 auto;
+		padding-top: 1rem;
+	}
+	.airplane{ color: #444; }
+	.big_title,
+	.sub_title{
+		z-index: 100;
+	}
+
+	.seat{
+		position: relative;
+		margin-top: 12%;
+		background: url('../images/bg_airplane.jpg') bottom center no-repeat;
+		background-size: 200% auto;
+
+		@include tablet {
+			background-size: 1920px auto;
+			margin-top: 85px;
+		}
+
+		.bg{
+			@include translate( -50%, -35%);
+			position: absolute;
+			left: 50%; top: 0px;
+			max-width: 190%;
+
+			pointer-events: none;
+			z-index: 50;
+			@include tablet {
+				max-width: 170%;
+			}
+			@include desktop_s {
+				width: 120%;
+				max-width: 1920px;
+			}
+		}
+		.light{
+			position: absolute;
+			width: 100%;
+			bottom: 0; left: 0;
+			z-index: 50;
+		}
+
+		.flex{
+			@include justify-content(center);
+			position: relative;
+			padding: 0 1%;
+			margin: 0 auto;
+
+			@include tablet {
+				max-width: 700px;
+			}
+		}
+		img{
+			max-width: 100%;
+		}
+
+		.profile{
+			position: relative;
+			width: 25%;
+
+			// &:after{
+			// 	content: '';
+			// 	position: absolute;
+			// 	display: block;
+			// 	left: 0; top: 0;
+			// 	width: 100%; height: 100%;
+			// 	background: url('../images/airplane.png') no-repeat;
+			// 	background-size: cover;
+			// }
+
+			.dream{
+				position: absolute;
+				width: 82%;
+				left: 0;
+				bottom: 66%;
+				z-index: 50;
+
+			}
+			&:nth-child(1) .dream{ left: 7%; }
+			&:nth-child(2) .dream{ left: 0%; }
+			&:nth-child(3) .dream{ left: 25%; }
+			&:nth-child(4) .dream{ left: 10%; }
+		}
+
+		.flight_name{
+			position: relative;
+			padding-bottom: 2rem;
+			font-size: .825rem;
+			line-height: 1rem;
+			color: $red;
+
+			.way{
+				@include align-items(center);
+				color: rgba(#000, .7);
+				font-size: 1.5rem;
+				line-height: 2rem;
+
+			}
+			span{
+				display: inline-block;
+
+			}
+			img{
+				display: inline-block;
+				height: 1rem;
+				margin: 0 .75rem;
+			}
+
+			@include tablet {
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+				.way{
+					font-size: 2.5rem;
+					line-height: 2.75rem;
+				}
+			}
+
+		}
+	}
+	.tour-list{
+		background-color: $sky_blue;
+		padding-bottom: 3.5rem;
+		.member{
+			margin-top: 50px;
+			font-size: 1.5rem;
+			line-height: 1.5rem;
+
+			span{
+				font-size: 1rem;
+				line-height: 1rem;
+				display: block;
+			}
+
+			@include tablet {
+				font-size: 2rem;
+				line-height: 2.25rem;
+				span{
+					font-size: 1.25rem;
+					line-height: 1.5rem;
+				}
+			}
+		}
+
+		.circle_box{
+			margin-top: 40px;
+			&:before{
+				@include translateX(-50%);
+				content: '';
+				display: block;
+				position: absolute;
+				left: 50%; top: -41px;
+				width: 1px; height: 40px;
+				background-color: rgba(#fff, .2);
+			}
+
+			&:nth-child(2):before{
+				content: none;
+			}
+
+			&.color-a1,
+			&.color-b4{ border: 1px solid #fece05; }
+
+			&.color-a2,
+			&.color-c2{ border: 1px solid #067b17; }
+
+			&.color-a3,
+			&.color-d2{ border: 1px solid #8d03b8; }
+
+			&.color-a4,
+			&.color-b3{ border: 1px solid #0bfbf8; }
+
+			&.color-a5,
+			&.color-c4{ border: 1px solid #4cfb02; }
+
+			&.color-b1,
+			&.color-c5,
+			&.color-d1{ border: 1px solid #98dfd1; }
+
+			&.color-b2,
+			&.color-c3,
+			&.color-d5{ border: 1px solid #fff603; }
+
+			&.color-b5,
+			&.color-d3{ border: 1px solid #f59dfb; }
+
+			&.color-c1,
+			&.color-d4{ border: 1px solid #d202a6; }
+		}
+	}
+}
+
+#vote_event{
+	padding-bottom: 50%;
+	background: $sky_blue url('../images/bg_tour.jpg') bottom center no-repeat;
+	background-size: 200% auto;
+	@include tablet {
+
+		background-size: 1920px auto;
+		padding-bottom: 500px;
+	}
+
+	.big_title{
+		padding-top: 3.5rem;
+		margin-top: 0;
+		&:before, &:after{
+			background-image: url('../images/deco-line2.png');
+		}
+	}
+	.sub_title{
+		font-size: 1.1rem;
+	}
+	.vote{
+		@include flex-box;
+		margin-top: 2rem;
+	}
+
+	.circle_box{
+		@include flex-direction(coulmn);
+		margin: 0 auto;
+		background-color: #fff;
+		color: $red;
+	}
+	.text{
+		font-size: 1.5rem;
+		line-height: 1.5rem;
+		span{
+			display: block;
+			font-size: 1rem;
+			line-height: 1rem;
+		}
+	}
+	.btn-promote{
+		@include btn-box;
+		margin-top: 4.5rem;
+
+		img{
+			max-width: 40px;
+			padding-right: .5rem;
+		}
+	}
+
+}
+
+
+// popup page
+.popup{
+	@include flex-center;
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	left: 0; top: 0;
+	background-color: $bg_green;
+	text-align: center;
+	z-index: 700;
+
+	&.show{ @include flex-box; }
+
+	h3{
+		font-size: 2.5rem;
+		line-height: 3rem;
+	}
+	.btn{
+		@include btn-box;
+	}
+	.btn-close{
+		position: absolute;
+		right: 10px; top: 0;
+		@include btn-close;
+	}
+}
+
+#spot_info{
+	overflow: auto;
+	&.show{ display: block; }
+
+	.inner{
+		padding: 4rem 0;
+		overflow: hidden;
+	}
+
+	.deco-firework{
+		max-width: 310px;
+	}
+
+	.big_title{
+		&:before, &:after{
+			background-image: url('../images/deco-line3.png');
+		}
+	}
+	.spot{
+		margin-top: .5rem;
+
+		span{
+			display: block;
+		}
+		.style{
+			font-size: 1.15rem;
+			line-height: 1.5rem;
+
+		}
+		.location{
+			font-size: 2.4rem;
+			line-height: 3rem;
+		}
+	}
+
+	.img_show{
+		position: relative;
+		max-width: 800px;
+		margin: 0 auto;
+		margin-top: 2rem;
+
+		.flex{
+			@include flex-wrap(nowrap);
+			position: relative;
+			left: 20%;
+
+		}
+		.item{
+			@include flex(0 0 auto);
+			width: 60%;
+			padding-right: 10%;
+			.name{
+				position: relative;
+				font-size: 1rem;
+				line-height: 2rem;
+				padding-left: 20px;
+				text-align: left;
+
+				&:before{
+					content: '';
+					display: block;
+					position: absolute;
+					left: 0; top: 0px;
+					width: 17px; height: 2rem;
+					background: url('../images/icon-zoom.png') center no-repeat;
+					background-size: 100% auto;
+				}
+			}
+		}
+
+		img{
+			max-width: 100%;
+		}
+	}
+
+	.info{
+		text-align: left;
+		padding: 0 10%;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.tags{
+		margin-top: 3.5rem;
+		font-size: 0;
+		.tag{
+			@include border-radius(40px);
+			display: inline-block;
+			padding: 0 1.5rem;
+			font-size: 1.15rem;
+			line-height: 2rem;
+			color: $red;
+			background-color: rgba(#fff, .4);
+			margin-right: .5rem;
+		}
+	}
+
+	.desc{
+		margin-top: 1.5rem;
+
+		p{
+			font-size: 1.15rem;
+			line-height: 2rem;
+			text-align: justify;
+
+		}
+	}
+
+
+
+}
+
+#promote_code{
+
+	.desc{
+		font-size: 1.15rem;
+		line-height: 2rem;
+		margin-top: 1rem;
+	}
+	.code{
+		font-size: 4rem;
+		line-height: 6rem;
+		margin: 4rem 0;
+	}
+}
+
+#user_data{
+
+	form{
+		padding-top: 1rem;
+		font-size: 1.5rem;
+		line-height: 2rem;
+		color: #fff;
+	}
+	.row{
+		@include flex-box;
+		@include align-items(center);
+		margin-top: 2rem;
+	}
+	.check{
+		margin-top: 1rem;
+		font-size: 1.15rem;
+	}
+	input[type=text]{
+		@include flex(1 1 auto);
+		@include box-sizing(border-box);
+		background-color: transparent;
+		outline: none;
+		border:none;
+		border-bottom: 1px solid #fff;
+		margin-left: .5rem;
+		font-size: 1.25rem;
+		line-height: 2rem;
+		color: #fff;
+		padding: 0 1rem;
+	}
+	input[type=checkbox]{
+		position: absolute;
+		width: 0px; height: 0px;
+		left: -9999px;
+
+		& + label:before{
+			content: '';
+			display: inline-block;
+			width: 16px; height: 16px;
+			position: relative;
+			top: 5px;
+			border: 1px solid #fff;
+			margin-right: .5rem;
+			vertical-align: top;
+			font-size: 12px;
+			line-height: 20px;
+		}
+		&:checked + label:before{
+			content: '✔'
+		}
+	}
+	label{
+		position: relative;
+	}
+	.btn{
+		margin-top: 2rem;
+		background-color: transparent;
+		outline: none;
+		color: #fff;
+	}
+}

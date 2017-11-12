@@ -1,0 +1,93 @@
+
+@mixin flex-box{
+	display: -ms-flexbox;
+	@include display-flex;
+}
+@mixin flex-center{
+	-ms-flex-align: center;
+	-ms-flex-pack: center;
+	@include justify-content(center);
+	@include align-items(center);
+}
+
+@mixin btn-box{
+  @include border-radius(40px);
+  @include display-flex(inline-flex);
+  @include align-items(center);
+  border: 1px solid #fff;
+  font-size: 1.3rem;
+  line-height: 1.5rem;
+  padding: .5rem 2rem;
+}
+@mixin btn-close{
+  width: 55px; height: 55px;
+  .box{
+    @include border-radius(50%);
+    @include flex-box;
+    @include flex-center;
+    @include flex-direction(column);
+    position: relative;
+    background-color: #229000;
+    width: 41px; height: 41px;
+    left: 14px; top: 7px;
+  }
+
+  span{
+    @include border-radius(1px);
+    display: block;
+    width: 25px;  height: 2px;
+    background-color: $red;
+    margin: 2px auto;
+    &:nth-child(1){
+      @include transform(translate(0, 6px) rotate(45deg));
+    }
+    &:nth-child(2){
+      opacity: 0;
+    }
+    &:nth-child(3){
+      @include transform(translate(0, -6px) rotate(-45deg));
+    }
+
+  }
+
+}
+
+//medai query
+@mixin desktop_l {
+  @media (min-width: 1921px) {
+    @content;
+  }
+}
+@mixin desktop_m {
+  @media (max-width: 1366px) {
+    @content;
+  }
+}
+@mixin desktop_s {
+  @media (min-width: 990px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 481px) {
+    @content;
+  }
+}
+
+@mixin mobile_l {
+  @media (min-width: 376px) {
+    @content;
+  }
+}
+@mixin mobile_m {
+  @media (min-width: 321px) {
+    @content;
+  }
+}
+
+@mixin mobile_s {
+  @media (max-width: 320px) {
+    @content;
+  }
+}
