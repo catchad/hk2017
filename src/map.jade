@@ -5,17 +5,20 @@ html(lang="zh-tw")
 		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
 		link(rel="stylesheet", href="assets/styles/main.css")
 		title 旺福與你一起創作的聖誕曲 - 聖誕地圖
+
 	body
 		header
+			include _header.jade
+
 		main
+			include _tour_inner.jade
 			//- 串 google map
+			#hkmap
 
 
-		footer
+		include _footer.jade
+
+		script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLLqkXFCrs7p3rwd1vUkvkG1CN01mdeXY")
+		script(src='assets/scripts/map.js')
 
 
-		//- script(src='assets/scripts/lib.min.js')
-		script(src='assets/scripts/jquery-3.2.1.min.js')
-		script(src='assets/scripts/TweenMax.min.js')
-		script(src='assets/scripts/hammer.min.js')
-		script(src='assets/scripts/main.js')

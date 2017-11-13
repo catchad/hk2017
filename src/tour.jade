@@ -1,16 +1,3 @@
-//- mixin for close btn
-mixin btn-close
-	.btn-close
-		.box
-			span
-			span
-			span
-//- mixin for tour
-mixin spot(name)
-	.btn.circle_box(class!=attributes.class)
-		p.text!= name
-
-
 <!DOCTYPE html>
 html(lang="zh-tw")
 	head
@@ -19,6 +6,8 @@ html(lang="zh-tw")
 		link(rel="stylesheet", href="assets/styles/main.css")
 		title 旺福與你一起創作的聖誕曲 - 聖誕行程
 	body
+		include _mixin.jade
+
 		header
 			include _header.jade
 
@@ -30,7 +19,6 @@ html(lang="zh-tw")
 				.inner
 					img(src="", alt="")
 
-
 			section.popup#promote_code.show
 				+btn-close
 				.inner
@@ -38,8 +26,6 @@ html(lang="zh-tw")
 					p.desc 小字說明文案待補，小字說明文案待補 小字說明文案待補
 					p.code HUJ1s3123
 					a(href="").btn.btn-buy 前往購買
-
-
 
 			section.popup#user_data.show
 				+btn-close
@@ -64,7 +50,6 @@ html(lang="zh-tw")
 							label(for="user_agree") 我已閱讀並同意相關活動辦法與隱私權政策
 
 						button.btn.btn-submit 確認送出
-
 
 			section#tour
 				#bg_tour

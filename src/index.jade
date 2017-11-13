@@ -9,78 +9,56 @@ html(lang="zh-tw")
 
 	body
 		header
-			.logo
-				img(src="", alt="")
-
-			.menu-switch
-				span
-				span
-				span
-
-			nav#menu
-				li
-					a(href="")
-				li
-					a(href="")
-				li
-					a(href="")
-				li
-					a(href="")
-				li
-					a(href="")
+			include _header.jade
 
 		main
-			canvas#bg_home
+			section#home
+				#bg_home
 				//- bg1 一開始放空
 				//- bg2 mami向前走
 				//- bg3 把卡片收起來（需要加入使用者輸入文字並對準位置	）
 
 				//- bg4 mami loading
 
-			.mask
+				.mask
 
-			section.step#step1
-				.title
-					h1 TITLE
-				.content
-					p 最新MV現在公開
-					.btn PLAY
-			section.step#step2
-				.title
-					h1 TITLE
-				.content
-					form(action="")
-						//- 限制三個字元
-						input#name(type="text" maxlength='3')
+				section.step#step1
+					.title
+						h1 TITLE
+					.content
+						p 最新MV現在公開
+						.btn PLAY
+				section.step#step2
+					.title
+						h1 TITLE
+					.content
+						form(action="")
+							//- 限制三個字元
+							input#name(type="text" maxlength='3')
 
-					.btn 看MV
-			section.step#step3
-				.title
-					h1 TITLE
-					p.tips 等一下下喔 下載即將完成
+						.btn 看MV
+				section.step#step3
+					.title
+						h1 TITLE
+						p.tips 等一下下喔 下載即將完成
 
-				.content
-					.btn 播放
+					.content
+						.btn 播放
 
-			section.step#step4
-				.title
-					h1 TITLE
-					p.tips 等一下下喔 下載即將完成
+				section.step#step4
+					.title
+						h1 TITLE
+						p.tips 等一下下喔 下載即將完成
 
-				#video
-					//- for master Kuei
+					#video
+						//- for master Kuei
 
-				.content
-					.btn 求你，分享一下MV
-					.btn 看行程抽機票
-
-
-
-		footer
+					.content
+						.btn 求你，分享一下MV
+						.btn 看行程抽機票
 
 
-		//- script(src='assets/scripts/lib.min.js')
-		script(src='assets/scripts/jquery-3.2.1.min.js')
-		script(src='assets/scripts/TweenMax.min.js')
-		script(src='assets/scripts/hammer.min.js')
-		script(src='assets/scripts/main.js')
+
+		include _footer.jade
+		script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js")
+		script(src='assets/scripts/home.js')
