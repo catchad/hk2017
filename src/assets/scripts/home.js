@@ -133,7 +133,7 @@ $(function() {
   }
   function checkStatus(ticket) {
     var jqxhr = $.ajax({
-      url: '../api/music/' + ticket,
+      url: '/tc/api/music/' + ticket,
       method: 'GET',
       headers: getAuthHeaders(),
       dataType: 'json'
@@ -170,8 +170,8 @@ $(function() {
   function apiMusic(name){
   	var formData = { name: name};
   	var jqxhr = $.ajax({
-      url: '../api/music',
-      method: 'post',
+      url: '/tc/api/music/',
+      method: 'POST',
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify(formData),
       headers: getAuthHeaders(),

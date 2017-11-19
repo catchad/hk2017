@@ -47,8 +47,8 @@ $(function() {
     };
     // jquery >= 1.9
     var jqxhr = $.ajax({
-      url: $(this).attr('action'),
-      method: $(this).attr('method').toUpperCase(),
+      url: '/tc/api/users',
+      method: 'POST',
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify(formData),
       headers: getAuthHeaders(),
