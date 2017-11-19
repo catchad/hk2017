@@ -8,54 +8,71 @@ html(lang="zh-tw")
 
 
 	body
+		include _mixin.jade
+		.full_loader.show
+			p
+				|下載中
+				span.count 0
+				|%
+			+loader
+
 		header
 			include _header.jade
 
 		main
 			section#home
 				#bg_home
-				//- bg1 一開始放空
-				//- bg2 mami向前走
-				//- bg3 把卡片收起來（需要加入使用者輸入文字並對準位置	）
 
-				//- bg4 mami loading
-
-				.mask
-
-				section.step#step1
-					.title
-						h1 TITLE
+				.step#step1
+					img(src="assets/images/home-title.png", alt="").title
 					.content
-						p 最新MV現在公開
-						.btn PLAY
-				section.step#step2
+						.row
+							.btn.btn--big.btn-to_step2
+								span PLAY
+						.row
+							a(href="./tour.html").btn.btn-to_vote
+								span 選旺福路線抽機票，領取機票折扣
+
+				.step#step2
 					.title
-						h1 TITLE
-					.content
+						h2.big_title.color_red 請於卡片處填入姓名
+
+					.name_input
 						form(action="")
-							//- 限制三個字元
-							input#name(type="text" maxlength='3')
-
-						.btn 看MV
-				section.step#step3
-					.title
-						h1 TITLE
-						p.tips 等一下下喔 下載即將完成
+							//- user name
+							input#name1(type="text" maxlength='1' placeholder='')
+							input#name2(type="text" maxlength='1' placeholder='')
+							input#name3(type="text" maxlength='1' placeholder='')
 
 					.content
-						.btn 播放
+						.btn.btn--big.btn-to_step3
+							span 看MV
 
-				section.step#step4
-					.title
-						h1 TITLE
-						p.tips 等一下下喔 下載即將完成
 
+				.step#step3
+					.loading
+						p.tips
+							|等一下下喔
+							br
+							|下載即將完成
+						+loader
+					.content
+						.btn.btn-to_step4
+							span Loading Done
+
+				.step#step4
+					//- video ready click to play
+					.btn.btn--big.btn-play
+						span 播放
+
+				.step#step5
 					#video
 						//- for master Kuei
-
 					.content
-						.btn 求你，分享一下MV
-						.btn 看行程抽機票
+						.btn.btn-share
+							span  求你，分享一下MV
+						a(href="./tour.html").btn
+							span 選旅行路線，抽機票
 
 
 

@@ -20,7 +20,9 @@
   padding: .5rem 2rem;
 }
 @mixin btn-close{
-  width: 55px; height: 55px;
+  width: 50px;
+  height: 100%;
+  // width: 40px; height: 40px;
   .box{
     @include border-radius(50%);
     @include flex-box;
@@ -28,24 +30,28 @@
     @include flex-direction(column);
     position: relative;
     background-color: #229000;
-    width: 41px; height: 41px;
-    left: 14px; top: 7px;
+    width: 50px; height: 50px;
+    left: 0px; top: 5px;
+
+    @include desktop_s {
+      top: 21px;
+    }
   }
 
   span{
     @include border-radius(1px);
     display: block;
-    width: 25px;  height: 2px;
+    width: 30px;  height: 2px;
     background-color: $red;
-    margin: 2px auto;
+    margin: 3px auto;
     &:nth-child(1){
-      @include transform(translate(0, 6px) rotate(45deg));
+      @include transform(translate(0, 8px) rotate(45deg));
     }
     &:nth-child(2){
       opacity: 0;
     }
     &:nth-child(3){
-      @include transform(translate(0, -6px) rotate(-45deg));
+      @include transform(translate(0, -8px) rotate(-45deg));
     }
 
   }
@@ -54,17 +60,17 @@
 
 //medai query
 @mixin desktop_l {
-  @media (min-width: 1921px) {
+  @media (min-width: 1367px) {
     @content;
   }
 }
 @mixin desktop_m {
-  @media (max-width: 1366px) {
+  @media (min-width: 1025px) {
     @content;
   }
 }
 @mixin desktop_s {
-  @media (min-width: 990px) {
+  @media (min-width: 769px) {
     @content;
   }
 }

@@ -14,20 +14,32 @@ html(lang="zh-tw")
 		main
 			include _tour_inner.jade
 
-			section.popup#spot_img
+			section.popup#promote_code
 				+btn-close
 				.inner
-					img(src="", alt="")
+					h3 機票折扣代碼
+					h4
+						|於華航官網購買香港來回機票
+						br
+						|可折抵150元
 
-			section.popup#promote_code.show
-				+btn-close
-				.inner
-					h3 機票優惠資訊
-					p.desc 小字說明文案待補，小字說明文案待補 小字說明文案待補
-					p.code HUJ1s3123
+					p.code 2017HK
+					.detail
+						p.desc 使用方式：
+						p.list
+							|1.活動內容：凡於官網購票，並輸入折扣代碼「2017HK」，可享由台灣區(桃園/高雄/台中/台南)出發至香港，每張機票減價TWD 150元之折扣優惠。
+						p.list
+							|2.適用艙等：經濟艙全艙等皆適用。
+						p.list
+							|3.活動效期(開票日)：2017年11月27日至12月31日。
+						p.list
+							|4.出發日期：2017年11月27日至12月28日、2018年1月1日至2月14日、2018年2月19日至3月31日。
+						p.list
+							|5.本次活動僅限於華航官網購買華航/華信國際線成人、兒童來回機票(嬰兒票不適用)，不得與任何其他信用卡活動促銷案等合併使用。
+
 					a(href="").btn.btn-buy 前往購買
 
-			section.popup#user_data.show
+			section.popup#user_data
 				+btn-close
 				.inner
 					h3
@@ -58,16 +70,20 @@ html(lang="zh-tw")
 				.airplane
 					.row
 						img(src="assets/images/deco-firework.png", alt="").deco-firework
-
-					h2.color_red.big_title 聖誕行程幫我們決定啦
-					h3.sub_title
-						|旺福想要去香港過聖誕，但四人想去的地方都不同
-						br
-						|由你來決定路線，還有機會
-						span.color_red 獲得香港來回機票
+					h2.big_title 聖誕行程幫我們決定啦
 
 					.seat
+
 						img(src="assets/images/deco-cloud.png", alt="").bg
+
+						h3.sub_title
+							|旺福想去香港過聖誕
+							br
+							|看完他們各自的路線，由你來決定
+							br
+							|還有機會
+							span.color_red 獲得香港來回機票
+
 						.flex
 							.profile
 								img(src="assets/images/member1.png", alt="")
@@ -88,7 +104,6 @@ html(lang="zh-tw")
 								img(src="assets/images/member4.png", alt="")
 								.dream
 									img(src="assets/images/dream4.png", alt="")
-							//- img(src="assets/images/deco-light.png", alt="").light
 
 						.flight_name
 							p 旺福號聖誕班機
@@ -101,84 +116,93 @@ html(lang="zh-tw")
 				.tour-list
 					.quarter
 						.flex_inner
-							h3.member
-								|推機
-								span 耍氣質
-								|行程
-							+spot('雅痞<br/>聖地')(class='color-a1')
-							+spot('文青<br/>都來這')(class='color-a2')
-							+spot('老店<br/>老味道')(class='color-a3')
-							+spot('一起<br/>墜入<br/>浪漫')(class='color-a4')
-							+spot('香港<br/>夜未眠')(class='color-a5')
-						.flex_inner
-							h3.member
-								|肚皮
-								span 吃大餐
-								|行程
-							+spot('星級<br/>美食')(class='color-b1')
-							+spot('不敗<br/>港味')(class='color-b2')
-							+spot('盡嚐<br/>漁家味')(class='color-b3')
-							+spot('街邊<br/>隱藏<br/>美食')(class='color-b4')
-							+spot('潮人<br/>潮味')(class='color-b5')
+							h3.member.color-1
+								span 推機耍
+								|氣質
+							+spot('浪漫<br/>聖誕')(class='color-1')
+							+spot('雅痞<br/>聖地')(class='color-1')
+							+spot('生活<br/>提案')(class='color-1')
+							+spot('浪漫<br/>情懷')(class='color-1')
+							+spot('巷弄<br/>秘境')(class='color-1')
 
 						.flex_inner
-							h3.member
-								|瑪靡
-								span 想逛逛
-								|行程
-							+spot('舊城<br/>中環')(class='color-c1')
-							+spot('漫步<br/>老香港')(class='color-c2')
-							+spot('時尚<br/>香港')(class='color-c3')
-							+spot('港灣<br/>夜景')(class='color-c4')
-							+spot('小酒館<br/>情懷')(class='color-c5')
+							h3.member.color-2
+								span 肚皮吃
+								|大餐
+							+spot('閃耀<br/>維港')(class='color-2')
+							+spot('繽紛<br/>滋味')(class='color-2')
+							+spot('必吃<br/>甜點')(class='color-2')
+							+spot('星級<br/>美食')(class='color-2')
+							+spot('臥虎<br/>藏龍')(class='color-2')
 
 						.flex_inner
-							h3.member
-								|小民
-								span 想玩耍
-								|行程
-							+spot('復古<br/>情懷')(class='color-d1')
-							+spot('香港<br/>迪士尼')(class='color-d2')
-							+spot('海洋<br/>公園')(class='color-d3')
-							+spot('摩天輪<br/>爬高高')(class='color-d4')
-							+spot('小酒館<br/>情懷')(class='color-d5')
+							h3.member.color-3
+								span 瑪靡想
+								|逛街
+							+spot('聖誕<br/>限定')(class='color-3')
+							+spot('挖寶<br/>地圖')(class='color-3')
+							+spot('文創<br/>潮流')(class='color-3')
+							+spot('品味<br/>生活')(class='color-3')
+							+spot('文青<br/>必逛')(class='color-3')
+
+						.flex_inner
+							h3.member.color-4
+								span 小民想
+								|玩耍
+							+spot('閃耀<br/>維港')(class='color-4')
+							+spot('歐風<br/>氣息')(class='color-4')
+							+spot('繽紛<br/>聖誕')(class='color-4')
+							+spot('雪花<br/>紛飛')(class='color-4')
+							+spot('香港<br/>秘境')(class='color-4')
 
 				#vote_event
 					h2.big_title 你要選擇誰的聖誕行程呢
 					h3.sub_title
-							|選擇一個路線，有機會
+							|選擇一個旺福路線，就有機會
 							span.color_red 獲得香港來回機票
 
 					.vote.quarter
 						.flex_inner
-							.btn.circle_box
-								p.text
-									|推機
-									span 耍氣質
-									|行程
+							.btn.color-1
+								.circle_box
+									p.text
+										span 我要選
+										|氣質
+										br
+										|路線
 						.flex_inner
-							.btn.circle_box
-								p.text
-									|肚皮
-									span 吃大餐
-									|行程
+							.btn.color-2
+								.circle_box
+									p.text
+										span 我要選
+										|大餐
+										br
+										|路線
 						.flex_inner
-							.btn.circle_box
-								p.text
-									|瑪靡
-									span 想逛逛
-									|行程
+							.btn.color-3
+								.circle_box
+									p.text
+										span 我要選
+										|逛街
+										br
+										|路線
 						.flex_inner
-							.btn.circle_box
-								p.text
-									|小民
-									span 想玩耍
-									|行程
+							.btn.color-4
+								.circle_box
+									p.text
+										span 我要選
+										|玩耍
+										br
+										|路線
 
 					.row
 						.btn.btn-promote
+							.s_text
+								|不想抽機票
+								br
+								|想立即出發
 							img(src="assets/images/icon-promote.png", alt="")
-							span 優惠機票折扣立即領取
+							span 領取機票折扣碼
 
 
 		include _footer.jade

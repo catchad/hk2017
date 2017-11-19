@@ -1,0 +1,89 @@
+{"frames": {
+
+"03-00000.jpg":{
+	"frame": {"x":1924,"y":5768,"w":1920,"h":1013},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00001.jpg":{
+	"frame": {"x":2,"y":6092,"w":1920,"h":1013},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00002.jpg":{
+	"frame": {"x":2,"y":5077,"w":1920,"h":1013},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00003.jpg":{
+	"frame": {"x":1924,"y":3846,"w":1920,"h":1013},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00004.jpg":{
+	"frame": {"x":2,"y":4062,"w":1920,"h":1013},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00005.jpg":{
+	"frame": {"x":2,"y":3047,"w":1920,"h":1013},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00006.jpg":{
+	"frame": {"x":1924,"y":1924,"w":1920,"h":1013},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00007.jpg":{
+	"frame": {"x":2,"y":2032,"w":1920,"h":1013},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00008.jpg":{
+	"frame": {"x":2,"y":1017,"w":1920,"h":1013},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00009.jpg":{
+	"frame": {"x":1924,"y":2,"w":1920,"h":1013},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+},
+"03-00010.jpg":{
+	"frame": {"x":2,"y":2,"w":1920,"h":1013},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1920,"h":1013},
+	"sourceSize": {"w":1920,"h":1013}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker ",
+	"version": "1.0",
+	"image": "03.jpg",
+	"format": "RGBA8888",
+	"size": {"w":2939,"h":7690},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:cf8947cae01e37bb87f19641e42faa6e:1/1$"
+}
+}
