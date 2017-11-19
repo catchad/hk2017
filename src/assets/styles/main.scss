@@ -346,7 +346,11 @@ header{
 			border: none;
 		}
 		a{
+			@include transition(.3s);
 			display: block;
+			&:hover{
+				opacity: .8;
+			}
 		}
 	}
 }
@@ -361,8 +365,13 @@ footer{
 	color: #777;
 	background-color: #fff;
 	text-align: center;
+
+	a:hover{
+		opacity: .8;
+	}
 	.social_media{
 		a{
+			@include transition(.3s);
 			display: inline-block;
 			width:56px; height:56px;
 			overflow:hidden;
@@ -594,7 +603,7 @@ footer{
 			color: #333;
 			text-align: center;
 
-			background-color: rgba(#00f, .1);
+			// background-color: rgba(#00f, .1);
 
 			@include desktop_s {
 				font-size: 1.25rem;
@@ -723,7 +732,7 @@ footer{
 
 			.dream{
 				position: absolute;
-				width: 82%;
+				width: 80%;
 				left: 0;
 				bottom: 66%;
 				z-index: 50;

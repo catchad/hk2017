@@ -22,7 +22,7 @@
 @mixin btn-close{
   width: 50px;
   height: 100%;
-  // width: 40px; height: 40px;
+  cursor: pointer;
   .box{
     @include border-radius(50%);
     @include flex-box;
@@ -53,7 +53,6 @@
     &:nth-child(3){
       @include transform(translate(0, -8px) rotate(-45deg));
     }
-
   }
 
 }
