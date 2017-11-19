@@ -8,6 +8,12 @@ html(lang="zh-tw")
 	body
 		include _mixin.jade
 
+		.full_loader.show
+			p
+				|下載中
+				span.count 0
+				|%
+			+loader
 		header
 			include _header.jade
 

@@ -131,7 +131,10 @@ a{
 	margin: 0 auto;
 
 	&:hover{
-		@include scale(.95);
+		@include scale(.96);
+	}
+	&:active{
+		@include scale(.92);
 	}
 
 	@include mobile_s {
@@ -867,6 +870,13 @@ footer{
 	.btn-promote{
 		@include btn-box;
 		margin-top: 4.5rem;
+		&:hover{
+			@include scale(.96);
+		}
+		&:active{
+			@include scale(.92);
+		}
+
 		.s_text{
 			font-size: 12px;
 			line-height: 12px;

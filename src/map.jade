@@ -7,6 +7,13 @@ html(lang="zh-tw")
 		title 旺福與你一起創作的聖誕曲 - 聖誕地圖
 
 	body
+		include _mixin.jade
+		.full_loader.show
+			p
+				|下載中
+				span.count 0
+				|%
+			+loader
 		header
 			include _header.jade
 
