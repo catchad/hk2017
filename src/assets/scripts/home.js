@@ -117,6 +117,11 @@ $(function() {
 		steps[currentAni].visible = true;
 		steps[currentAni].gotoAndPlay(0);
 	}
+	function mvLoader(){
+		pageHide();
+		pageShow('#step4', .5);
+		nextAni();
+	}
 
 	function getAuthHeaders() {
     var headers = {};
@@ -147,9 +152,7 @@ $(function() {
 					nextAni();
 
 					// 等待影片 音樂下載完畢才顯示下一段
-					// pageHide();
-					// pageShow('#step4', .5);
-					// nextAni();
+					mvLoader();
 
           break;
         default:
