@@ -855,6 +855,7 @@ footer{
 		}
 	}
 	.sub_title{
+		padding-bottom: 0;
 		font-size: 1.3rem;
 		color: #fff;
 	}
@@ -1176,10 +1177,10 @@ footer{
 @include keyframes(cloud_moving) {
 	0%,
 	100% {
-		@include translate(-50%, -50%);
+		@include translate(-50%, -52%);
 	}
 	50%{
-		@include translate(-50%, -47%);
+		@include translate(-50%, -48%);
 	}
 }
 
