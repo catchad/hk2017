@@ -192,7 +192,7 @@ $(function() {
 
 
 	  // marker
-	  var iconBase = 'assets/images/';
+	  var iconBase = 'https://hkwonderful.discoverhongkong.com/tc/assets/images/';
 	  var icons = {
 	    mamber1: {
 	      icon: iconBase + 'map-icon1.png'
@@ -242,7 +242,7 @@ $(function() {
 
 		    //after image loaded show popup
 		    // $('#spot_info').addClass('show');
-		    popShow($('#spot_info'))
+		    popShow('#spot_info')
 
 		  });
 	  });

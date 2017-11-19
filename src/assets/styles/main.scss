@@ -23,6 +23,7 @@ body, html{
 	@include tablet {
 		font-size: 18px;
 	}
+
 }
 body{
 	font-family: '微軟正黑體', sans-serif;
@@ -32,9 +33,11 @@ body{
 	.wf-active &{
 		font-family: 'cwTeXYen',sans-serif;
 	}
+	&.lock{
+		height: 100vh;
+		overflow: hidden;
+	}
 }
-
-
 
 main{
 	@include transition(opacity .5s);
@@ -472,6 +475,7 @@ footer{
 		@include border-radius(40px);
 		@include display-flex(inline-flex);
 		@include flex-center;
+		// @include transition(.2s);
 
 		font-size: 1rem;
 		line-height: 3rem;
@@ -494,6 +498,13 @@ footer{
 				border-left-color: #fff;
 				border-left-width: .5em;
 			}
+		}
+
+		&:hover{
+			@include scale(.96);
+		}
+		&:active{
+			@include scale(.92);
 		}
 
 		@include desktop_s {
@@ -555,7 +566,7 @@ footer{
 			}
 
 			@include desktop_s {
-				width: 54vh;
+				width: 50vh;
 			}
 		}
 		form{
@@ -602,12 +613,10 @@ footer{
 	}
 
 	#step4{
-
-		.btn-play{
+		.content{
 			@include translate(-50%, -50%);
 			position: absolute;
 			left: 50%; top: 50%;
-
 			@include desktop_s {
 				top: 55%;
 			}
@@ -1097,7 +1106,9 @@ footer{
 		margin-top: 1rem;
 		font-size: 1.15rem;
 	}
-	input[type=text]{
+	input[type=text],
+	input[type=email],
+	input[type=tel]{
 		@include flex(1 1 auto);
 		@include box-sizing(border-box);
 		@include border-radius(0px);

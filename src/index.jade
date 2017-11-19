@@ -3,7 +3,7 @@ html(lang="zh-tw")
 	head
 		meta(charset="UTF-8")
 		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
-		link(rel="stylesheet", href="assets/styles/main.css")
+		link(rel="stylesheet", href="/tc/assets/styles/main.css")
 		title 旺福與你一起創作的聖誕曲
 
 
@@ -24,7 +24,7 @@ html(lang="zh-tw")
 				#bg_home
 
 				.step#step1
-					img(src="assets/images/home-title.png", alt="").title
+					img(src="/tc/assets/images/home-title.png", alt="").title
 					.content
 						.row
 							.btn.btn--big.btn-to_step2
@@ -62,8 +62,9 @@ html(lang="zh-tw")
 
 				.step#step4
 					//- video ready click to play
-					.btn.btn--big.btn-play
-						span 播放
+					.content
+						.btn.btn--big.btn-play
+							span 播放
 
 				.step#step5
 					#video
@@ -78,4 +79,4 @@ html(lang="zh-tw")
 
 		include _footer.jade
 		script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js")
-		script(src='assets/scripts/home.js')
+		script(src='/tc/assets/scripts/home.js')

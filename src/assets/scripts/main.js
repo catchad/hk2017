@@ -1,8 +1,9 @@
 // set show popup event as global for Page Map
-var popShow;
+var popShow, popClose;
 var ww = window.innerWidth;
 var imgLoaded = false;
-var mainLoader = $('.full_loader');
+var mainLoader = $('.full_loader'),
+		body= $('body');
 
 WebFont.load({
   custom: {
@@ -17,18 +18,20 @@ $(function() {
 
 	//popup show
 	popShow = function(page){
+		body.addClass('lock');
 		TweenMax.set( page, { className: '+=show'});
 		TweenMax.fromTo( page, .5, { x:'-50%', alpha:0 }, { x:'0%', alpha:1 });
 	}
 	// popup close
-	function popClose(page){
+	popClose = function(page){
+		body.removeClass('lock');
 		TweenMax.fromTo( page, .5, { x:'0%', alpha:1 }, { x:'-50%', alpha:0 });
 		TweenMax.set( page, { className: '-=show', delay: .51});
 	}
 	//resize
 	function onResize(){
 		ww = window.innerWidth;
-		console.log(ww)
+		console.log(ww);
 	}
 
 	//image loader

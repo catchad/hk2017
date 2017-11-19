@@ -9,26 +9,25 @@ $(function() {
 	var imgCount = 0,
 			imgMax = 5,
 			countText = $('.full_loader .count');
-	var api_url = 'https://hkwonderful.discoverhongkong.com/tc/'
 
 	var loader = PIXI.loader;
   canvas.append(app.view);
   if (ww <= 768) {
 		loader
-		  .add('../assets/images/sprite/01m.json')
-		  .add('../assets/images/sprite/02m.json')
-		  .add('../assets/images/sprite/03m.json')
-		  .add('../assets/images/sprite/04m.json')
-		  .add('../assets/images/sprite/05m.json')
+		  .add('/tc/assets/images/sprite/01m.json')
+		  .add('/tc/assets/images/sprite/02m.json')
+		  .add('/tc/assets/images/sprite/03m.json')
+		  .add('/tc/assets/images/sprite/04m.json')
+		  .add('/tc/assets/images/sprite/05m.json')
 		  .load(onAssetsLoaded);
 	}
 	else{
 		loader
-		  .add('../assets/images/sprite/01.json')
-		  .add('../assets/images/sprite/02.json')
-		  .add('../assets/images/sprite/03.json')
-		  .add('../assets/images/sprite/04.json')
-		  .add('../assets/images/sprite/05.json')
+		  .add('/tc/assets/images/sprite/01.json')
+		  .add('/tc/assets/images/sprite/02.json')
+		  .add('/tc/assets/images/sprite/03.json')
+		  .add('/tc/assets/images/sprite/04.json')
+		  .add('/tc/assets/images/sprite/05.json')
 		  .load(onAssetsLoaded);
 	}
 
@@ -131,7 +130,7 @@ $(function() {
   	var formData = { name: name};
   	var jqxhr = $.ajax({
       // url: '../api/music',
-      url: api_url+'api/music',
+      url: '../api/music',
       method: 'post',
       contentType: 'application/json; charset=utf-8',
       data: JSON.stringify(formData),

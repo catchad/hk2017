@@ -3,7 +3,7 @@ html(lang="zh-tw")
 	head
 		meta(charset="UTF-8")
 		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
-		link(rel="stylesheet", href="assets/styles/main.css")
+		link(rel="stylesheet", href="/tc/assets/styles/main.css")
 		title 旺福與你一起創作的聖誕曲 - 聖誕行程
 	body
 		include _mixin.jade
@@ -37,7 +37,7 @@ html(lang="zh-tw")
 						p.list
 							|5.本次活動僅限於華航官網購買華航/華信國際線成人、兒童來回機票(嬰兒票不適用)，不得與任何其他信用卡活動促銷案等合併使用。
 
-					a(href="").btn.btn-buy 前往購買
+					a(href="" target='_blank').btn.btn-buy 前往購買
 
 			section.popup#user_data
 				+btn-close
@@ -47,16 +47,16 @@ html(lang="zh-tw")
 						br
 						|留下資料抽獎
 
-					form(action="")
+					form(id="register-form" method="post" action="../api/users")
 						.row
-							label(for="") 姓名：
-							input(type="text")
+							label(for="user_tel") 姓名：
+							input(type="text" name=name)#user_name
 						.row
-							label(for="") 電話：
-							input(type="text")
+							label(for="user_tel") 電話：
+							input(type="tel" name='mobile')#user_tel
 						.row
-							label(for="") E-mail：
-							input(type="text")
+							label(for="user_email") E-mail：
+							input(type="email" name='email')#user_email
 						.row.check
 							input(type="checkbox" name='agree' id='user_agree')
 							label(for="user_agree") 我已閱讀並同意相關活動辦法與隱私權政策
@@ -69,12 +69,12 @@ html(lang="zh-tw")
 
 				.airplane
 					.row
-						img(src="assets/images/deco-firework.png", alt="").deco-firework
+						img(src="/tc/assets/images/deco-firework.png", alt="").deco-firework
 					h2.big_title 聖誕行程幫我們決定啦
 
 					.seat
 
-						img(src="assets/images/deco-cloud.png", alt="").bg
+						img(src="/tc/assets/images/deco-cloud.png", alt="").bg
 
 						h3.sub_title
 							|旺福想去香港過聖誕
@@ -86,30 +86,30 @@ html(lang="zh-tw")
 
 						.flex
 							.profile
-								img(src="assets/images/member1.png", alt="")
+								img(src="/tc/assets/images/member1.png", alt="")
 								.dream
-									img(src="assets/images/dream1.png", alt="")
+									img(src="/tc/assets/images/dream1.png", alt="")
 
 							.profile
-								img(src="assets/images/member2.png", alt="")
+								img(src="/tc/assets/images/member2.png", alt="")
 								.dream
-									img(src="assets/images/dream2.png", alt="")
+									img(src="/tc/assets/images/dream2.png", alt="")
 
 							.profile
-								img(src="assets/images/member3.png", alt="")
+								img(src="/tc/assets/images/member3.png", alt="")
 								.dream
-									img(src="assets/images/dream3.png", alt="")
+									img(src="/tc/assets/images/dream3.png", alt="")
 
 							.profile
-								img(src="assets/images/member4.png", alt="")
+								img(src="/tc/assets/images/member4.png", alt="")
 								.dream
-									img(src="assets/images/dream4.png", alt="")
+									img(src="/tc/assets/images/dream4.png", alt="")
 
 						.flight_name
 							p 旺福號聖誕班機
 							p.way.flex
 								span 台灣
-								img(src="assets/images/deco-flight.png", alt="")
+								img(src="/tc/assets/images/deco-flight.png", alt="")
 								span 香港
 
 
@@ -163,7 +163,7 @@ html(lang="zh-tw")
 
 					.vote.quarter
 						.flex_inner
-							.btn.color-1
+							.btn.btn-vote.color-1
 								.circle_box
 									p.text
 										span 我要選
@@ -171,7 +171,7 @@ html(lang="zh-tw")
 										br
 										|路線
 						.flex_inner
-							.btn.color-2
+							.btn.btn-vote.color-2
 								.circle_box
 									p.text
 										span 我要選
@@ -179,7 +179,7 @@ html(lang="zh-tw")
 										br
 										|路線
 						.flex_inner
-							.btn.color-3
+							.btn.btn-vote.color-3
 								.circle_box
 									p.text
 										span 我要選
@@ -187,7 +187,7 @@ html(lang="zh-tw")
 										br
 										|路線
 						.flex_inner
-							.btn.color-4
+							.btn.btn-vote.color-4
 								.circle_box
 									p.text
 										span 我要選
@@ -201,9 +201,9 @@ html(lang="zh-tw")
 								|不想抽機票
 								br
 								|想立即出發
-							img(src="assets/images/icon-promote.png", alt="")
+							img(src="/tc/assets/images/icon-promote.png", alt="")
 							span 領取機票折扣碼
 
 
 		include _footer.jade
-
+		script(src='/tc/assets/scripts/tour.js')
