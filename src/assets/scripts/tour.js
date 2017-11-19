@@ -32,7 +32,7 @@ $(function() {
   // 參加抽獎
   function getAuthHeaders() {
     var headers = {};
-    var csrfToken = 'fvWYLKZNFdp_eglMKInu2n310RhhqIxU7-VgaVd672-0dHhiVYmCshTiA47CLytDqnFEhYsK9hZggnDSz7VwTzeKhnzWCYn9R4MZxhsuD881';
+    var csrfToken = $('#csrf-form input[name=__RequestVerificationToken]').val();
     if (csrfToken) {
       headers['X-RVT'] = csrfToken;
     }

@@ -125,16 +125,51 @@ $(function() {
 
 	function getAuthHeaders() {
     var headers = {};
-    var csrfToken = 'fvWYLKZNFdp_eglMKInu2n310RhhqIxU7-VgaVd672-0dHhiVYmCshTiA47CLytDqnFEhYsK9hZggnDSz7VwTzeKhnzWCYn9R4MZxhsuD881';
+    var csrfToken = $('#csrf-form input[name=__RequestVerificationToken]').val();
     if (csrfToken) {
       headers['X-RVT'] = csrfToken;
     }
     return headers;
   }
+  function checkStatus(ticket) {
+    var jqxhr = $.ajax({
+      url: '../api/music/' + ticket,
+      method: 'GET',
+      headers: getAuthHeaders(),
+      dataType: 'json'
+    })
+    .done(function (response, textStatus, jqXHR) {
+      switch (response.code) {
+        case 200:
+        case 201:
+          if (response.data.MusicFile == null) {
+            // 等待2秒再次檢查
+            setTimeout(function () { checkStatus(ticket); }, 2000);
+          }
+          else {
+          	// 等待影片 音樂下載完畢才顯示下一段
+						mvLoader();
+          }
+          break;
+        default:
+          alert('發生錯誤。' + response.code);
+      }
+      console.log(response);
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      var response = $.parseJSON(jqXHR.responseText);
+      switch (response.code) {
+        case 400:
+          alert('輸入資料有誤。' + response.message);
+          break;
+        default:
+          alert('發生錯誤。' + response.code);
+      }
+    });
+  }
   function apiMusic(name){
   	var formData = { name: name};
   	var jqxhr = $.ajax({
-      // url: '../api/music',
       url: '../api/music',
       method: 'post',
       contentType: 'application/json; charset=utf-8',
@@ -143,17 +178,24 @@ $(function() {
       dataType: 'json'
     })
     .done(function (response, textStatus, jqXHR) {
+
       switch (response.code) {
         case 200:
         case 201:
-          console.log('mp3 return');
-          console.log(response.data.MusicFile);
-          pageHide();
+        	pageHide();
 					nextAni();
 
-					// 等待影片 音樂下載完畢才顯示下一段
-					mvLoader();
-
+          if (response.data.MusicFile != null) {
+          	console.log('mp3 return');
+          	console.log(response.data.MusicFile);
+          	// 之前產生過 有資料可以直接用
+          	// 等待影片 音樂下載完畢才顯示下一段
+						mvLoader();
+          }
+          else {
+            // 等待2秒然後檢查音樂檔案生成狀態
+            setTimeout(function () { checkStatus(response.data.Ticket); }, 2000);
+          }
           break;
         default:
           alert('發生錯誤。' + response.code);

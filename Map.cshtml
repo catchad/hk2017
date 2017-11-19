@@ -12,6 +12,9 @@
     <title>旺福與你一起創作的聖誕曲 - 聖誕地圖</title>
   </head>
   <body>
+    <form id="csrf-form">
+      @Html.AntiForgeryToken()
+    </form>
     <div class="full_loader show">
       <div class="loader">
         <div class="sk-fading-circle">
