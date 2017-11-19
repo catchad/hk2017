@@ -67,8 +67,17 @@ html(lang="zh-tw")
 							span 播放
 
 				.step#step5
-					#video
-						//- for master Kuei
+					.video
+						.video__screen
+							video.video__videoElement(id="myVideo", muted, playsinline)
+							audio.video__audioElement
+							canvas.video__overlay(id="screenCanvas", width="1920", height="1080")
+							canvas.video__overlay(id="fwCanvas")
+						.video__controls
+							img.video__play(src="/tc/assets/images/play.svg")
+							.video__timeline
+								.video__progress
+							//- div(class="video__repeat")
 					.content
 						.btn.btn-share
 							span  求你，分享一下MV
@@ -78,5 +87,18 @@ html(lang="zh-tw")
 
 
 		include _footer.jade
-		script(src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js")
+		script(src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js")
+		script(src="/tc/assets/scripts/numeric-1.2.6.min.js")
+		script.
+			var keyFrameData = [];
+		script(src="/tc/assets/scripts/keyframedata/keyframedata32.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata33.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata49.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata0101.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata0134.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata0136.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata0142.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata0158.js")
+		script(src="/tc/assets/scripts/keyframedata/keyframedata0211.js")
+		script(src="/tc/assets/scripts/video.js")
 		script(src='/tc/assets/scripts/home.js')

@@ -105,10 +105,21 @@
           </div>
         </div>
         <div id="step5" class="step">
-          <div id="video">
+          <div class="video">
+            <div class="video__screen">
+              <video id="myVideo" muted="muted" playsinline="playsinline" class="video__videoElement"></video>
+              <audio class="video__audioElement"></audio>
+              <canvas id="screenCanvas" width="1920" height="1080" class="video__overlay"></canvas>
+              <canvas id="fwCanvas" class="video__overlay"></canvas>
+            </div>
+            <div class="video__controls"><img src="/tc/assets/images/play.svg" class="video__play"/>
+              <div class="video__timeline">
+                <div class="video__progress"></div>
+              </div>
+            </div>
           </div>
           <div class="content">
-            <div class="btn btn-share"><span> 求你，分享一下MV</span></div><a href="./tour/" class="btn"><span>選旅行路線，抽機票</span></a>
+            <div class="btn btn-share"><span> 求你，分享一下MV</span></div><a href="./tour.html" class="btn"><span>選旅行路線，抽機票</span></a>
           </div>
         </div>
       </section>
@@ -129,7 +140,19 @@
     <script src="assets/scripts/device.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script src="assets/scripts/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js"></script>
+    <script src="/tc/assets/scripts/numeric-1.2.6.min.js"></script>
+    <script>var keyFrameData = [];</script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata32.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata33.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata49.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata0101.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata0134.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata0136.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata0142.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata0158.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata0211.js"></script>
+    <script src="/tc/assets/scripts/video.js"></script>
     <script src="assets/scripts/home.js"></script>
   </body>
 </html>

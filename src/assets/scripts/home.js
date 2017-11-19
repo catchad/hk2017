@@ -1,4 +1,5 @@
 $(function() {
+	var myMv = new mv();
 	var canvas = $('#bg_home');
 	var app = new PIXI.Application(canvas.width(), canvas.height(), {backgroundColor : 0xf5f1ec});
 	var steps = [];
@@ -148,7 +149,16 @@ $(function() {
           }
           else {
           	// 等待影片 音樂下載完畢才顯示下一段
-						mvLoader();
+
+			myMv.start({
+				img: [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[7] || '/tc/assets/images/test/fireworktext.png'],
+				music: response.data.MusicFile,
+				complete: function() {
+					mvLoader();
+				}
+			});
+
+						
           }
           break;
         default:
@@ -190,7 +200,14 @@ $(function() {
           	console.log(response.data.MusicFile);
           	// 之前產生過 有資料可以直接用
           	// 等待影片 音樂下載完畢才顯示下一段
-						mvLoader();
+			myMv.start({
+				img: [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[7] || '/tc/assets/images/test/fireworktext.png'],
+				music: response.data.MusicFile,
+				complete: function() {
+					mvLoader();
+				}
+			});
+
           }
           else {
             // 等待2秒然後檢查音樂檔案生成狀態
@@ -236,6 +253,7 @@ $(function() {
 
 	});
 	$('.step .btn-play').on('click', function(){
+		myMv.playVideo();
 		pageHide();
 		pageShow('#step5', .5);
 		setTimeout( function(){
