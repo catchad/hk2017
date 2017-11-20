@@ -73,7 +73,7 @@ gulp.task('concat-js', function() {
 });
 
 gulp.task('js', ['clean-js', 'concat-js'], function() {
-    return gulp.src('src/assets/scripts/*.js')
+    return gulp.src('src/assets/scripts/**/*.js')
         // .pipe(babel({
         //     presets: ['es2015']
         // }))
