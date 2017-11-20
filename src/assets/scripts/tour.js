@@ -1,25 +1,75 @@
 $(function() {
-	// var canvas = $('#bg_home');
-	// var app = new PIXI.Application(canvas.width(), canvas.height(), {backgroundColor : 0xf5f1ec});
- //  canvas.append(app.view);
+  var canvas = document.getElementById('bg_tour');
+  var snowObj = new Image();
 
+  snowObj.onload = function() {
+    makeSnow(canvas, snowObj);
+  };
+  snowObj.src = '/tc/assets/images/snow.png';
 
-	// PIXI.loader
-	//   .add('assets/images/sprite/01m.json')
-	//   .load(onAssetsLoaded);
+  function makeSnow(el, texture) {
+    var ctx = el.getContext('2d');
+    var width = 0;
+    var height = 0;
+    var particles = [];
 
+    var Particle = function() {
+      this.x = this.y = this.dx = this.dy = 0;
+      this.reset();
+    }
 
+    Particle.prototype.reset = function() {
+      this.y = Math.random() * height;
+      this.x = Math.random() * width;
+      this.dx = (Math.random() * 0.4) - 0.2;
+      this.dy = (Math.random() * 0.6) + 0.2;
+      this.w = this.h = (Math.random() * 30) + 20;
+    }
 
-	// function onAssetsLoaded(){
-	// 	var frames = [];
+    function createParticles(count) {
+      if (count != particles.length) {
+        particles = [];
+        for (var i = 0; i < count; i++) {
+          particles.push(new Particle());
+        }
+      }
+    }
 
+    function ctxResize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      el.width = width;
+      el.height = height;
 
-	// 	//init
+      createParticles((width * height) / 50000);
+    }
 
-	// 	app.ticker.add(function() {
-	// 		// detect over world
-	// 	});
-	// }
+    function updateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(function(particle) {
+        particle.y += particle.dy;
+        particle.x += particle.dx;
+
+        if (particle.y > height) {
+          particle.y = 0;
+        }
+
+        if (particle.x > width) {
+          particle.reset();
+          particle.y = 0;
+        }
+        ctx.drawImage(texture, particle.x, particle.y, particle.w, particle.h);
+      });
+
+      window.requestAnimationFrame(updateParticles);
+    }
+
+    ctxResize();
+    updateParticles();
+
+    window.addEventListener('resize', ctxResize);
+  }
+
 
 	$('.btn-vote').on('click', function(){
 		popShow('#user_data');

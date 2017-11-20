@@ -9,10 +9,7 @@ html(lang="zh-tw")
 		include _mixin.jade
 
 		.full_loader.show
-			p
-				|下載中
-				span.count 0
-				|%
+			p 下載中
 			+loader
 		header
 			include _header.jade
@@ -70,7 +67,7 @@ html(lang="zh-tw")
 						button.btn.btn-submit 確認送出
 
 			section#tour
-				#bg_tour
+				canvas#bg_tour
 					//- 雪花
 
 				.airplane

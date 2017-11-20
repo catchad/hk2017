@@ -704,6 +704,13 @@ footer{
 	@include filter-gradient(#030426, #00053c, vertical); // IE6-9
 	@include background-image(linear-gradient(top, #030426 0%,#00053c 100%));
 
+	#bg_tour{
+		position: fixed;
+		left: 0; top: 0;
+		width: 100%; height: 100vh;
+		pointer-events: none;
+		z-index: 300;
+	}
 	.airplane{ color: #fff; }
 	.deco-firework{
 		width: 80%;
