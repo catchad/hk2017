@@ -1,3 +1,4 @@
+
 $(function() {
 	if (ww <= 768) {
 		var cw = 800,
@@ -146,13 +147,8 @@ $(function() {
           }
           else {
           	// 等待影片 音樂下載完畢才顯示下一段
-						myMv.start({
-							img: [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[7] || '/tc/assets/images/test/fireworktext.png'],
-							music: response.data.MusicFile,
-							complete: function() {
-								mvLoader();
-							}
-						});
+            mvStart(response);
+
           }
           break;
         default:
@@ -195,13 +191,7 @@ $(function() {
           	console.log(response.data.MusicFile);
           	// 之前產生過 有資料可以直接用
           	// 等待影片 音樂下載完畢才顯示下一段
-						myMv.start({
-							img: [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[7] || '/tc/assets/images/test/fireworktext.png'],
-							music: response.data.MusicFile,
-							complete: function() {
-								mvLoader();
-							}
-						});
+          	mvStart(response);
           }
           else {
             // 等待2秒然後檢查音樂檔案生成狀態
@@ -265,5 +255,20 @@ $(function() {
 		nextAni();
 	});
 
+	function mvStart(response) {
+		var imgData;
+		if( response.data.NameFiles !== null ) {
+			imgData = [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[7] || '/tc/assets/images/test/fireworktext.png'];
+		} else {
+			imgData = ['/tc/assets/images/test/testname1-pc.png', '/tc/assets/images/test/testname2-pc.png', '/tc/assets/images/test/testname3-pc.png', '/tc/assets/images/test/testname4-pc.png', '/tc/assets/images/test/testname5-pc.png', '/tc/assets/images/test/testname6-pc.png', '/tc/assets/images/test/testname7-pc.png', '/tc/assets/images/test/fireworktext.png']
+		}
+		myMv.start({
+			img: imgData,
+			music: response.data.MusicFile,
+			complete: function() {
+				mvLoader();
+			}
+		});
+	}
 
 });
