@@ -251,15 +251,7 @@ $(function() {
 
 
 	});
-	$('.step .btn-play').on('click', function(){
-		myMv.playVideo();
-		pageHide();
-		pageShow('#step5', .5);
-		setTimeout( function(){
-			steps[currentAni].visible = false;
-			steps[currentAni].gotoAndStop(0);
-		}, 500);
-	});
+
 
 	// fake finished loading event
 	$('.step .btn-to_step4').on('click', function(){
