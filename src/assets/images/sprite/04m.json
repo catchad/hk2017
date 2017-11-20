@@ -1,69 +1,69 @@
 {"frames": {
 
-"04-00000.jpg":{
+"02-00000.jpg":{
 	"frame": {"x":804,"y":2826,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00001.jpg":{
+"02-00001.jpg":{
 	"frame": {"x":2,"y":2826,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00002.jpg":{
+"02-00002.jpg":{
 	"frame": {"x":804,"y":2120,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00003.jpg":{
+"02-00003.jpg":{
 	"frame": {"x":2,"y":2120,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00004.jpg":{
+"02-00004.jpg":{
 	"frame": {"x":804,"y":1414,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00005.jpg":{
+"02-00005.jpg":{
 	"frame": {"x":2,"y":1414,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00006.jpg":{
+"02-00006.jpg":{
 	"frame": {"x":804,"y":708,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00007.jpg":{
+"02-00007.jpg":{
 	"frame": {"x":2,"y":708,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00008.jpg":{
+"02-00008.jpg":{
 	"frame": {"x":804,"y":2,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":800,"h":704},
 	"sourceSize": {"w":800,"h":704}
 },
-"04-00009.jpg":{
+"02-00009.jpg":{
 	"frame": {"x":2,"y":2,"w":800,"h":704},
 	"rotated": false,
 	"trimmed": false,

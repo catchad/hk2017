@@ -25,24 +25,30 @@ html(lang="zh-tw")
 
 				.step#step1
 					img(src="/tc/assets/images/home-title.png", alt="").title
+					h1
+						span.color_red 旺福
+						|為
+						span.color_red 你
+						|創作的聖誕曲
 					.content
 						.row
 							.btn.btn--big.btn-to_step2
 								span PLAY
 						.row
-							a(href="./tour.html").btn.btn-to_vote
-								span 選旺福路線抽機票，領取機票折扣
+							a(href="./tour/").btn.btn-to_vote
+								span 選路線抽機票，拿折扣
 
 				.step#step2
 					.title
-						h2.big_title.color_red 請於卡片處填入姓名
+						h2.big_title.color_red 請在框框內輸入姓名
+						p.desc （ 3個字中文姓名限定 ）
 
 					.name_input
 						form(action="")
 							//- user name
-							input#name1(type="text" maxlength='1' placeholder='')
-							input#name2(type="text" maxlength='1' placeholder='')
-							input#name3(type="text" maxlength='1' placeholder='')
+							input#name1(type="text" maxlength='3' autocomplete="off" placeholder='')
+							input#name2(type="text" maxlength='1' autocomplete="off" placeholder='')
+							input#name3(type="text" maxlength='1' autocomplete="off" placeholder='')
 
 					.content
 						.btn.btn--big.btn-to_step3
@@ -50,21 +56,14 @@ html(lang="zh-tw")
 
 
 				.step#step3
+					img(src="/tc/assets/images/home-title.png", alt="").title
+					p 等一下下喔，下載即將完成
+
 					.loading
-						p.tips
-							|等一下下喔
-							br
-							|下載即將完成
 						+loader
 					.content
 						.btn.btn-to_step4
 							span Loading Done
-
-				.step#step4
-					//- video ready click to play
-					.content
-						.btn.btn--big.btn-play
-							span 播放
 
 				.step#step5
 					.video
@@ -81,8 +80,8 @@ html(lang="zh-tw")
 					.content
 						.btn.btn-share
 							span  求你，分享一下MV
-						a(href="./tour.html").btn
-							span 選旅行路線，抽機票
+						a(href="./tour/").btn
+							span 選路線抽機票，拿折扣
 
 
 

@@ -53,22 +53,24 @@
       <section id="home">
         <div id="bg_home"></div>
         <div id="step1" class="step"><img src="assets/images/home-title.png" alt="" class="title"/>
+        <h1><span class="color_red">旺福</span>為<span class="color_red">你</span>創作的聖誕曲</h1>
           <div class="content">
             <div class="row">
               <div class="btn btn--big btn-to_step2"><span>PLAY</span></div>
             </div>
-            <div class="row"><a href="./tour/" class="btn btn-to_vote"><span>選旺福路線抽機票，領取機票折扣</span></a></div>
+            <div class="row"><a href="./tour/" class="btn btn-to_vote"><span>選路線抽機票，拿折扣</span></a></div>
           </div>
         </div>
         <div id="step2" class="step">
           <div class="title">
-            <h2 class="big_title color_red">請於卡片處填入姓名</h2>
+            <h2 class="big_title color_red">請在框框內輸入姓名</h2>
+            <p class="desc">（ 3個字中文姓名限定 ）</p>
           </div>
           <div class="name_input">
             <form action="">
-              <input id="name1" type="text" maxlength="1" placeholder=""/>
-              <input id="name2" type="text" maxlength="1" placeholder=""/>
-              <input id="name3" type="text" maxlength="1" placeholder=""/>
+              <input id="name1" type="text" maxlength="3" placeholder="" autocomplete="off"/>
+              <input id="name2" type="text" maxlength="1" placeholder="" autocomplete="off"/>
+              <input id="name3" type="text" maxlength="1" placeholder="" autocomplete="off"/>
             </form>
           </div>
           <div class="content">
@@ -76,32 +78,28 @@
           </div>
         </div>
         <div id="step3" class="step">
+          <img src="/tc/assets/images/home-title.png" alt="" class="title"/>
+          <p>等一下下喔，下載即將完成</p>
           <div class="loading">
-            <p class="tips">等一下下喔<br/>下載即將完成</p>
-                <div class="loader">
-                  <div class="sk-fading-circle">
-                    <div class="sk-circle sk-circle1"></div>
-                    <div class="sk-circle sk-circle2"></div>
-                    <div class="sk-circle sk-circle3"></div>
-                    <div class="sk-circle sk-circle4"></div>
-                    <div class="sk-circle sk-circle5"></div>
-                    <div class="sk-circle sk-circle6"></div>
-                    <div class="sk-circle sk-circle7"></div>
-                    <div class="sk-circle sk-circle8"></div>
-                    <div class="sk-circle sk-circle9"></div>
-                    <div class="sk-circle sk-circle10"></div>
-                    <div class="sk-circle sk-circle11"></div>
-                    <div class="sk-circle sk-circle12"></div>
-                  </div>
-                </div>
+            <div class="loader">
+              <div class="sk-fading-circle">
+                <div class="sk-circle sk-circle1"></div>
+                <div class="sk-circle sk-circle2"></div>
+                <div class="sk-circle sk-circle3"></div>
+                <div class="sk-circle sk-circle4"></div>
+                <div class="sk-circle sk-circle5"></div>
+                <div class="sk-circle sk-circle6"></div>
+                <div class="sk-circle sk-circle7"></div>
+                <div class="sk-circle sk-circle8"></div>
+                <div class="sk-circle sk-circle9"></div>
+                <div class="sk-circle sk-circle10"></div>
+                <div class="sk-circle sk-circle11"></div>
+                <div class="sk-circle sk-circle12"></div>
+              </div>
+            </div>
           </div>
           <div class="content">
             <div class="btn btn-to_step4"><span>Loading Done</span></div>
-          </div>
-        </div>
-        <div id="step4" class="step">
-          <div class="content">
-            <div class="btn btn--big btn-play"><span>播放</span></div>
           </div>
         </div>
         <div id="step5" class="step">
@@ -119,7 +117,7 @@
             </div>
           </div>
           <div class="content">
-            <div class="btn btn-share"><span> 求你，分享一下MV</span></div><a href="./tour.html" class="btn"><span>選旅行路線，抽機票</span></a>
+            <div class="btn btn-share"><span> 求你，分享一下MV</span></div><a href="./tour/" class="btn"><span>選路線抽機票，拿折扣</span></a>
           </div>
         </div>
       </section>
@@ -138,7 +136,7 @@
     <script src="assets/scripts/TweenMax.min.js"></script>
     <script src="assets/scripts/hammer.min.js"></script>
     <script src="assets/scripts/device.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
     <script src="assets/scripts/main.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js"></script>
     <script src="/tc/assets/scripts/numeric-1.2.6.min.js"></script>
