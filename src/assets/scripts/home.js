@@ -158,11 +158,6 @@ $(function() {
 				}
 			});
 
-<<<<<<< HEAD
-
-=======
-						
->>>>>>> 84a708eedc13b2df14018a5edc34fb79b17e0bfd
           }
           break;
         default:

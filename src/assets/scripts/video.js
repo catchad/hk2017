@@ -4,6 +4,8 @@ var mv = function() {
 	// params.onComplete (Function)
 	var self = this;
 
+	var ww = window.width;
+
 	var v = document.getElementById("myVideo"); 
 	var a = document.querySelector(".video__audioElement");
 	// var globalParams = params;
@@ -56,25 +58,35 @@ var mv = function() {
 		}
 		
 
-
 		function pixiInit() {
-			var app = new PIXI.Application(1920, 1080, {forceCanvas: true, view: document.getElementById('fwCanvas'), transparent:true});
+			var w = 850;
+			var h = 400;
+			var app = new PIXI.Application(w, h, {forceCanvas: false, view: document.getElementById('firework'), transparent:true});
 
-			var texture = PIXI.Texture.fromImage('/tc/assets/images/test/particle.png');
+			var texture = PIXI.Texture.fromImage('/tc/assets/images/test/particle2.png');
 
-			var container = new PIXI.Container();
+			var container = new PIXI.particles.ParticleContainer(10000, {
+			    scale: false,
+			    position: true,
+			    rotation: false,
+			    uvs: false,
+			    alpha: true
+			});
+
+			// var container = new PIXI.Container();
 
 			app.stage.addChild(container);
 
-			container.x = 1920/2 - c.width/2;
-			container.y = 1080/2 - c.height/2 - 250;
+			container.x = w/2 - c.width/2;
+			container.y = 30;
+			var timer;
 
 			var pixels = [];
 
 			var pixelColors = [0xff0000];
 
 			var usedPoint = [];
-			for( var i=0; i<900; i++ ) {
+			for( var i=0; i<4000; i++ ) {
 				// var rnd;
 				// do {
 				// 	rnd = Math.floor(Math.random()*pointData.length);
@@ -82,17 +94,20 @@ var mv = function() {
 				var rnd = Math.floor(Math.random()*pointData.length);
 
 			    var pixel = new PIXI.Sprite(texture);
-			    pixel.anchor.set(0.5);
-			    pixel.x = pointData[rnd].x;
-			    pixel.y = pointData[rnd].y;
-			    pixel.alpha = 0;
-			    pixel.scale.x = pixel.scale.y = Math.random()*0.6+0.3;
-			    // pixel.blendMode = blend;
-			    pixel.blendMode = PIXI.BLEND_MODES.ADD;
-			    pixel.tint = Math.random() * 0xffffff;
-			    container.addChild(pixel);
-			    pixel.data = {x:pixel.x, y:pixel.y};
+			    pixel.data = {x:pointData[rnd].x, y:pointData[rnd].y, scale:1};
 
+			    pixel.anchor.set(0.5);
+			    pixel.x = pixel.data.x;
+			    pixel.y = pixel.data.y;
+			    pixel.alpha = 0;
+			    pixel.scale.x = pixel.scale.y = pixel.data.scale;
+			    // pixel.blendMode = blend;
+			    // pixel.blendMode = PIXI.BLEND_MODES.ADD;
+			    // pixel.tint = Math.random() * 0xffffff;
+			    pixel.tint = 0xfffd4b;
+			    container.addChild(pixel);
+			    
+			    // container.scale.x = container.scale.y = 0.6;
 			    // var du = Math.random()*1+1;
 
 			    // var tl = new TimelineMax({repeat:-1});
@@ -113,29 +128,40 @@ var mv = function() {
 			function shotComplete() {
 				self.isShooting = false;
 			}
+
 			self.shot = function() {
+				clearTimeout(timer);
 				self.isShooting = true;
 				for( var i=0; i<pixels.length; i++ ) {
 					// TweenMax.to(pixels[i], Math.random()*2+2, {y:"+=100", alpha:0});
 					// var rnd1 = 0;
-					var rndDelay = Math.random()*2;
-				    // TweenMax.fromTo(pixels[i], 2+rnd1, {x:pixels[i].data.x + Math.random()*60-30, y:pixels[i].data.y+15+Math.random()*10, alpha:0}, {x:pixels[i].data.x, y:pixels[i].data.y, alpha:1, ease:Power2.easeOut});
-				    // TweenMax.fromTo(pixels[i], 1, {x:pixels[i].data.x, y:pixels[i].data.y+15, alpha:0}, {x:pixels[i].data.x, y:pixels[i].data.y, alpha:1, ease:Power2.easeOut, delay:rndDelay});
-				    TweenMax.fromTo(pixels[i], 1, {x:pixels[i].data.x+(Math.random()*60-30), y:pixels[i].data.y+(Math.random()*60-10), alpha:0}, {x:pixels[i].data.x, y:pixels[i].data.y, alpha:1, ease:Power2.easeOut, delay:rndDelay});
-				    TweenMax.to(pixels[i], 3+Math.random()*1, {x:pixels[i].data.x + Math.random()*70-35, y:pixels[i].data.y+40+Math.random()*60, alpha:0, ease:Power3.easeIn, delay:1+rndDelay});
+					var rndDelay = Math.random()*0.3;
+					TweenMax.killTweensOf(pixels[i]);
+
+				    pixels[i].x = pixels[i].data.x; 
+				    pixels[i].y = pixels[i].data.y+10;
+				    pixels[i].scale.x = pixels[i].scale.y = pixels[i].data.scale;
+				    pixels[i].alpha = 0;
+
+				    TweenMax.to(pixels[i], 1.5, {x:pixels[i].data.x, y:pixels[i].data.y, alpha:1, ease:Power2.easeOut});
+				    
+				    TweenMax.to(pixels[i], 3+Math.random()*1, {x:pixels[i].data.x, y:pixels[i].data.y+100, ease:Power2.easeIn, delay:2});
+				    TweenMax.to(pixels[i], 1+Math.random()*2, {alpha:0, ease:Power2.easeIn, delay:2.5});
+					// TweenMax.to(pixels[i].scale, 3+Math.random()*2, {x: 0.5, y: 0.5, ease:Linear.easeNone, delay:2});
 				}
 
-				setTimeout(function() {
+				timer = setTimeout(function() {
 					self.isShooting = false;
 				}, 7000)
+
 			}
 
 			self.show = function() {
-				document.getElementById('fwCanvas').style.display = "block";
+				document.getElementById('firework').style.display = "block";
 			}
 
 			self.hide = function() {
-				document.getElementById('fwCanvas').style.display = "none";
+				document.getElementById('firework').style.display = "none";
 			}
 
 			self.loadComplete = true;
@@ -173,7 +199,7 @@ var mv = function() {
 			linearFiltering: true
 		};
 
-		var screenCanvasElement = document.getElementById('screenCanvas');
+		var screenCanvasElement = document.getElementById('screen');
 		var glOpts = { antialias: false, depth: false, preserveDrawingBuffer: false };
 		var gl =
 		    screenCanvasElement.getContext('webgl', glOpts) ||
@@ -200,6 +226,7 @@ var mv = function() {
 		var screenTextureSize;	
 		var loadChecker = 0;
 		var imgArray = [];
+		var maskArray = [];
 		var completeFn;
 
 		self.loadAssets = function(img, complete) {
@@ -212,16 +239,25 @@ var mv = function() {
 				text.onload = imgLoaded;
 				text.src = img[i];
 			}
+
+			for( var i=0; i<3; i++ ) {
+				var mask = new Image();
+				maskArray.push(mask);
+				mask.onload = imgLoaded;
+				mask.src = "/tc/assets/images/test/mask"+(i+1)+"-mobile.png";
+			}
+
+
+
 		}
 
 
-	
-		var dot = new Image();
-		dot.src = "/tc/assets/images/test/dot.png";
+		// var dot = new Image();
+		// dot.src = "/tc/assets/images/test/dot3.png";
 
 		function imgLoaded() {
 			loadChecker++;
-			if( loadChecker == imgArray.length ) {
+			if( loadChecker == imgArray.length+maskArray.length ) {
 				screenImgElement = imgArray[self.nowImgID];
 				loadScreenTexture();
 				completeFn();
@@ -306,8 +342,8 @@ var mv = function() {
 
 		function loadScreenTexture(params) {
 		    if(!gl || !glResources) { return; }
-		    // params.ratio
-		    // params.position
+		    // params.ratio.x y
+		    // params.position.x y
 		    // params.type
 
 		    var image = screenImgElement;
@@ -330,15 +366,18 @@ var mv = function() {
 		    	ctx.drawImage(image, 0, 0, image.width, image.height);
 		    	
 		    } else {
-		    	if( params.type == "horizontal" ) {
-		    		// ctx.drawImage(image, 0, 0, image.width/params.ratio, image.height, params.position, 0, image.width, image.height);
-		    		ctx.drawImage(image, 0, 0, image.width, image.height, image.width*params.position, 0, image.width*params.ratio, image.height);
+		    	ctx.drawImage(image, image.width*params.position.x, image.height*params.position.y, image.width*params.ratio.x, image.height*params.ratio.y);
+		    	// if( params.type == "horizontal" ) {
+		    	// 	ctx.drawImage(image, image.width*params.position, 0, image.width*params.ratio, image.height);
+		    	// }
+		    	// if( params.type == "vertical" ) {
+		    	// 	ctx.drawImage(image, 0, image.height*params.position, image.width, image.height*params.ratio);
+		    	// }
+
+		    	if( params.mask !== undefined ) {
+		    		ctx.drawImage(maskArray[params.mask], 0, 0, image.width, image.height);
 		    	}
-		    	if( params.type == "vertical" ) {
-		    		// ctx.drawImage(image, 0, 0, image.width, image.height/params.ratio, 0, params.position, image.width, image.height);
-		    		ctx.drawImage(image, 0, 0, image.width, image.height, 0, image.height*params.position, image.width, image.height*params.ratio);
-		    	}
-		    	// ctx.drawImage(dot, 0, 0, image.width, image.height);
+		    	
 	  		    	
 		    }
 		    
@@ -537,32 +576,80 @@ var mv = function() {
 
 		var beforeSeekIsPlaying = false;
 		var isMousedown = false;
-		document.querySelector(".video__play").addEventListener('click', function() {
+		var el = document.querySelectorAll(".video__play, .video__pause, .video__cover");
+
+		for( var i=0; i<el.length; i++ ) {
+			el[i].addEventListener('click', toggleVideoStatus)
+		}
+
+		function toggleVideoStatus(event) {
+			document.querySelector(".video__cover").classList.remove("video__cover--active");
 			if( v.paused ) {
 				v.play();
 				a.play();
+				document.querySelector(".video__play").classList.remove("video__play--active");
+				document.querySelector(".video__pause").classList.add("video__pause--active");
 			} else {
 				v.pause();
 				a.pause();
-			}		
-		})
+				document.querySelector(".video__play").classList.add("video__play--active");
+				document.querySelector(".video__pause").classList.remove("video__pause--active");
+			}	
+		}
+		// document.querySelectorAll(".video__play, .video__pause").addEventListener('click', function() {
+		// 	if( v.paused ) {
+		// 		v.play();
+		// 		a.play();
+		// 		document.querySelector(".video__play").classList.remove("video__play--active");
+		// 		document.querySelector(".video__pause").classList.add("video__pause--active");
+		// 	} else {
+		// 		v.pause();
+		// 		a.pause();
+		// 		document.querySelector(".video__play").classList.add("video__play--active");
+		// 		document.querySelector(".video__pause").classList.remove("video__pause--active");
+		// 	}		
+		// })
 
-		document.querySelector(".video__timeline").addEventListener("mousedown", function(event) {
+		// document.querySelector(".video__cover").addEventListener("click", function() {
+		// 	v.play();
+		// 	a.play();
+		// 	this.classList.remove("video__cover--active");
+		// })
+
+		document.querySelector(".video__timeline").addEventListener("mousedown", timelineMoveStart)
+		document.querySelector(".video__timeline").addEventListener("touchstart", timelineMoveStart)
+
+		function timelineMoveStart(event) {
+			event.preventDefault();
+			var x;
+			if( event.touches ) {
+				x = event.touches[0].offsetX;
+			} else {
+				x = event.offsetX+1;
+			}
+			
 			if( v.paused ) {
 				beforeSeekIsPlaying = false;
 			} else {
 				beforeSeekIsPlaying = true;
 			}
-			var progress = Math.min(Math.max( (event.offsetX+1) / document.querySelector(".video__timeline").offsetWidth, 0), 1) * 100;
-			TweenMax.set('.video__progress', {width: progress+"%"});
-			v.currentTime = a.currentTime = v.duration * progress/100;
-
 			v.pause();
 			a.pause();
 			isMousedown = true;
-		})
-		document.addEventListener("mouseup", function(event) {
+
+			var progress = Math.min(Math.max( x / document.querySelector(".video__timeline").offsetWidth, 0), 1) * 100;
+			TweenMax.set('.video__progress', {width: progress+"%"});
+			v.currentTime = a.currentTime = v.duration * progress/100;
+
+
+		}
+
+		document.addEventListener("mouseup", timelineMoveEnd)
+		document.addEventListener("touchend", timelineMoveEnd)
+
+		function timelineMoveEnd(event) {
 			if( isMousedown ) {
+				event.preventDefault();
 				// var progress = parseInt(document.querySelector(".video__progress").style.width);
 				// v.currentTime = v.duration * progress/100;
 				if( beforeSeekIsPlaying ) {
@@ -571,22 +658,37 @@ var mv = function() {
 				}
 				isMousedown = false;
 			}
-			
-		})
+		}
 
-		document.addEventListener("mousemove", function(event) {
+
+		document.addEventListener("mousemove", timelineMoveing)
+		document.addEventListener("touchmove", timelineMoveing)
+
+		function timelineMoveing(event) {
 			if( isMousedown ) {
-				// console.log("move");
+				console.log('move');
+				event.preventDefault();
+				var x;
+				if( event.touches ) {
+					x = event.touches[0].pageX;
+				} else {
+					x = event.pageX;
+				}
+
 				var timeline = document.querySelector(".video__timeline");
-				var progress = Math.min(Math.max( (event.pageX - timeline.getBoundingClientRect().x) / timeline.offsetWidth, 0), 1) * 100;
+				var progress = Math.min(Math.max( (x - timeline.getBoundingClientRect().x) / timeline.offsetWidth, 0), 1) * 100;
 
 				v.currentTime = a.currentTime = v.duration * progress/100;
 
 				// var progress = Math.min(Math.max( (event.offsetX+1) / timeline.offsetWidth, 0), 1) * 100;
 				TweenMax.set('.video__progress', {width: progress+"%"});
 			}
+		}
 
-		})
+		// document.addEventListener("touchstart", function(event) {
+		// 	event.preventDefault();
+
+		// });
 
 
 		function updateProgressBar() {
@@ -667,13 +769,14 @@ var mv = function() {
 			    var theCurrentFrame=Math.floor(curTime*frameRate);
 
 			    if( f.loadComplete ) {
-				    if( theCurrentFrame >= 2844 && theCurrentFrame <= 2993 && !f.isShooting) {
+				    if( theCurrentFrame >= 2860 && theCurrentFrame <= 2993 && !f.isShooting) {
 						f.show();
 						f.shot();
 						console.log("SHOT");
 				    }
-				    if( theCurrentFrame < 2844 || theCurrentFrame > 2993 ) {
+				    if( theCurrentFrame < 2860 || theCurrentFrame > 2993 ) {
 				    	f.hide();
+				    	f.isShooting = false;
 				    }
 			    }
 
@@ -697,14 +800,40 @@ var mv = function() {
 								]);
 			   					
 								if( keyFrameData[i].img !== vntf.nowImgID ) {
+									TweenMax.killTweensOf(transformData.position);
 									vntf.changeTexture(keyFrameData[i].img);
 
 									if( keyFrameData[i].marquee !== undefined ) {
-										transformData = {position:0, ratio: keyFrameData[i].marquee.ratio, type: keyFrameData[i].marquee.type};
-										TweenMax.fromTo(transformData, keyFrameData[i].marquee.duration, {position:keyFrameData[i].marquee.start}, {position:keyFrameData[i].marquee.end, ease:Power0.easeOut, onUpdate:function(){
-											// loadScreenTexture(transformData);
-											vntf.changeTexture(keyFrameData[i].img, transformData);
-										}});
+										transformData = {
+											mask: keyFrameData[i].marquee.mask,
+											position: {
+												x: 0,
+												y: 0
+											},
+											ratio: {
+												x: keyFrameData[i].marquee.ratio.x,
+												y: keyFrameData[i].marquee.ratio.y,
+											},
+											type: keyFrameData[i].marquee.type
+										};
+
+										var tweenFrom = {
+											x: keyFrameData[i].marquee.position.start.x,
+											y: keyFrameData[i].marquee.position.start.y
+										}
+
+										var tweenTo = {
+											x: keyFrameData[i].marquee.position.end.x,
+											y: keyFrameData[i].marquee.position.end.y,
+											ease: Power1.easeOut,
+											onUpdate: function() {
+												vntf.changeTexture(keyFrameData[i].img, transformData);
+												// console.log( transformData );
+											}
+										}
+
+										TweenMax.fromTo(transformData.position, keyFrameData[i].marquee.duration, tweenFrom, tweenTo);
+										// TweenMax.fromTo(transformData.position, keyFrameData[i].marquee.duration, {x:keyFrameData[i].marquee.position.start.x, y:keyFrameData[i].marquee.position.start.y}, {x:keyFrameData[i].marquee.position.end.x, y:keyFrameData[i].marquee.position.end.x});
 									}
 								}
 								// redrawImg();
@@ -720,9 +849,9 @@ var mv = function() {
 			    }
 
 			    if( isShow ) {
-			    	TweenMax.set("#screenCanvas", {opacity: 1});
+			    	TweenMax.set("#screen", {opacity: 1});
 			    } else {
-			    	TweenMax.set("#screenCanvas", {opacity: 0});
+			    	TweenMax.set("#screen", {opacity: 0});
 			    }
 
 			    
@@ -737,6 +866,7 @@ var mv = function() {
 
 				if( syncChecker == 120 ) {
 					// document.querySelector(".msg").innerHTML = Math.abs(a.currentTime - v.currentTime );
+					// console.log( Math.abs(a.currentTime - v.currentTime ) );
 					if( Math.abs(a.currentTime - v.currentTime ) > 0.4 ) {
 						v.currentTime = a.currentTime;
 						console.log("sync!!");
@@ -773,6 +903,12 @@ var mv = function() {
 	self.playVideo = function() {
 		v.play();
 		a.play();
+	}
+
+	self.seekTo = function(number) {
+		document.querySelector(".video__cover").classList.remove("video__cover--active");
+		v.currentTime = a.currentTime = number; 
+		// a.play();
 	}
 
 
