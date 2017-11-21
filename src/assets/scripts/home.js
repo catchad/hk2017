@@ -1,4 +1,3 @@
-
 $(function() {
 	if (ww <= 768) {
 		var cw = 800,
@@ -10,13 +9,15 @@ $(function() {
 	}
 
 	var myMv = new mv();
+	var urlValue = urlSearchParser();
+	var userTicket;
+
 	var canvas = $('#bg_home');
 	var app = new PIXI.Application(cw, ch, {backgroundColor : 0xf5f1ec});
 	var steps = [];
 	var currentPage = '#step1',
 			currentAni = 0;
 	var doOnce = false;
-
 	var imgCount = 0,
 			imgMax = 5,
 			countText = $('.full_loader .count');
@@ -76,11 +77,18 @@ $(function() {
 		}
 
 		//init
-		steps[0].visible = true;
-		// steps[2].loop = false;
-		steps[0].play();
-
-
+		if( urlValue['t'] ) {
+			userTicket = urlValue['t']
+	    	pageHide();
+			nextAni();
+			pageShow('#step3', 0.5);
+			checkStatus(userTicket);
+			$('#step5 .btn-share').text("換我，製作我的影片");
+		} else {
+			steps[0].visible = true;
+			// steps[2].loop = false;
+			steps[0].play();
+		}
 		// app.ticker.add(function() {
 
 		// });
@@ -185,10 +193,10 @@ $(function() {
         	pageHide();
 					nextAni();
 					pageShow('#step3', 0.5);
-
+			userTicket = response.data.Ticket;
           if (response.data.MusicFile != null) {
           	console.log('mp3 return');
-          	console.log(response.data.MusicFile);
+          	console.log(response.data.MusicFile);          	
           	// 之前產生過 有資料可以直接用
           	// 等待影片 音樂下載完畢才顯示下一段
           	mvStart(response);
@@ -255,6 +263,21 @@ $(function() {
 		nextAni();
 	});
 
+	$('#step5 .btn-share').on('click', function(event) {
+		if( urlValue['t'] ) {
+			location.href = "https://hkwonderful.discoverhongkong.com/tc/";
+		} else {
+			FB.ui({
+				method: 'share',
+				href: 'https://hkwonderful.discoverhongkong.com/tc/?t='+userTicket,
+			},
+			function(response) {
+
+			});
+		}
+
+	});
+
 	function mvStart(response) {
 		var imgData;
 		if( ww > 1024 ) {
@@ -270,6 +293,20 @@ $(function() {
 				mvLoader();
 			}
 		});
+	}
+	function urlSearchParser() {
+		var arr = []
+		var strUrl = location.search;
+		var getPara, ParaVal;
+		if (strUrl.indexOf("?") != -1) {
+			var getSearch = strUrl.split("?");
+			getPara = getSearch[1].split("&");
+			for (i = 0; i < getPara.length; i++) {
+			  ParaVal = getPara[i].split("=");
+			  arr[ParaVal[0]] = ParaVal[1];
+			}
+		}
+		return arr;
 	}
 
 });
