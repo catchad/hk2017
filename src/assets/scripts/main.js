@@ -5,14 +5,6 @@ var imgLoaded = false;
 var mainLoader = $('.full_loader'),
 		body= $('body');
 
-// WebFont.load({
-//   custom: {
-//     families: ['cwTeXYen'],
-//     urls: ['https://fonts.googleapis.com/earlyaccess/cwtexyen.css']
-//   }
-
-// });
-
 $(function() {
 	var header = $('header');
 
