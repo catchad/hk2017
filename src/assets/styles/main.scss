@@ -41,8 +41,7 @@ main{
 	@include transition(opacity .5s);
 	@include box-sizing(border-box);
 	position: relative;
-	padding-top: $page_gap;
-	min-height: 100vh;
+	min-height: calc(100vh - #{$page_gap});
 	overflow: hidden;
 	opacity: 0;
 	&.show{
@@ -50,7 +49,7 @@ main{
 	}
 
 	@include desktop_s {
-		padding-top: $page_gap-d;
+		min-height: calc(100vh - #{$page_gap-d});
 	}
 }
 section{
@@ -237,8 +236,7 @@ header{
 	@include flex-box;
 	@include align-items(center);
 
-	position: fixed;
-	left: 0; top: 0;
+	position: relative;
 	width: 100%;
 	height: 60px;
 	background-color: #fff;
@@ -979,12 +977,12 @@ footer{
 	.btn-promote{
 		@include btn-box;
 		margin-top: 4.5rem;
+		transition: .3s;
 		&:hover{
-			@include scale(.96);
+			background-color: #f60202;
+			border-color: transparent;
 		}
-		&:active{
-			@include scale(.92);
-		}
+
 
 		.s_text{
 			font-size: 12px;
