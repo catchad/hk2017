@@ -5,6 +5,7 @@ var ww = window.innerWidth;
 var imgLoaded = false;
 var mainLoader = $('.full_loader'),
 		body= $('body');
+var isRunning = false;
 
 $(function() {
 	var header = $('header');
@@ -28,12 +29,14 @@ $(function() {
 		body.addClass('lock');
 		TweenMax.set( page, { className: '+=show'});
 		TweenMax.fromTo( page, .5, { x:'-50%', alpha:0 }, { x:'0%', alpha:1 });
+		isRunning = false;
 	}
 	// popup close
 	popClose = function(page){
 		body.removeClass('lock');
 		TweenMax.fromTo( page, .5, { x:'0%', alpha:1 }, { x:'-50%', alpha:0 });
 		TweenMax.set( page, { className: '-=show', delay: .51});
+		isRunning = false;
 	}
 	//resize
 	function onResize(){
@@ -62,10 +65,13 @@ $(function() {
 	// bind event
 	$(window).on('resize', onResize);
 	$('.popup .btn-close').on('click', function(){
-		var page = $(this).parents('.popup');
-		// console.log(page)
-		if ( page.hasClass('show') ){
-			popClose(page);
+		if ( !isRunning ){
+			isRunning = true;
+			var page = $(this).parents('.popup');
+			// console.log(page)
+			if ( page.hasClass('show') ){
+				popClose(page);
+			}
 		}
 	});
 
@@ -84,7 +90,8 @@ $(function() {
 	// tour and map page bind pan event
 	function setImgshow(){
 		var item = $('#img_show .item');
-		maxShow_w = item.width() * item.length + ww * .1 * (item.length-1) - ww*.6
+		maxShow_w = (ww * .6) * item.length + ww * .1 * (item.length-1) - ww*.6
+		console.log( item.width(), item.length, ww, maxShow_w );
 	}
 
 	var pan_tar = document.getElementById('img_show');
@@ -108,7 +115,7 @@ $(function() {
 					panX = -maxShow_w;
 				}
 
-				// console.log(panX);
+
 				TweenMax.set('#img_show .flex', {x: panX})
 			});
 

@@ -17,10 +17,7 @@ $(function() {
 	var steps = [];
 	var currentPage = '#step1',
 			currentAni = 0;
-	var doOnce = false;
-	var imgCount = 0,
-			imgMax = 5,
-			countText = $('.full_loader .count');
+	var countText = $('.full_loader .count');
 
 	var loader = PIXI.loader;
   canvas.append(app.view);
@@ -94,6 +91,7 @@ $(function() {
 
 
 	function pageHide(){
+
 		TweenMax.fromTo(currentPage, .3, { alpha: 1 }, { alpha: 0 });
 		TweenMax.set(currentPage, { display: 'none', delay: .3 });
 
@@ -101,11 +99,13 @@ $(function() {
 	function pageShow(page, delay){
 		TweenMax.set(page, { display: 'block',delay: delay });
 		TweenMax.fromTo(page, .3, { alpha: 0 }, { alpha: 1, delay: delay+.05, onComplete:function(){
+			isRunning = false;
 			if (page == '#step2') {
 				$('#name1').focus();
 			}
 		} });
 		currentPage = page;
+
 	}
 
 	function nextAni(){
@@ -113,7 +113,6 @@ $(function() {
 		steps[currentAni].gotoAndStop(0);
 
 		currentAni++;
-		doOnce = false;
 		if (currentAni <= 1) {
 			steps[currentAni].visible = true;
 			steps[currentAni].gotoAndPlay(0);
@@ -144,6 +143,7 @@ $(function() {
       dataType: 'json'
     })
     .done(function (response, textStatus, jqXHR) {
+      isRunning = false;
       switch (response.code) {
         case 200:
         case 201:
@@ -163,6 +163,7 @@ $(function() {
       console.log(response);
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
+      isRunning = false;
       var response = $.parseJSON(jqXHR.responseText);
       switch (response.code) {
         case 400:
@@ -211,6 +212,7 @@ $(function() {
       console.log(response);
     })
     .fail(function (jqXHR, textStatus, errorThrown) {
+      isRunning = false;
       var response = $.parseJSON(jqXHR.responseText);
       switch (response.code) {
         case 400:
@@ -224,38 +226,49 @@ $(function() {
 
   // step1
 	$('.step .btn-to_step2').on('click', function(){
-		pageHide();
-		pageShow('#step2', 0.5);
-		pageTrack('page-Home-inputname');
+		if ( !isRunning ) {
+			isRunning = true;
+			console.log(isRunning);
+			pageHide();
+			pageShow('#step2', 0.5);
+			pageTrack('page-Home-inputname');
+		}
+
 	});
 
 	// step2
-	$('#name1').on('change', function(){
-		var name = $(this).val()
-		if ( name.length == 3 ) {
-			$('#name1').val(name.charAt(0));
-			$('#name2').val(name.charAt(1));
-			$('#name3').val(name.charAt(2));
+	function getName(){
+		if ( !isRunning ) {
+			isRunning = true;
+			console.log(isRunning);
+			var name = $('#name1').val();
+			if ( name.length == 3) {
+				apiMusic(name);
+			}
+			else{
+				alert('姓名輸入錯誤');
+			}
 		}
-	})
+	}
+	$('#name_form').on('submit', function(e){
+		e.preventDefault();
+		getName();
+	});
 	$('.step .btn-to_step3').on('click', function(){
 		// send name to backend
-		var name = $('#name1').val().charAt(0)+$('#name2').val()+$('#name3').val();
-		if ( name.length == 3) {
-			apiMusic(name);
-		}
-		else{
-			alert('姓名輸入錯誤');
-		}
+		getName();
 	});
 
 	$('.step .btn-play').on('click', function(){
-		pageHide();
-		pageShow('#step5', .5);
-		setTimeout( function(){
-			steps[currentAni].visible = false;
-			steps[currentAni].gotoAndStop(0);
-		}, 500);
+		if ( !isRunning ) {
+			isRunning = true;
+			pageHide();
+			pageShow('#step5', .5);
+			setTimeout( function(){
+				steps[currentAni].visible = false;
+				steps[currentAni].gotoAndStop(0);
+			}, 500);
+		}
 	});
 
 	// step5

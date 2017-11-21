@@ -383,15 +383,16 @@ footer{
 		a{
 			@include transition(.3s);
 			display: inline-block;
-			width:56px; height:56px;
+			width:46px; height:46px;
 			overflow:hidden;
 			background-repeat: no-repeat;
 			background-image:url(../images/icons.png);
-			margin: 0 10px;
+			margin: 0 7px;
+			background-size: 100% auto;
 		}
-		.fb { background-position: -2px -118px}
-		.ig { background-position: -2px -60px}
-		.utube { background-position: -2px -2px}
+		.fb { background-position: 0px -88px}
+		.ig { background-position: 0px -44px}
+		.utube { background-position: 0px 0px}
 	}
 
 	.policy{
@@ -483,7 +484,7 @@ footer{
 		left: 50%; bottom: 2rem;
 
 		.iphone &{
-			bottom: 4rem;
+			bottom: 3rem;
 		}
 
 		@include desktop_s {
@@ -614,21 +615,19 @@ footer{
 			}
 		}
 		form{
-			@include transform(translateX(-50%) rotate(-1.5deg));
+			@include transform(translateX(-50%) rotate(-1deg));
 			position: absolute;
-			width: 100%; height: 11%;
-			left: 50%; bottom: 27%;
-			text-align: center;
-			font-size: 0;
+			width: 50%; height: 7%;
+			left: 50%; bottom: 28%;
 		}
 		input{
 			@include box-sizing(border-box);
 			display: inline-block;
 			border: none;
 			outline: none;
-			margin: 0 1%;
+
 			font-size: 1.5rem;
-			width: 16%; height: 100%;
+			width: 100%; height: 100%;
 			line-height: 100%;
 
 			background-color: transparent;
@@ -1171,6 +1170,8 @@ footer{
 
 #promote_code{
 	overflow: auto;
+
+	&.show{ display: block; }
 
 	h4{
 		font-size: 1.15rem;
