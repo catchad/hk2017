@@ -72,10 +72,12 @@ $(function() {
 
 
 	$('.btn-vote').on('click', function(){
+    pageTrack('page-Tour-vote');
 		popShow('#user_data');
 	});
 	$('.btn-promote').on('click', function(){
-		popShow('#promote_code');
+		pageTrack('page-Tour-promote');
+    popShow('#promote_code');
 	});
 
 
@@ -109,6 +111,7 @@ $(function() {
         case 200:
         case 201:
           console.log('save user data OK');
+          pageTrack('page-Tour-savedata');
           alert('參加成功。');
 					popClose('#user_data');
           break;

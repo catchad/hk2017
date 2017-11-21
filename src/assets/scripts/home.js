@@ -38,6 +38,7 @@ $(function() {
 	}
 
 	// loader
+	pageTrack('page-Home-loading');
 	loader.onProgress.add(function(e){
 		countText.text( e.progress );
 	});
@@ -69,12 +70,12 @@ $(function() {
 			}
 
 			app.stage.addChild(steps[i]);
-
-			//image loaded
-			$('main').addClass('show');
-			mainLoader.removeClass('show');
-			imgLoaded = true;
 		}
+		//image loaded
+		$('main').addClass('show');
+		mainLoader.removeClass('show');
+		imgLoaded = true;
+		pageTrack('page-Home-enter');
 
 		//init
 		if( urlValue['t'] ) {
@@ -89,9 +90,6 @@ $(function() {
 			// steps[2].loop = false;
 			steps[0].play();
 		}
-		// app.ticker.add(function() {
-
-		// });
 	}
 
 
@@ -108,7 +106,6 @@ $(function() {
 			}
 		} });
 		currentPage = page;
-
 	}
 
 	function nextAni(){
@@ -121,8 +118,8 @@ $(function() {
 			steps[currentAni].visible = true;
 			steps[currentAni].gotoAndPlay(0);
 		}
-
 	}
+
 	function mvLoader(){
 		pageHide();
 		pageShow('#step5', .5);
@@ -130,6 +127,7 @@ $(function() {
 		// myMv.playVideo();
 	}
 
+	// for api
 	function getAuthHeaders() {
     var headers = {};
     var csrfToken = $('#csrf-form input[name=__RequestVerificationToken]').val();
@@ -190,13 +188,14 @@ $(function() {
       switch (response.code) {
         case 200:
         case 201:
+        	pageTrack('page-Home-videoloading');
         	pageHide();
 					nextAni();
 					pageShow('#step3', 0.5);
 			userTicket = response.data.Ticket;
           if (response.data.MusicFile != null) {
           	console.log('mp3 return');
-          	console.log(response.data.MusicFile);          	
+          	console.log(response.data.MusicFile);
           	// 之前產生過 有資料可以直接用
           	// 等待影片 音樂下載完畢才顯示下一段
           	mvStart(response);
@@ -223,12 +222,14 @@ $(function() {
     });
   }
 
+  // step1
 	$('.step .btn-to_step2').on('click', function(){
 		pageHide();
-		// setTimeout(nextAni, 200);
 		pageShow('#step2', 0.5);
-
+		pageTrack('page-Home-inputname');
 	});
+
+	// step2
 	$('#name1').on('change', function(){
 		var name = $(this).val()
 		if ( name.length == 3 ) {
@@ -247,6 +248,7 @@ $(function() {
 			alert('姓名輸入錯誤');
 		}
 	});
+
 	$('.step .btn-play').on('click', function(){
 		pageHide();
 		pageShow('#step5', .5);
@@ -256,13 +258,7 @@ $(function() {
 		}, 500);
 	});
 
-	// fake finished loading event
-	$('.step .btn-to_step4').on('click', function(){
-		pageHide();
-		pageShow('#step5', .5);
-		nextAni();
-	});
-
+	// step5
 	$('#step5 .btn-share').on('click', function(event) {
 		if( urlValue['t'] ) {
 			location.href = "https://hkwonderful.discoverhongkong.com/tc/";
@@ -279,6 +275,7 @@ $(function() {
 	});
 
 	function mvStart(response) {
+
 		var imgData;
 		if( ww > 1024 ) {
 			imgData = [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[14]];
@@ -290,6 +287,7 @@ $(function() {
 			img: imgData,
 			music: response.data.MusicFile,
 			complete: function() {
+				pageTrack('page-Home-videoplay');
 				mvLoader();
 			}
 		});

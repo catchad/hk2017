@@ -2,8 +2,8 @@
 html(lang="zh-tw")
 	head
 		meta(charset="UTF-8")
-		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
-		link(rel="stylesheet", href="/tc/assets/styles/main.css")
+		include _meta.jade
+
 		title 旺福與你一起創作的聖誕曲 - 聖誕行程
 	body
 		include _mixin.jade
@@ -20,27 +20,22 @@ html(lang="zh-tw")
 			section.popup#promote_code
 				+btn-close
 				.inner
-					h3 機票折扣代碼
-					h4
-						|於華航官網購買香港來回機票
-						br
-						|可折抵150元
-
+					h3 機票折扣碼
 					p.code 2017HK
-					.detail
-						p.desc 使用方式：
-						p.list
-							|1.活動內容：凡於官網購票，並輸入折扣代碼「2017HK」，可享由台灣區(桃園/高雄/台中/台南)出發至香港，每張機票減價TWD 150元之折扣優惠。
-						p.list
-							|2.適用艙等：經濟艙全艙等皆適用。
-						p.list
-							|3.活動效期(開票日)：2017年11月27日至12月31日。
-						p.list
-							|4.出發日期：2017年11月27日至12月28日、2018年1月1日至2月14日、2018年2月19日至3月31日。
-						p.list
-							|5.本次活動僅限於華航官網購買華航/華信國際線成人、兒童來回機票(嬰兒票不適用)，不得與任何其他信用卡活動促銷案等合併使用。
+					h4
+						|於華航網站購買香港來回機票
+						br
+						|輸入折扣碼，可折抵150元
 
-					a(href="" target='_blank').btn.btn-buy 前往購買
+					a(href="https://www.china-airlines.com/tw/zh/" target='_blank').btn.btn-buy 前往購買
+					.detail
+						p.desc 說明事項：
+						p.list 1.凡於華航網站購買香港來回機票，輸入折扣代碼2017HK，可享由台灣區(桃園/高雄/台中/台南)出發至香港，每張機票減價TWD 150元之折扣優惠。
+						p.list 2.適用艙等：經濟艙全艙等皆適用。
+						p.list 3.活動效期(開票日)：2017年11月27日至12月31日。
+						p.list 4.出發日期：2017年11月27日至12月28日、2018年1月1日至2月14日、2018年2月19日至3月31日。
+						p.list 5.本次活動僅限於華航官網購買華航/華信國際線成人、兒童來回機票(嬰兒票不適用)，不得與任何其他信用卡活動促銷案等合併使用。
+
 
 			section.popup#user_data
 				+btn-close

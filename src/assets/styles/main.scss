@@ -290,6 +290,10 @@ header{
 		}
 	}
 	&.expend .menu-switch{
+		position: fixed;
+    right: 0px;
+    top: 0;
+
 		.box{ background-color: #229000; }
 		span{
 			&:nth-child(1){
@@ -1175,32 +1179,30 @@ footer{
 	.code{
 		display: inline-block;
 		font-size: 4rem;
-		line-height: 6rem;
-		margin: 1rem 0;
-		padding: 0 .75rem;
-		border-bottom: 1px solid rgba(#fff, .5);
+		line-height: 4.5rem;
+		margin-bottom: 2rem;
 	}
 
 	.detail{
+		border-top: 1px solid rgba(#fff, .5);
 		text-align: left;
-		width: 80%;
+		width: 85%;
 		margin: 0 auto;
-		padding-bottom: 3rem;
+		padding: 3rem 0;
 	}
 	.desc{
 		font-size: 1.15rem;
 		line-height: 2rem;
-		padding-top: 1rem;
 	}
 	.list{
 		display: block;
 		font-size: 1rem;
-		line-height: 1.4rem;
+		line-height: 1.5rem;
 		padding-left: 1rem;
-		text-indent: -1rem;
+		text-indent: -.9rem;
 	}
 	.btn{
-		margin-bottom: 3rem;
+		margin: 3rem 0;
 	}
 
 }

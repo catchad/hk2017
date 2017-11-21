@@ -2,8 +2,8 @@
 html(lang="zh-tw")
 	head
 		meta(charset="UTF-8")
-		meta(name="viewport", content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
-		link(rel="stylesheet", href="/tc/assets/styles/main.css")
+		include _meta.jade
+
 		title 旺福與你一起創作的聖誕曲
 
 	body
@@ -102,7 +102,7 @@ html(lang="zh-tw")
 
 
 		include _footer.jade
-		script(src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js")
+
 		script(src="/tc/assets/scripts/numeric-1.2.6.min.js")
 		script.
 			var keyFrameData = [];

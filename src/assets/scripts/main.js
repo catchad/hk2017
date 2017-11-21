@@ -11,6 +11,7 @@ $(function() {
 
 	// tracking
 	pageTrack = function (page){
+		console.log('/tc/'+page);
 	  dcsMultiTrack('DCS.dcsuri','/tc/'+page);
 	  ga('send', 'pageview', page );
 	}
@@ -74,12 +75,18 @@ $(function() {
 		}
 		else{
 			header.addClass('expend');
+			pageTrack('page-Menu-open');
 		}
 
 	});
 
 
 	// tour and map page bind pan event
+	function setImgshow(){
+		var item = $('#img_show .item');
+		maxShow_w = item.width() * item.length + ww * .1 * (item.length-1) - ww*.6
+	}
+
 	var pan_tar = document.getElementById('img_show');
 	var maxShow_w = 0;
 	if ( pan_tar !== null ) {
@@ -103,7 +110,6 @@ $(function() {
 
 				// console.log(panX);
 				TweenMax.set('#img_show .flex', {x: panX})
-
 			});
 
 			// set image show width
@@ -112,11 +118,7 @@ $(function() {
 
 	}
 
-	function setImgshow(){
-		var item = $('#img_show .item');
-		maxShow_w = item.width() * item.length + ww * .1 * (item.length-1) - ww*.6
-		console.log('img_show move area: '+maxShow_w);
-	}
+
 
 
 
