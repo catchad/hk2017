@@ -571,6 +571,17 @@ footer{
 			line-height: 2rem;
 			color: #333;
 		}
+		.btn{
+			width: 180px;
+			box-sizing: border-box;
+
+			@include mobile_s {
+				width: 155px;
+			}
+			@include desktop_s {
+				width: 210px;
+			}
+		}
 	}
 
 	#step2{
