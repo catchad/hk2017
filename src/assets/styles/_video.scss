@@ -9,6 +9,10 @@
 	max-width: 1150px;
 	font-size: 0;
 	margin-top: 30px;
+	@media screen and (max-width: 1366px ) {
+		max-width: 680px;
+	}
+
 	&__screen {
 		position: relative;
 		width: 100%;
@@ -83,12 +87,15 @@
 	&__repeat {
 		position: relative;
 		width: 40px;
-		height: 40px;
-		border-radius: 50%;
-		border: 2px solid #FE0000;
-		box-sizing: border-box;
+		height: auto;
 		flex: 0 0 auto;
+		opacity: 0.5;
+		cursor: pointer;
 	}
+	&__repeat--active {
+		opacity: 1;
+	}
+
 	&__timeline {
 		flex: 1;
 		height: 2px;

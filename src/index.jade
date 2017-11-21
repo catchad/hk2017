@@ -6,8 +6,25 @@ html(lang="zh-tw")
 		link(rel="stylesheet", href="/tc/assets/styles/main.css")
 		title 旺福與你一起創作的聖誕曲
 
-
 	body
+		script.
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId            : '372656716505092',
+					autoLogAppEvents : true,
+					xfbml            : true,
+					version          : 'v2.11'
+				});
+				FB.AppEvents.logPageView();
+			};
+			(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+
 		include _mixin.jade
 		.full_loader.show
 			p
@@ -75,6 +92,7 @@ html(lang="zh-tw")
 							img.video__pause(src="/tc/assets/images/pause.svg")
 							.video__timeline
 								.video__progress
+							img.video__repeat(src="/tc/assets/images/repeat.svg")
 					.content
 						.btn.btn-share
 							span  求你，分享一下影片

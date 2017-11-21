@@ -699,14 +699,20 @@ footer{
 			width: 55%;
 			max-width: 290px;
 
-			@include mobile_s {
-				max-width: 200px;
-			}
-			@include desktop_s {
-				display: none;
-			}
+
+
 		}
 		.content{ width: 100%; }
+
+		.content{
+		    width: 100%;
+		    position: relative;
+		    transform: none;
+		    left: 0;
+		    bottom: 0;
+		    margin-top: 10px;
+		}
+
 		.btn{
 			margin: 0 .5rem;
 		}

@@ -12,6 +12,24 @@
     <title>旺福與你一起創作的聖誕曲</title>
   </head>
   <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '372656716505092',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v2.11'
+        });
+        FB.AppEvents.logPageView();
+      };
+      (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));      
+    </script>
     <form id="csrf-form">
       @Html.AntiForgeryToken()
     </form>
@@ -111,7 +129,7 @@
             <div class="video__controls"><img src="/tc/assets/images/play.svg" class="video__play video__play--active"/><img src="/tc/assets/images/pause.svg" class="video__pause"/>
               <div class="video__timeline">
                 <div class="video__progress"></div>
-              </div>
+              </div><img src="/tc/assets/images/repeat.svg" class="video__repeat"/>
             </div>
           </div>
           <div class="content">
@@ -129,25 +147,16 @@
         <div class="logo"><a href="http://www.discoverhongkong.com/tc/about-hktb/index.jsp" target="_blank"><img src="/tc/assets/images/logo-b1.png" alt=""/></a><a href="http://www.discoverhongkong.com/tc/index.jsp" target="_blank"><img src="/tc/assets/images/logo-b2.png" alt=""/></a></div>
       </div>
     </footer>
-    <script src="/tc/assets/scripts/jquery-3.2.1.min.js"></script>
-    <script src="/tc/assets/scripts/imagesloaded.pkgd.min.js"></script>
-    <script src="/tc/assets/scripts/TweenMax.min.js"></script>
-    <script src="/tc/assets/scripts/hammer.min.js"></script>
-    <script src="/tc/assets/scripts/device.min.js"></script>
 
-    <script src="/tc/assets/scripts/main.js"></script>
+    <script src="assets/scripts/jquery-3.2.1.min.js"></script>
+    <script src="assets/scripts/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/scripts/TweenMax.min.js"></script>
+    <script src="assets/scripts/hammer.min.js"></script>
+    <script src="assets/scripts/device.min.js"></script>
+    <script src="assets/scripts/main.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js"></script>
     <script src="/tc/assets/scripts/numeric-1.2.6.min.js"></script>
-    <script>var keyFrameData = [];</script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata32.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata33.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata49.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata0101.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata0134.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata0136.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata0142.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata0158.js"></script>
-    <script src="/tc/assets/scripts/keyframedata/keyframedata0211.js"></script>
+    <script src="/tc/assets/scripts/keyframedata/keyframedata.js"></script>
     <script src="/tc/assets/scripts/video.js"></script>
     <script src="/tc/assets/scripts/home.js"></script>
   </body>
