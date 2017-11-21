@@ -1,5 +1,6 @@
 // set show popup event as global for Page Map
 var popShow, popClose;
+var pageTrack, eventTrack;
 var ww = window.innerWidth;
 var imgLoaded = false;
 var mainLoader = $('.full_loader'),
@@ -7,6 +8,19 @@ var mainLoader = $('.full_loader'),
 
 $(function() {
 	var header = $('header');
+
+	// tracking
+	pageTrack = function (page){
+	  dcsMultiTrack('DCS.dcsuri','/tc/'+page);
+	  ga('send', 'pageview', page );
+	}
+	eventTrack = function(tar){
+	  var _cate = tar.attr('data-cate'),
+	      _label = tar.attr('data-label');
+
+	  if (_cate)
+	    ga('send', 'event', _cate, 'click', _label);
+	}
 
 	//popup show
 	popShow = function(page){
