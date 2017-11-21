@@ -88,6 +88,7 @@ $(function() {
 	});
 
 
+
   // 參加抽獎
   function getAuthHeaders() {
     var headers = {};
@@ -144,5 +145,82 @@ $(function() {
     }
   });
 
+  // get spot info
+  var spotData,
+      spotInner = $('#spot_info');
+  $.ajax({
+    dataType: "json",
+    url: '/tc/assets/spot.json',
+    success: function(result, status){
+      spotData = result;
+    }
+  });
+
+  $('.tour-list .btn').on('click', function(){
+
+    var spotId = $(this).attr('data-spot');
+    var spot = spotData[spotId];
+    pageTrack('page-Spot-'+spotId);
+    console.log(spot);
+
+    spotInner.find('h2 .name').text(spot.name);
+    spotInner.find('.style').text(spot.style);
+    spotInner.find('.location').text(spot.location);
+    spotInner.find('.desc').html(spot.desc);
+
+    // set images
+    var imgs = '';
+    for (var i = 0; i < spot.img_url.length; i++) {
+      imgs += "<div class='item' data-img='" + spot.img_url[i] + "'><img src='/tc/assets/images/" + spot.img_url[i] + "' alt='/><p class='name'>" + spot.img_name[i] + "</p></div>"
+    }
+    $('#img_show .flex').html(imgs);
+
+    setImgshow();
+    imgLoading( spotInner, popShow(spotInner) );
+  });
+  $('#img_show .flex').on('click', '.item', function(){
+    if ( !isRunning ) {
+      isRunning = true;
+      var img = $(this).attr('data-img');
+      $('#spot_image img').attr('src', '/tc/assets/images/'+img);
+      popShow('#spot_image');
+    }
+  });
+
+  // tour and map page bind pan event
+  function setImgshow(){
+    var item = $('#img_show .item');
+    maxShow_w = (ww * .6) * item.length + ww * .1 * (item.length-1) - ww*.6
+  }
+
+  var pan_tar = document.getElementById('img_show');
+  var maxShow_w = 0;
+
+  // page tour and map
+  imgLoading( $('main') );
+
+  if (ww <= 768) {
+    // bind hammer js
+    var hammertime = new Hammer(pan_tar);
+    var panX = 0;
+    hammertime.on('pan', function(ev) {
+      // console.log(ev.deltaX)
+      panX = panX + ev.deltaX/8;
+
+      if ( panX > 0) {
+        panX = 0;
+      }
+      else if( panX < -maxShow_w ){
+        panX = -maxShow_w;
+      }
+
+      TweenMax.set('#img_show .flex', {x: panX})
+    });
+  }
+
+
+
 
 });
+
+// "<div class='item'><img src='/tc/assets/images/'+tour_sample.jpg+ ' alt='/><p class='name'>科士街石牆樹</p></div>"

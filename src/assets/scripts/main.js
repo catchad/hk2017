@@ -1,6 +1,7 @@
 // set show popup event as global for Page Map
 var popShow, popClose;
 var pageTrack, eventTrack;
+var imgLoading;
 var ww = window.innerWidth;
 var imgLoaded = false;
 var mainLoader = $('.full_loader'),
@@ -45,7 +46,7 @@ $(function() {
 	}
 
 	//image loader
-	function imgLoading(page, cont){
+	imgLoading = function (page, cont){
 		mainLoader.addClass('show');
 		page.imagesLoaded()
 		  .always( function( instance ) {
@@ -87,43 +88,7 @@ $(function() {
 	});
 
 
-	// tour and map page bind pan event
-	function setImgshow(){
-		var item = $('#img_show .item');
-		maxShow_w = (ww * .6) * item.length + ww * .1 * (item.length-1) - ww*.6
-		console.log( item.width(), item.length, ww, maxShow_w );
-	}
 
-	var pan_tar = document.getElementById('img_show');
-	var maxShow_w = 0;
-	if ( pan_tar !== null ) {
-		// page tour and map
-		imgLoading( $('main') );
-
-		if (ww <= 768) {
-			// bind hammer js
-			var hammertime = new Hammer(pan_tar);
-			var panX = 0;
-			hammertime.on('pan', function(ev) {
-				// console.log(ev.deltaX)
-				panX = panX + ev.deltaX/8;
-
-				if ( panX > 0) {
-					panX = 0;
-				}
-				else if( panX < -maxShow_w ){
-					panX = -maxShow_w;
-				}
-
-
-				TweenMax.set('#img_show .flex', {x: panX})
-			});
-
-			// set image show width
-			setImgshow();
-		}
-
-	}
 
 
 

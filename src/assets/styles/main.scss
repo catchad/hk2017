@@ -293,6 +293,10 @@ header{
 		position: fixed;
     right: 0px;
     top: 0;
+    height: 55px;
+    @include desktop_s {
+    	height: 71px;
+    }
 
 		.box{ background-color: #229000; }
 		span{
@@ -1034,8 +1038,13 @@ footer{
 	}
 	.btn-close{
 		position: absolute;
-		right: 10px; top: 0;
 		@include btn-close;
+		right: 10px; top: 0;
+		height: 80px;
+
+		@include desktop_s {
+			top: 0;
+		}
 	}
 }
 
@@ -1172,7 +1181,7 @@ footer{
 	overflow: auto;
 
 	&.show{ display: block; }
-
+	.inner{ padding: 4rem 0; }
 	h4{
 		font-size: 1.15rem;
 		line-height: 2rem;
