@@ -1003,6 +1003,15 @@ footer{
 			font-size: 20px;
 		}
 	}
+	.btn-home{
+		@include btn-box;
+		margin-top: 2rem;
+		transition: .3s;
+		&:hover{
+			background-color: #f60202;
+			border-color: transparent;
+		}
+	}
 
 }
 //map page
