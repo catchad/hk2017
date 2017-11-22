@@ -67,9 +67,9 @@ gulp.task('clean-js', function() {
         .pipe(clean());
 });
 gulp.task('concat-js', function() {
-    // return gulp.src(['src/assets/scripts/lib/jquery-3.0.0.min.js', 'src/assets/scripts/lib/TweenMax.min.js', 'src/assets/scripts/lib/device.min.js', 'src/assets/scripts/lib/imagesloaded.pkgd.min.js', 'src/assets/scripts/lib/slick.min.js', 'src/assets/scripts/lib/easeljs-0.8.2.min.js', 'src/assets/scripts/lib/preloadjs-0.6.2.min.js'])
-    //   .pipe(concat('lib.js'))
-    //   .pipe(gulp.dest('build/assets/scripts/'));
+    return gulp.src(['src/assets/scripts/lib/jquery-3.2.1.min.js', 'src/assets/scripts/lib/TweenMax.min.js', 'src/assets/scripts/lib/device.min.js', 'src/assets/scripts/lib/imagesloaded.pkgd.min.js', 'src/assets/scripts/lib/hammer.min.js', 'src/assets/scripts/lib/pixi.min.js'])
+      .pipe(concat('lib.js'))
+      .pipe(gulp.dest('build/assets/scripts/'));
 });
 
 gulp.task('js', ['clean-js', 'concat-js'], function() {
