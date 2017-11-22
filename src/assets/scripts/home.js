@@ -9,7 +9,6 @@ $(function() {
 	}
 
 	var myMv = new mv();
-	var urlValue = urlSearchParser();
 	var userTicket;
 
 	var canvas = $('#bg_home');
@@ -274,7 +273,7 @@ $(function() {
 
 	// step5
 	$('#step5 .btn-share').on('click', function(event) {
-		if( urlValue['t'] ) {
+		if( window.ticket !== undefined ) {
 			location.href = "https://hkwonderful.discoverhongkong.com/tc/";
 		} else {
 			FB.ui({
@@ -306,19 +305,6 @@ $(function() {
 			}
 		});
 	}
-	function urlSearchParser() {
-		var arr = []
-		var strUrl = location.search;
-		var getPara, ParaVal;
-		if (strUrl.indexOf("?") != -1) {
-			var getSearch = strUrl.split("?");
-			getPara = getSearch[1].split("&");
-			for (i = 0; i < getPara.length; i++) {
-			  ParaVal = getPara[i].split("=");
-			  arr[ParaVal[0]] = ParaVal[1];
-			}
-		}
-		return arr;
-	}
+
 
 });

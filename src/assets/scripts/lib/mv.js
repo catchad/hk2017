@@ -62,7 +62,7 @@ var mv = function() {
 			var h = 400;
 			var app = new PIXI.Application(w, h, {forceCanvas: false, view: document.getElementById('firework'), transparent:true});
 
-			var texture = PIXI.Texture.fromImage('/assets/images/test/particle2.png');
+			var texture = PIXI.Texture.fromImage('/tc/assets/images/test/particle2.png');
 
 			var container = new PIXI.particles.ParticleContainer(10000, {
 			    scale: false,
@@ -100,25 +100,9 @@ var mv = function() {
 			    pixel.y = pixel.data.y;
 			    pixel.alpha = 0;
 			    pixel.scale.x = pixel.scale.y = pixel.data.scale;
-			    // pixel.blendMode = blend;
-			    // pixel.blendMode = PIXI.BLEND_MODES.ADD;
-			    // pixel.tint = Math.random() * 0xffffff;
 			    pixel.tint = 0xfffd4b;
-			    container.addChild(pixel);
-			    
-			    // container.scale.x = container.scale.y = 0.6;
-			    // var du = Math.random()*1+1;
+			    container.addChild(pixel);			    
 
-			    // var tl = new TimelineMax({repeat:-1});
-			    // tl.to(pixel, du, {alpha:0});
-			    // tl.to(pixel, du, {alpha:1});
-
-			    // TweenMax.to(pixel, 1, {y:pointData[rnd].y-20, alpha:1, ease:Power2.easeOut});
-			    // TweenMax.to(pixel, 2, {y:pointData[rnd].y+40, ease:Power2.easeIn, delay:1});
-
-			    // tl.add( TweenMax.to(pixel, du, {alpha:1}) );
-			    
-			    // pixel.tint = 0x66CCFF;
 			    pixels.push(pixel);
 
 				// var x = pointData[rnd].x;
@@ -243,7 +227,7 @@ var mv = function() {
 				var mask = new Image();
 				maskArray.push(mask);
 				mask.onload = imgLoaded;
-				mask.src = "/assets/images/test/mask"+(i+1)+"-mobile.png";
+				mask.src = "/tc/assets/images/test/mask"+(i+1)+"-mobile.png";
 			}
 
 		}
@@ -588,13 +572,12 @@ var mv = function() {
 				a.pause();
 				document.querySelector(".video__play").classList.add("video__play--active");
 				document.querySelector(".video__pause").classList.remove("video__pause--active");
-			}	
+			}
 		}
 
 		document.querySelector(".video__repeat").addEventListener('click', function(){
 			v.loop = !v.loop;
 			a.loop = !a.loop;
-
 			if( v.loop ) {
 				document.querySelector(".video__repeat").classList.add("video__repeat--active");
 			} else {
@@ -622,18 +605,18 @@ var mv = function() {
 			}
 		})
 
-		var timer;
+		// var timer;
 		mc.on("pan tap press", function(event) {
-			clearTimeout(timer);
+			// clearTimeout(timer);
 
 			var timeline =  document.querySelector(".video__timeline");
 			var x = event.center.x - timeline.getBoundingClientRect().x;  
 			var progress = Math.min(Math.max( x / document.querySelector(".video__timeline").offsetWidth, 0), 1) * 100;
 			updateProgressBar(progress);
-			timer = setTimeout(function() {
+			// timer = setTimeout(function() {
 				v.currentTime = a.currentTime = v.duration * progress/100;
-				console.log("change");
-			}, 100)
+				// console.log("change");
+			// }, 100)
 			
 		});
 
@@ -729,7 +712,7 @@ var mv = function() {
 			completeFn = complete;
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
-			req.open('GET', '/assets/videos/mv.mp4', true);
+			req.open('GET', '/tc/assets/videos/mv.mp4', true);
 			req.responseType = 'blob';
 			req.onload = function() {
 			   if (this.status === 200) {
