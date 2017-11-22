@@ -223,26 +223,7 @@ $(function() {
 	    }
 	  };
 
-	  // var features = [
-	  //   {
-	  //     position: new google.maps.LatLng(22.2991332,114.1770699),
-	  //     type: 'mamber1',
-	  //     title: '推機'
-	  //   }, {
-	  //     position: new google.maps.LatLng(22.2833326,114.1738553),
-	  //     type: 'mamber2',
-	  //     title: '肚皮'
-	  //   }, {
-	  //     position: new google.maps.LatLng(22.2930678,114.1708626),
-	  //     type: 'mamber3',
-	  //     title: 'Mami'
-	  //   }, {
-	  //     position: new google.maps.LatLng(22.2789112,114.1819145),
-	  //     type: 'mamber4',
-	  //     title: '小民'
-	  //   }
-	  // ];
-	  var spot_list = ["t1", "t2", "t3", "t4", "t5", "d1", "d2", "d3", "d4", "d5", "m2", "m3", "m4", "m5", "s1", "s2", "s4", "s5"]
+	  var spot_list = ["t1", "t2", "t3", "t4", "t5", "d1", "d2", "d3", "d4", "d5", "m1", "m2", "m3", "m4", "m5", "s1", "s2", "s3", "s4", "s5"]
 	  var features = [];
 	  for (var i = 0; i < spot_list.length; i++) {
 	  	var _marker ={
@@ -252,8 +233,6 @@ $(function() {
 	  	}
 	  	features.push(_marker);
 	  }
-
-
 	  // Create markers.
 	  features.forEach(function(feature) {
 	    var marker = new google.maps.Marker({
@@ -263,8 +242,6 @@ $(function() {
 	      map: map
 	    });
 	    marker.addListener('click', function() {
-		    // get spot name and replace data
-		    console.log( this.spot )
 		    //after image loaded show popup
 		    getSpotinfo(this.spot);
 
@@ -277,7 +254,6 @@ $(function() {
   function getSpotinfo(spotId){
     var spot = spotData[spotId];
     pageTrack('page-Spot-'+spotId);
-    console.log(spot);
 
     spotInner.find('h2 .name').text(spot.name);
     spotInner.find('.style').text(spot.style);
@@ -290,6 +266,8 @@ $(function() {
       imgs += "<div class='item' data-img='" + spot.img_url[i] + "'><img src='/tc/assets/images/" + spot.img_url[i] + "' alt='/><p class='name'>" + spot.img_name[i] + "</p></div>"
     }
     $('#img_show .flex').html(imgs);
+    $('.btn-linkto').attr('href', spot.links[0]);
+    $('.btn-linkto').text( spot.links_name[0]);
 
     setImgshow();
     imgLoading( spotInner, popShow(spotInner) );

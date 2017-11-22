@@ -47,16 +47,17 @@ $(function() {
 
 	//image loader
 	imgLoading = function (page, cont){
+		mainLoader.addClass('show');
 		page.imagesLoaded()
 		  .always( function( instance ) {
 		    console.log('all images loaded');
 		    TweenMax.set(mainLoader, {className: '-=show'});
-		    TweenMax.set(page, {className: '+=show', delay: .5});
-		    // mainLoader.removeClass('show');
-		    // page.addClass('show');
+		    TweenMax.set(page, {className: '+=show', delay: .5, onComplete:function(){
+		    	if ( typeof cont === 'function')
+          	cont();
+		    }});
 
-		    if ( typeof cont === 'function')
-            cont();
+
 		  })
 	}
 

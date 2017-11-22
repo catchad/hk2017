@@ -19,7 +19,7 @@ body, html{
 		font-size: 14px;
 	}
 	@include tablet {
-		font-size: 18px;
+		font-size: 16px;
 	}
 }
 
@@ -1012,7 +1012,6 @@ footer{
 			border-color: transparent;
 		}
 
-
 		.s_text{
 			font-size: 12px;
 			line-height: 12px;
@@ -1201,20 +1200,22 @@ footer{
 	}
 
 	.info{
-		text-align: left;
+
 		padding: 0 10%;
 		max-width: 800px;
 		margin: 0 auto;
 	}
 	.desc{
 		margin-top: 1.5rem;
-
+		text-align: left;
 		p{
 			font-size: 1.15rem;
 			line-height: 2rem;
-			text-align: justify;
-
+			// text-align: justify;
 		}
+	}
+	.btn-linkto{
+		margin: 2rem 0;
 	}
 }
 #spot_image{

@@ -178,6 +178,8 @@ $(function() {
       imgs += '<div class="item" data-img="' + spot.img_url[i] + '"><img src="/tc/assets/images/' + spot.img_url[i] + '"/><p class="name">' + spot.img_name[i] + '</p></div>';
     }
     $('#img_show .flex').html(imgs);
+    $('.btn-linkto').attr('href', spot.links[0]);
+    $('.btn-linkto').text( spot.links_name[0]);
 
     setImgshow();
     imgLoading( spotInner, popShow(spotInner) );
