@@ -283,7 +283,7 @@ $(function() {
 		} else {
 			FB.ui({
 				method: 'share',
-				href: 'https://hkwonderful.discoverhongkong.com/tc/?t='+userTicket,
+				href: 'https://hkwonderful.discoverhongkong.com/tc/tvideo/'+userTicket,
 			},
 			function(response) {
 
