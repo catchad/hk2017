@@ -706,6 +706,9 @@ footer{
 	}
 
 	#step5{
+		display: block;
+		opacity: 0;
+		visibility: hidden;
 		.title{
 			width: 55%;
 			max-width: 290px;

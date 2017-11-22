@@ -73,7 +73,7 @@ gulp.task('concat-js', function() {
 
     gulp.src(['src/assets/scripts/lib/numeric-1.2.6.min.js', 'src/assets/scripts/lib/keyframedata.js', 'src/assets/scripts/lib/mv.js'])
       .pipe(concat('mv.js'))
-      .pipe(uglify())
+      // .pipe(uglify())
       .pipe(gulp.dest('build/assets/scripts/'));
 });
 
@@ -82,7 +82,7 @@ gulp.task('js', ['clean-js', 'concat-js'], function() {
         // .pipe(babel({
         //     presets: ['es2015']
         // }))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest('build/assets/scripts/'));
 });
 

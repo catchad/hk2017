@@ -85,7 +85,7 @@ var mv = function() {
 			var pixelColors = [0xff0000];
 
 			var usedPoint = [];
-			for( var i=0; i<4000; i++ ) {
+			for( var i=0; i<3500; i++ ) {
 				// var rnd;
 				// do {
 				// 	rnd = Math.floor(Math.random()*pointData.length);
@@ -93,7 +93,7 @@ var mv = function() {
 				var rnd = Math.floor(Math.random()*pointData.length);
 
 			    var pixel = new PIXI.Sprite(texture);
-			    pixel.data = {x:pointData[rnd].x, y:pointData[rnd].y, scale:1};
+			    pixel.data = {x:pointData[rnd].x, y:pointData[rnd].y, scale:1, tint: 0xfffd4b};
 
 			    pixel.anchor.set(0.5);
 			    pixel.x = pixel.data.x;
@@ -125,11 +125,14 @@ var mv = function() {
 				    pixels[i].y = pixels[i].data.y+10;
 				    pixels[i].scale.x = pixels[i].scale.y = pixels[i].data.scale;
 				    pixels[i].alpha = 0;
+				    pixels[i].tint = pixels[i].data.tint;
 
 				    TweenMax.to(pixels[i], 1.5, {x:pixels[i].data.x, y:pixels[i].data.y, alpha:1, ease:Power2.easeOut});
 				    
 				    TweenMax.to(pixels[i], 3+Math.random()*1, {x:pixels[i].data.x, y:pixels[i].data.y+100, ease:Power2.easeIn, delay:2});
 				    TweenMax.to(pixels[i], 1+Math.random()*2, {alpha:0, ease:Power2.easeIn, delay:2.5});
+
+				    // TweenMax.to(pixels[i], 3, {colorProps:{tint: 0xff0000} });
 					// TweenMax.to(pixels[i].scale, 3+Math.random()*2, {x: 0.5, y: 0.5, ease:Linear.easeNone, delay:2});
 				}
 
@@ -167,6 +170,18 @@ var mv = function() {
 		var self = this;
 
 		self.nowImgID = 0;
+
+		// Math.min(window.width, 1150)
+		
+		if( document.querySelector('.video__screen').offsetWidth < 800 ) {
+			self.screenWidth = document.querySelector('.video__screen').offsetWidth*2;
+			self.screenHeight = document.querySelector('.video__screen').offsetHeight*2;
+		} else {
+			self.screenWidth = document.querySelector('.video__screen').offsetWidth;
+			self.screenHeight = document.querySelector('.video__screen').offsetHeight;
+		}
+
+		console.log(self.screenWidth );
 		var controlPoints = [
 		    { x: 0, y: 0 },
 		    { x: 1, y: 0 },
@@ -183,6 +198,10 @@ var mv = function() {
 		};
 
 		var screenCanvasElement = document.getElementById('screen');
+		screenCanvasElement.setAttribute('width', self.screenWidth);
+		screenCanvasElement.setAttribute('height', self.screenHeight);
+		
+
 		var glOpts = { antialias: false, depth: false, preserveDrawingBuffer: false };
 		var gl =
 		    screenCanvasElement.getContext('webgl', glOpts) ||
@@ -190,7 +209,6 @@ var mv = function() {
 		if(!gl) {
 		    addError("Your browser doesn't seem to support WebGL.");
 		}
-
 
 		var anisoExt =
 		    gl.getExtension('EXT_texture_filter_anisotropic') ||
@@ -307,7 +325,7 @@ var mv = function() {
 		        
 		    rv.transMatUniform = gl.getUniformLocation(rv.shaderProgram, 'uTransformMatrix');
 		    rv.samplerUniform = gl.getUniformLocation(rv.shaderProgram, 'uSampler');
-		        
+
 		    // Create a texture to use for the screen image
 		    rv.screenTexture = gl.createTexture();
 
@@ -317,6 +335,8 @@ var mv = function() {
 		    return rv;
 		}
 
+		var loadScreenCanvas = document.createElement("canvas");
+		var loadScreenCtx = loadScreenCanvas.getContext("2d");
 
 		function loadScreenTexture(params) {
 		    if(!gl || !glResources) { return; }
@@ -330,38 +350,29 @@ var mv = function() {
 		    gl.bindTexture(gl.TEXTURE_2D, glResources.screenTexture);
 		    
 		    // Scale up the texture to the next highest power of two dimensions.
-		    var canvas = document.createElement("canvas");
-		    canvas.width = nextHighestPowerOfTwo(extent.w);
-		    canvas.height = nextHighestPowerOfTwo(extent.h);
+		    // var canvas = document.createElement("canvas");
+		    loadScreenCanvas.width = nextHighestPowerOfTwo(extent.w);
+		    loadScreenCanvas.height = nextHighestPowerOfTwo(extent.h);
 
-
-
-		    var ctx = canvas.getContext("2d");
+		    // var ctx = canvas.getContext("2d");
 		    // ctx.drawImage(image, 0, 0, image.width, image.height, -600, 0, image.width/1.2, image.height);
 
 
 		    if( params == undefined ) {
-		    	ctx.drawImage(image, 0, 0, image.width, image.height);
+		    	loadScreenCtx.drawImage(image, 0, 0, image.width, image.height);
 		    	
 		    } else {
-		    	ctx.drawImage(image, image.width*params.position.x, image.height*params.position.y, image.width*params.ratio.x, image.height*params.ratio.y);
-		    	// if( params.type == "horizontal" ) {
-		    	// 	ctx.drawImage(image, image.width*params.position, 0, image.width*params.ratio, image.height);
-		    	// }
-		    	// if( params.type == "vertical" ) {
-		    	// 	ctx.drawImage(image, 0, image.height*params.position, image.width, image.height*params.ratio);
-		    	// }
+		    	loadScreenCtx.drawImage(image, image.width*params.position.x, image.height*params.position.y, image.width*params.ratio.x, image.height*params.ratio.y);
 
 		    	if( params.mask !== undefined ) {
-		    		ctx.drawImage(maskArray[params.mask], 0, 0, image.width, image.height);
+		    		loadScreenCtx.drawImage(maskArray[params.mask], 0, 0, image.width, image.height);
 		    	}
 		    	
-	  		    	
 		    }
 		    
 		    // ctx.drawImage(image, 0, 0, image.width, image.height);
 		    
-		    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
+		    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, loadScreenCanvas);
 		    
 		    if(qualityOptions.linearFiltering) {
 		        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,
@@ -392,10 +403,8 @@ var mv = function() {
 		    gl.bindTexture(gl.TEXTURE_2D, null);
 		    
 		    // Record normalised height and width.
-		    var w = extent.w / canvas.width, h = extent.h / canvas.height;
+		    var w = extent.w / loadScreenCanvas.width, h = extent.h / loadScreenCanvas.height;
 		    
-
-
 		    srcPoints = [
 		        { x: 0, y: 0 }, // top-left
 		        { x: w, y: 0 }, // top-right
@@ -768,12 +777,12 @@ var mv = function() {
 			    lastCurrentFrame = theCurrentFrame;
 			    // console.log( theCurrentFrame );
 			    if( f.loadComplete ) {
-				    if( theCurrentFrame >= 2860 && theCurrentFrame <= 2993 && !f.isShooting) {
+				    if( theCurrentFrame >= 2904 && theCurrentFrame <= 2993 && !f.isShooting) {
 						f.show();
 						f.shot();
 						// console.log("SHOT");
 				    }
-				    if( theCurrentFrame < 2860 || theCurrentFrame > 2993 ) {
+				    if( theCurrentFrame < 2904 || theCurrentFrame > 2993 ) {
 				    	f.hide();
 				    	f.isShooting = false;
 				    }
@@ -791,11 +800,18 @@ var mv = function() {
 			   					// test.visibility = true;
 			   					// test.set({cornersData: [keyFrameData[i].data[0][j][1], keyFrameData[i].data[0][j][2], keyFrameData[i].data[1][j][1], keyFrameData[i].data[1][j][2], keyFrameData[i].data[2][j][1], keyFrameData[i].data[2][j][2], keyFrameData[i].data[3][j][1], keyFrameData[i].data[3][j][2]]})
 
+			   		// 			vntf.updatePoint([
+								//     { x: keyFrameData[i].data[0][j][1], y: keyFrameData[i].data[0][j][2] },
+								//     { x: keyFrameData[i].data[1][j][1], y: keyFrameData[i].data[1][j][2] },
+								//     { x: keyFrameData[i].data[3][j][1], y: keyFrameData[i].data[3][j][2] },
+								//     { x: keyFrameData[i].data[2][j][1], y: keyFrameData[i].data[2][j][2] }						    
+								// ]);
+
 			   					vntf.updatePoint([
-								    { x: keyFrameData[i].data[0][j][1], y: keyFrameData[i].data[0][j][2] },
-								    { x: keyFrameData[i].data[1][j][1], y: keyFrameData[i].data[1][j][2] },
-								    { x: keyFrameData[i].data[3][j][1], y: keyFrameData[i].data[3][j][2] },
-								    { x: keyFrameData[i].data[2][j][1], y: keyFrameData[i].data[2][j][2] }						    
+								    { x: vntf.screenWidth*keyFrameData[i].data[0][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[0][j][2]/1080 },
+								    { x: vntf.screenWidth*keyFrameData[i].data[1][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[1][j][2]/1080 },
+								    { x: vntf.screenWidth*keyFrameData[i].data[3][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[3][j][2]/1080 },
+								    { x: vntf.screenWidth*keyFrameData[i].data[2][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[2][j][2]/1080 }						    
 								]);
 			   					
 								if( keyFrameData[i].img !== vntf.nowImgID ) {

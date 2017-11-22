@@ -97,7 +97,12 @@ $(function() {
 
 	}
 	function pageShow(page, delay){
-		TweenMax.set(page, { display: 'block',delay: delay });
+		if( page == "#step5" ) {
+			TweenMax.set(page, { display: 'block', visibility:'visible', delay: delay });
+		} else {
+			TweenMax.set(page, { display: 'block',delay: delay });
+		}
+		
 		TweenMax.fromTo(page, .3, { alpha: 0 }, { alpha: 1, delay: delay+.05, onComplete:function(){
 			isRunning = false;
 			if (page == '#step2') {

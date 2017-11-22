@@ -10,7 +10,7 @@ html(lang="zh-tw")
 			.video__screen
 				video.video__videoElement(id="myVideo", muted, playsinline)
 				audio.video__audioElement
-				canvas.video__overlay(id="screen", width="1920", height="1080")
+				canvas.video__overlay(id="screen", width="600", height="338")
 				canvas.video__firework(id="firework")
 				img.video__cover.video__cover--active(src="/assets/images/video-cover.png")
 			.video__controls
@@ -37,6 +37,7 @@ html(lang="zh-tw")
 
 		script(src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js")
 		script(src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js")
+		//- script(src="//s3-us-west-2.amazonaws.com/s.cdpn.io/106114/ColorPropsPlugin.js")
 		script(src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js")
 		//- script(src="http://www.numericjs.com/lib/numeric-1.2.6.min.js")
 		script(src="assets/scripts/mv.js")
