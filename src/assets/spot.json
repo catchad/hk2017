@@ -1,5 +1,8 @@
 {
   "t1": {
+    "type":"member1",
+    "lat": "22.281941",
+    "lng": "114.160152",
     "name": "推機",
     "style": "浪漫聖誕",
     "location": "中環皇后像廣場",
@@ -16,10 +19,13 @@
       "http://www.discoverhongkong.com/tc/see-do/events-festivals/highlight-events/winter-fest.jsp?page=1"
     ],
     "links_name": [
-      "看更多香港繽紛冬日節活動"
+      "看更多"
     ]
   },
   "t2": {
+    "type":"member1",
+    "lat": "22.281270",
+    "lng": "114.129071",
     "name": "推機",
     "style": "雅痞聖地",
     "location": "堅尼地城",
@@ -39,11 +45,14 @@
     "links": [
       "https://gotohk.discoverhongkong.com/tc/article.php?id=146"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "t3": {
+    "type":"member1",
+    "lat": "22.285493",
+    "lng": "114.142787",
     "name": "推機",
-    "style": "生活提案",
+    "style": "香港風情",
     "location": "西營盤",
     "img_url": [
       "tour_sample.jpg",
@@ -61,9 +70,12 @@
     "links": [
       "https://gotohk.discoverhongkong.com/tc/article.php?id=143"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "t4": {
+    "type":"member1",
+    "lat": "22.275697",
+    "lng": "114.172181",
     "name": "推機",
     "style": "浪漫情懷",
     "location": "利東街",
@@ -83,9 +95,12 @@
     "links": [
       "https://gotohk.discoverhongkong.com/tc/blogger-story.php?id=140"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "t5": {
+    "type":"member1",
+    "lat": "22.287918",
+    "lng": "114.149131",
     "name": "推機",
     "style": "港式生活",
     "location": "上環",
@@ -105,9 +120,12 @@
     "links": [
       "http://www.discoverhongkong.com/tc/shop/where-to-shop/shopping-areas/sheung-wan.jsp"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "d1": {
+    "type":"member2",
+    "lat": "22.283722",
+    "lng": "114.154935",
     "name": "肚皮",
     "style": "繽紛滋味",
     "location": "中環",
@@ -132,6 +150,9 @@
     ]
   },
   "d2": {
+    "type":"member2",
+    "lat": "22.282348",
+    "lng": "114.191790",
     "name": "肚皮",
     "style": "星級美食",
     "location": "天后",
@@ -151,9 +172,12 @@
     "links": [
       "https://gotohk.discoverhongkong.com/tc/blogger-story.php?id=35"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "d3": {
+    "type":"member2",
+    "lat": "22.282137",
+    "lng": "114.221906",
     "name": "肚皮",
     "style": "臥虎藏龍",
     "location": "西灣河",
@@ -173,9 +197,12 @@
     "links": [
       "http://www.discoverhongkong.com/tc/dine-drink/where-to-eat/soho-east.jsp"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "d4": {
+    "type":"member2",
+    "lat": "22.297574",
+    "lng": "114.172164",
     "name": "肚皮",
     "style": "不敗港味",
     "location": "尖沙咀",
@@ -195,9 +222,12 @@
     "links": [
       "http://www.discoverhongkong.com/tc/shop/where-to-shop/shopping-areas/tsim-sha-tsui.jsp"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "d5": {
+    "type":"member2",
+    "lat": "22.304313",
+    "lng": "114.171768",
     "name": "肚皮",
     "style": "經典港味",
     "location": "佐敦",
@@ -217,9 +247,12 @@
     "links": [
       "https://gotohk.discoverhongkong.com/tc/blogger-story.php?id=95"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "m1": {
+    "type":"member3",
+    "lat": "",
+    "lng": "",
     "name": "瑪靡",
     "style": "繽紛聖誕",
     "location": "商場佈置",
@@ -240,6 +273,9 @@
     "links_name": []
   },
   "m2": {
+    "type":"member3",
+    "lat": "22.293210",
+    "lng": "114.174971",
     "name": "瑪靡",
     "style": "共賞璀璨",
     "location": "幻彩詠香江",
@@ -264,6 +300,9 @@
     ]
   },
   "m3": {
+    "type":"member3",
+    "lat": "22.319244",
+    "lng": "114.169346",
     "name": "瑪靡",
     "style": "文創潮流",
     "location": "旺角",
@@ -283,9 +322,12 @@
     "links": [
       "http://www.discoverhongkong.com/tc/shop/where-to-shop/shopping-areas/mong-kok.jsp"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "m4": {
+    "type":"member3",
+    "lat": "22.277582",
+    "lng": "114.173832",
     "name": "瑪靡",
     "style": "品味生活",
     "location": "灣仔",
@@ -305,9 +347,12 @@
     "links": [
       "https://gotohk.discoverhongkong.com/tc/blogger-story.php?id=140"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "m5": {
+    "type":"member3",
+    "lat": "22.280190",
+    "lng": "114.184902",
     "name": "瑪靡",
     "style": "巷弄秘境",
     "location": "銅鑼灣",
@@ -327,9 +372,12 @@
     "links": [
       "https://gotohk.discoverhongkong.com/tc/blogger-story.php?id=190"
     ],
-    "links_name": []
+    "links_name": ["了解更多"]
   },
   "s1": {
+    "type":"member4",
+    "lat": "22.285407",
+    "lng": "114.161743",
     "name": "小民",
     "style": "閃躍維港",
     "location": "光影匯演",
@@ -350,6 +398,9 @@
     "links_name": []
   },
   "s2": {
+    "type":"member4",
+    "lat": "22.293352",
+    "lng": "114.170259",
     "name": "小民",
     "style": "除夕倒數",
     "location": "2018香港除夕倒數",
@@ -370,10 +421,13 @@
       "http://www.discoverhongkong.com/tc/see-do/events-festivals/highlight-events/countdown.jsp"
     ],
     "links_name": [
-      "除夕跨年倒數煙火最佳觀賞位置"
+      "最佳觀賞位置"
     ]
   },
   "s3": {
+    "type":"member4",
+    "lat": "",
+    "lng": "",
     "name": "小民",
     "style": "",
     "location": "電車全景遊",
@@ -398,6 +452,9 @@
     ]
   },
   "s4": {
+    "type":"member4",
+    "lat": "22.293732",
+    "lng": "114.168954",
     "name": "小民",
     "style": "天星小輪",
     "location": "遊維港",
@@ -422,8 +479,11 @@
     ]
   },
   "s5": {
+    "type":"member4",
+    "lat": "22.254895",
+    "lng": "114.242950",
     "name": "小民",
-    "style": "",
+    "style": "郊野香港",
     "location": "看見不一樣的綠色香港",
     "img_url": [
       "tour_sample.jpg",
