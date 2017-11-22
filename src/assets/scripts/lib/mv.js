@@ -5,7 +5,6 @@ var mv = function() {
 	var self = this;
 
 	var ww = window.width;
-
 	var v = document.getElementById("myVideo"); 
 	var a = document.querySelector(".video__audioElement");
 	// var globalParams = params;
@@ -247,13 +246,8 @@ var mv = function() {
 				mask.src = "/tc/assets/images/test/mask"+(i+1)+"-mobile.png";
 			}
 
-
-
 		}
 
-
-		// var dot = new Image();
-		// dot.src = "/tc/assets/images/test/dot3.png";
 
 		function imgLoaded() {
 			loadChecker++;
@@ -607,29 +601,6 @@ var mv = function() {
 			}
 		})
 
-		v.addEventListener('play', function() {
-			console.log('play');
-		})
-
-		// document.querySelectorAll(".video__play, .video__pause").addEventListener('click', function() {
-		// 	if( v.paused ) {
-		// 		v.play();
-		// 		a.play();
-		// 		document.querySelector(".video__play").classList.remove("video__play--active");
-		// 		document.querySelector(".video__pause").classList.add("video__pause--active");
-		// 	} else {
-		// 		v.pause();
-		// 		a.pause();
-		// 		document.querySelector(".video__play").classList.add("video__play--active");
-		// 		document.querySelector(".video__pause").classList.remove("video__pause--active");
-		// 	}		
-		// })
-
-		// document.querySelector(".video__cover").addEventListener("click", function() {
-		// 	v.play();
-		// 	a.play();
-		// 	this.classList.remove("video__cover--active");
-		// })
 
 		document.querySelector(".video__timeline").addEventListener("mousedown", timelineMoveStart)
 		document.querySelector(".video__timeline").addEventListener("touchstart", timelineMoveStart)
@@ -675,13 +646,11 @@ var mv = function() {
 			}
 		}
 
-
 		document.addEventListener("mousemove", timelineMoveing)
 		document.addEventListener("touchmove", timelineMoveing)
 
 		function timelineMoveing(event) {
 			if( isMousedown ) {
-				console.log('move');
 				event.preventDefault();
 				var x;
 				if( event.touches ) {
@@ -788,7 +757,7 @@ var mv = function() {
 				    if( theCurrentFrame >= 2860 && theCurrentFrame <= 2993 && !f.isShooting) {
 						f.show();
 						f.shot();
-						console.log("SHOT");
+						// console.log("SHOT");
 				    }
 				    if( theCurrentFrame < 2860 || theCurrentFrame > 2993 ) {
 				    	f.hide();
@@ -817,7 +786,7 @@ var mv = function() {
 			   					
 								if( keyFrameData[i].img !== vntf.nowImgID ) {
 									TweenMax.killTweensOf(transformData.position);
-									vntf.changeTexture(keyFrameData[i].img);
+									
 
 									if( keyFrameData[i].marquee !== undefined ) {
 										transformData = {
@@ -850,6 +819,8 @@ var mv = function() {
 
 										TweenMax.fromTo(transformData.position, keyFrameData[i].marquee.duration, tweenFrom, tweenTo);
 										// TweenMax.fromTo(transformData.position, keyFrameData[i].marquee.duration, {x:keyFrameData[i].marquee.position.start.x, y:keyFrameData[i].marquee.position.start.y}, {x:keyFrameData[i].marquee.position.end.x, y:keyFrameData[i].marquee.position.end.x});
+									} else {
+										vntf.changeTexture(keyFrameData[i].img);
 									}
 								}
 								// redrawImg();
@@ -927,23 +898,4 @@ var mv = function() {
 		// a.play();
 	}
 
-
 }
-
-
-
-// var myMv = new mv();
-
-// myMv.start({
-// 	img: ['assets/images/test/testname1-2.png', 'assets/images/test/testname2-2.png', 'assets/images/test/testname3-2.png', 'assets/images/test/testname4-2.png', 'assets/images/test/testname5-2.png', 'assets/images/test/testname6-2.png', 'assets/images/test/testname7-2.png', 'assets/images/test/fireworktext.png'],
-// 	music: 'assets/videos/testaudio.mp3',
-// 	complete: function() {
-// 		console.log("OK");
-// 	}
-// });
-
-
-
-
-
-	// document.querySelector()

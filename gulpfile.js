@@ -67,17 +67,22 @@ gulp.task('clean-js', function() {
         .pipe(clean());
 });
 gulp.task('concat-js', function() {
-    return gulp.src(['src/assets/scripts/lib/jquery-3.2.1.min.js', 'src/assets/scripts/lib/TweenMax.min.js', 'src/assets/scripts/lib/device.min.js', 'src/assets/scripts/lib/imagesloaded.pkgd.min.js', 'src/assets/scripts/lib/hammer.min.js', 'src/assets/scripts/lib/pixi.min.js'])
+    gulp.src(['src/assets/scripts/lib/jquery-3.2.1.min.js', 'src/assets/scripts/lib/TweenMax.min.js', 'src/assets/scripts/lib/device.min.js', 'src/assets/scripts/lib/imagesloaded.pkgd.min.js', 'src/assets/scripts/lib/hammer.min.js', 'src/assets/scripts/lib/pixi.min.js'])
       .pipe(concat('lib.js'))
+      .pipe(gulp.dest('build/assets/scripts/'));
+
+    gulp.src(['src/assets/scripts/lib/numeric-1.2.6.min.js', 'src/assets/scripts/lib/keyframedata.js', 'src/assets/scripts/lib/mv.js'])
+      .pipe(concat('mv.js'))
+      .pipe(uglify())
       .pipe(gulp.dest('build/assets/scripts/'));
 });
 
 gulp.task('js', ['clean-js', 'concat-js'], function() {
-    return gulp.src('src/assets/scripts/**/*.js')
+    return gulp.src('src/assets/scripts/*.js')
         // .pipe(babel({
         //     presets: ['es2015']
         // }))
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('build/assets/scripts/'));
 });
 
