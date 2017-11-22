@@ -1033,6 +1033,10 @@ footer{
 		font-size: 2.5rem;
 		line-height: 3rem;
 	}
+	h4 {
+	    font-size: 1.15rem;
+	    line-height: 2rem;
+	}
 	.btn{
 		@include btn-box;
 	}
@@ -1121,7 +1125,7 @@ footer{
 					position: absolute;
 					left: 0; top: 0px;
 					width: 17px; height: 2rem;
-					background: url('../images/icon-zoom.png') center no-repeat;
+					background: url('../images/icon-zoom.svg') center no-repeat;
 					background-size: 100% auto;
 				}
 			}
@@ -1212,7 +1216,7 @@ footer{
 		text-indent: -.9rem;
 	}
 	.btn{
-		margin: 3rem 0;
+		margin: 3rem 0.3rem;
 	}
 
 }

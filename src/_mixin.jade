@@ -9,7 +9,7 @@ mixin btn-close
 mixin spot(name)
 	.btn(class!=attributes.class)
 		.circle_box
-			p.text!= name
+			p.text #{name}
 
 //- loading
 mixin loader

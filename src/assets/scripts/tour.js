@@ -171,7 +171,7 @@ $(function() {
     // set images
     var imgs = '';
     for (var i = 0; i < spot.img_url.length; i++) {
-      imgs += "<div class='item' data-img='" + spot.img_url[i] + "'><img src='/tc/assets/images/" + spot.img_url[i] + "' alt='/><p class='name'>" + spot.img_name[i] + "</p></div>"
+      imgs += '<div class="item" data-img="' + spot.img_url[i] + '"><img src="/tc/assets/images/' + spot.img_url[i] + '"/><p class="name">' + spot.img_name[i] + '</p></div>';
     }
     $('#img_show .flex').html(imgs);
 

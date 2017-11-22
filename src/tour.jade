@@ -27,7 +27,8 @@ html(lang="zh-tw")
 						br
 						|輸入折扣碼，可折抵150元
 
-					a(href="https://www.china-airlines.com/tw/zh/" target='_blank').btn.btn-buy 前往購買
+					a(href="https://www.china-airlines.com/tw/zh/", target='_blank').btn.btn-buy 前往購買
+					a(href="/tc/").btn.btn-home 製作我的聖誕歌曲
 					.detail
 						p.desc 說明事項：
 						p.list 1.凡於華航網站購買香港來回機票，輸入折扣代碼2017HK，可享由台灣區(桃園/高雄/台中/台南)出發至香港，每張機票減價TWD 150元之折扣優惠。
@@ -35,15 +36,16 @@ html(lang="zh-tw")
 						p.list 3.活動效期(開票日)：2017年11月27日至12月31日。
 						p.list 4.出發日期：2017年11月27日至12月28日、2018年1月1日至2月14日、2018年2月19日至3月31日。
 						p.list 5.本次活動僅限於華航官網購買華航/華信國際線成人、兒童來回機票(嬰兒票不適用)，不得與任何其他信用卡活動促銷案等合併使用。
+						p.list
+							| 6.有關折扣碼使用相關問題請洽
+							a(href="https://www.china-airlines.com/tw/zh/contact-us/index", target="_blank") 中華航空
 
 
 			section.popup#user_data
 				+btn-close
 				.inner
-					h3
-						|完成投票
-						br
-						|留下資料抽獎
+					h3 留下資料，完成投票
+					h4 就有機會抽香港來回機票
 
 					form(id="register-form")
 						.row
@@ -153,7 +155,7 @@ html(lang="zh-tw")
 							+spot('香港<br/>秘境')(class='color-4' data-spot='s5')
 
 				#vote_event
-					h2.big_title 你想跟誰一起走？
+					h2.big_title 你要選擇誰的路線？
 					h3.sub_title
 							|選擇一個聖誕路線，就有機會
 							span.color_red 獲得香港來回機票
