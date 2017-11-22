@@ -175,7 +175,7 @@ $(function() {
     // set images
     var imgs = '';
     for (var i = 0; i < spot.img_url.length; i++) {
-      imgs += '<div class="item" data-img="' + spot.img_url[i] + '"><img src="/tc/assets/images/' + spot.img_url[i] + '"/><p class="name">' + spot.img_name[i] + '</p></div>';
+      imgs += '<div class="item" data-img="' + spot.img_url[i] + '"><img src="/tc/assets/images/spot/' + spot.img_url[i] + '"/><p class="name">' + spot.img_name[i] + '</p></div>';
     }
     $('#img_show .flex').html(imgs);
     $('.btn-linkto').attr('href', spot.links[0]);
@@ -188,7 +188,7 @@ $(function() {
     if ( !isRunning ) {
       isRunning = true;
       var img = $(this).attr('data-img');
-      $('#spot_image img').attr('src', '/tc/assets/images/'+img);
+      $('#spot_image img').attr('src', '/tc/assets/images/spot/'+img);
       popShow('#spot_image');
     }
   });

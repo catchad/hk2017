@@ -1170,10 +1170,12 @@ footer{
 			@include flex(0 0 auto);
 			width: 60%;
 			padding-right: 10%;
+			cursor: pointer;
 			.name{
 				position: relative;
 				font-size: 1rem;
 				line-height: 2rem;
+				height: 2rem;
 				padding-left: 20px;
 				text-align: left;
 
@@ -1189,8 +1191,9 @@ footer{
 			}
 
 			@include desktop_s {
-				width: 23%;
+				width: auto;
 				padding: 0 1%;
+				flex: 1 1 auto;
 			}
 		}
 
