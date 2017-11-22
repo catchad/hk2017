@@ -75,7 +75,7 @@ a{
 
 .big_title{
 	position: relative;
-	display: inline-block;
+	// display: inline-block;
 
 	font-size: 2.25rem;
 	line-height: 2.75rem;
@@ -348,7 +348,12 @@ header{
 	}
 	.title{
 		max-width: 275px;
-		margin-bottom: 3rem;
+		margin-bottom: 2rem;
+
+		@include desktop_s {
+			max-width: 300px;
+			margin-bottom: 1.5rem;
+		}
 	}
 	li{
 		position: relative;
@@ -362,7 +367,7 @@ header{
 		border-bottom: 1px solid rgba(#fff, .5);
 
 		&:last-child{
-			margin-bottom: 3rem;
+			margin-bottom: 2rem;
 			border: none;
 		}
 		a{
@@ -378,10 +383,10 @@ header{
 // footer
 footer{
 	position: relative;
-	padding-top: 2rem;
+	padding-top: 1rem;
 	padding-bottom: 1rem;
-	font-size: .85rem;
-	line-height: 1.8rem;
+	font-size: 14px;
+	line-height: 18px;
 	color: #777;
 	background-color: #fff;
 	text-align: center;
@@ -406,6 +411,7 @@ footer{
 	}
 
 	.policy{
+		font-size: 12px;
 		margin: 1rem 0;
 		p{ padding: 0 .25rem; }
 		a{
@@ -414,13 +420,20 @@ footer{
 			padding: 0 .25rem;
 			border-right: 1px solid #333;
 		}
+		@include tablet {
+			font-size: 14px;
+		}
 	}
 	.logo{
 		a{
 			display: inline-block;
-			margin: .75rem 2%;
-			width: 46%;
-			max-width: 145px;
+			margin: 17px;
+			width: 35%;
+			max-width: 143px;
+
+			@include tablet {
+				margin: 23px;
+			}
 		}
 		img{
 			width: 100%;
@@ -1066,9 +1079,38 @@ footer{
 		}
 	}
 }
+#rules{
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+
+	&.show{ display: block; }
+	.inner{ padding: 4rem 0; }
+
+	.big_title{
+		font-size: 1.5rem;
+		line-height: 2rem;
+	}
+	.detail{
+		width: 80%;
+		max-width: 750px;
+		margin: 2rem auto;
+		text-align: left;
+		list-style: decimal;
+		padding-left: 1.5rem;
+		font-size: 1rem;
+		line-height: 1.75rem;
+	}
+	ul{
+		list-style: disc;
+		padding-left: 1.5rem;
+	}
+
+
+}
 
 #spot_info{
 	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 	&.show{ display: block; }
 
 	.inner{
@@ -1077,14 +1119,13 @@ footer{
 	}
 
 	.deco-firework{
+		width: 80%;
 		max-width: 310px;
 	}
-
 	.big_title{
-		&:before, &:after{
-			background-image: url('../images/deco-line3.png');
-		}
+		display: block;
 	}
+
 	.spot{
 		margin-top: .5rem;
 
@@ -1162,22 +1203,6 @@ footer{
 		max-width: 800px;
 		margin: 0 auto;
 	}
-
-	.tags{
-		margin-top: 3.5rem;
-		font-size: 0;
-		.tag{
-			@include border-radius(40px);
-			display: inline-block;
-			padding: 0 1.5rem;
-			font-size: 1.15rem;
-			line-height: 2rem;
-			color: $red;
-			background-color: rgba(#fff, .4);
-			margin-right: .5rem;
-		}
-	}
-
 	.desc{
 		margin-top: 1.5rem;
 
@@ -1198,6 +1223,7 @@ footer{
 
 #promote_code{
 	overflow: auto;
+	-webkit-overflow-scrolling: touch;
 
 	&.show{ display: block; }
 	.inner{ padding: 4rem 0; }

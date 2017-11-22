@@ -47,12 +47,13 @@ $(function() {
 
 	//image loader
 	imgLoading = function (page, cont){
-		mainLoader.addClass('show');
 		page.imagesLoaded()
 		  .always( function( instance ) {
 		    console.log('all images loaded');
-		    mainLoader.removeClass('show');
-		    page.addClass('show');
+		    TweenMax.set(mainLoader, {className: '-=show'});
+		    TweenMax.set(page, {className: '+=show', delay: .5});
+		    // mainLoader.removeClass('show');
+		    // page.addClass('show');
 
 		    if ( typeof cont === 'function')
             cont();
@@ -84,7 +85,11 @@ $(function() {
 			header.addClass('expend');
 			pageTrack('page-Menu-open');
 		}
-
+	});
+	$('.poprule').on('click', function(e){
+		e.preventDefault();
+		popShow('#rules');
+		pageTrack('page-Rule');
 	});
 
 

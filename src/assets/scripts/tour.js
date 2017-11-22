@@ -146,13 +146,17 @@ $(function() {
   });
 
   // get spot info
+  mainLoader.addClass('show');
   var spotData,
       spotInner = $('#spot_info');
   $.ajax({
     dataType: "json",
     url: '/tc/assets/spot.json',
     success: function(result, status){
+
       spotData = result;
+      // page tour and map
+      imgLoading( $('main') );
     }
   });
 
@@ -196,9 +200,6 @@ $(function() {
   var pan_tar = document.getElementById('img_show');
   var maxShow_w = 0;
 
-  // page tour and map
-  imgLoading( $('main') );
-
   if (ww <= 768) {
     // bind hammer js
     var hammertime = new Hammer(pan_tar);
@@ -223,4 +224,3 @@ $(function() {
 
 });
 
-// "<div class='item'><img src='/tc/assets/images/'+tour_sample.jpg+ ' alt='/><p class='name'>科士街石牆樹</p></div>"

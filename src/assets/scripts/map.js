@@ -1,5 +1,20 @@
 $(function() {
+	mainLoader.addClass('show');
 
+	// get spot info
+  var spotData,
+      spotInner = $('#spot_info');
+  $.ajax({
+    dataType: "json",
+    url: '/tc/assets/spot.json',
+    success: function(result, status){
+      spotData = result;
+
+      // page tour and map
+      imgLoading( $('main') );
+			google.maps.event.addDomListener(window, 'load', initMap);
+    }
+  });
 	function initMap() {
 		// Create a new StyledMapType object, passing it an array of styles,
 	  // and the name to be displayed on the map type control.
@@ -194,76 +209,72 @@ $(function() {
 	  // marker
 	  var iconBase = 'https://hkwonderful.discoverhongkong.com/tc/assets/images/';
 	  var icons = {
-	    mamber1: {
+	    member1: {
 	      icon: iconBase + 'map-icon1.png'
 	    },
-	    mamber2: {
+	    member2: {
 	      icon: iconBase + 'map-icon2.png'
 	    },
-	    mamber3: {
+	    member3: {
 	      icon: iconBase + 'map-icon3.png'
 	    },
-	    mamber4: {
+	    member4: {
 	      icon: iconBase + 'map-icon4.png'
 	    }
 	  };
 
-	  var features = [
-	    {
-	      position: new google.maps.LatLng(22.2991332,114.1770699),
-	      type: 'mamber1',
-	      title: '推機'
-	    }, {
-	      position: new google.maps.LatLng(22.2833326,114.1738553),
-	      type: 'mamber2',
-	      title: '肚皮'
-	    }, {
-	      position: new google.maps.LatLng(22.2930678,114.1708626),
-	      type: 'mamber3',
-	      title: 'Mami'
-	    }, {
-	      position: new google.maps.LatLng(22.2789112,114.1819145),
-	      type: 'mamber4',
-	      title: '小民'
-	    }
-	  ];
+	  // var features = [
+	  //   {
+	  //     position: new google.maps.LatLng(22.2991332,114.1770699),
+	  //     type: 'mamber1',
+	  //     title: '推機'
+	  //   }, {
+	  //     position: new google.maps.LatLng(22.2833326,114.1738553),
+	  //     type: 'mamber2',
+	  //     title: '肚皮'
+	  //   }, {
+	  //     position: new google.maps.LatLng(22.2930678,114.1708626),
+	  //     type: 'mamber3',
+	  //     title: 'Mami'
+	  //   }, {
+	  //     position: new google.maps.LatLng(22.2789112,114.1819145),
+	  //     type: 'mamber4',
+	  //     title: '小民'
+	  //   }
+	  // ];
+	  var spot_list = ["t1", "t2", "t3", "t4", "t5", "d1", "d2", "d3", "d4", "d5", "m2", "m3", "m4", "m5", "s1", "s2", "s4", "s5"]
+	  var features = [];
+	  for (var i = 0; i < spot_list.length; i++) {
+	  	var _marker ={
+	  		position: new google.maps.LatLng(spotData[ spot_list[i] ].lat, spotData[ spot_list[i] ].lng),
+	      type: spotData[ spot_list[i] ].type,
+	      spid: spot_list[i]
+	  	}
+	  	features.push(_marker);
+	  }
+
 
 	  // Create markers.
 	  features.forEach(function(feature) {
 	    var marker = new google.maps.Marker({
 	      position: feature.position,
 	      icon: icons[feature.type].icon,
-	      spot: feature.title,
+	      spot: feature.spid,
 	      map: map
 	    });
 	    marker.addListener('click', function() {
 		    // get spot name and replace data
 		    console.log( this.spot )
-
 		    //after image loaded show popup
-		    // $('#spot_info').addClass('show');
-		    popShow('#spot_info')
+		    getSpotinfo(this.spot);
 
 		  });
 	  });
 	}
-	google.maps.event.addDomListener(window, 'load', initMap);
 
 
-	// get spot info
-  var spotData,
-      spotInner = $('#spot_info');
-  $.ajax({
-    dataType: "json",
-    url: '/tc/assets/spot.json',
-    success: function(result, status){
-      spotData = result;
-    }
-  });
 
-  $('.tour-list .btn').on('click', function(){
-
-    var spotId = $(this).attr('data-spot');
+  function getSpotinfo(spotId){
     var spot = spotData[spotId];
     pageTrack('page-Spot-'+spotId);
     console.log(spot);
@@ -282,7 +293,7 @@ $(function() {
 
     setImgshow();
     imgLoading( spotInner, popShow(spotInner) );
-  });
+  }
   $('#img_show .flex').on('click', '.item', function(){
     if ( !isRunning ) {
       isRunning = true;
@@ -300,9 +311,6 @@ $(function() {
 
   var pan_tar = document.getElementById('img_show');
   var maxShow_w = 0;
-
-  // page tour and map
-  imgLoading( $('main') );
 
   if (ww <= 768) {
     // bind hammer js
