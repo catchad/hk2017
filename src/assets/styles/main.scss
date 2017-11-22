@@ -59,6 +59,12 @@ a{
 	color: inherit;
 	text-decoration: none;
 }
+
+.link {
+	color: inherit;
+	text-decoration: underline;
+}
+
 .flex{
 	@include flex-box;
 }

@@ -75,12 +75,13 @@ $(function() {
 		pageTrack('page-Home-enter');
 
 		//init
-		if( urlValue['t'] ) {
-			userTicket = urlValue['t']
+		if( window.ticket !== undefined ) {
+			// 帶ticket進站, 直接顯示影片
+			// userTicket = urlValue['t']
 	    	pageHide();
 			nextAni();
 			pageShow('#step3', 0.5);
-			checkStatus(userTicket);
+			checkStatus(window.ticket);
 			$('#step5 .btn-share').text("換我，製作我的影片");
 		} else {
 			steps[0].visible = true;

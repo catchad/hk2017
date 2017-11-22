@@ -569,7 +569,7 @@ var mv = function() {
 	var PlayerUI = function() {
 
 		var beforeSeekIsPlaying = false;
-		var isMousedown = false;
+		var isPaning = false;
 		var el = document.querySelectorAll(".video__play, .video__pause, .video__cover");
 
 		for( var i=0; i<el.length; i++ ) {
@@ -590,6 +590,7 @@ var mv = function() {
 				document.querySelector(".video__pause").classList.remove("video__pause--active");
 			}	
 		}
+
 		document.querySelector(".video__repeat").addEventListener('click', function(){
 			v.loop = !v.loop;
 			a.loop = !a.loop;
@@ -601,19 +602,10 @@ var mv = function() {
 			}
 		})
 
-
-		document.querySelector(".video__timeline").addEventListener("mousedown", timelineMoveStart)
-		document.querySelector(".video__timeline").addEventListener("touchstart", timelineMoveStart)
-
-		function timelineMoveStart(event) {
-			event.preventDefault();
-			var x;
-			if( event.touches ) {
-				x = event.touches[0].offsetX+1;
-			} else {
-				x = event.offsetX+1;
-			}
-			
+		var mc = new Hammer(document.querySelector(".video__timeline"));
+		mc.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+		mc.on("panstart", function(event) {
+			isPaning = true;
 			if( v.paused ) {
 				beforeSeekIsPlaying = false;
 			} else {
@@ -621,69 +613,108 @@ var mv = function() {
 			}
 			v.pause();
 			a.pause();
-			isMousedown = true;
+		})
+		mc.on("panend", function(event) {
+			isPaning = false;
+			if( beforeSeekIsPlaying ) {
+				a.play();
+				v.play();
+			}
+		})
 
+		var timer;
+		mc.on("pan tap press", function(event) {
+			clearTimeout(timer);
+
+			var timeline =  document.querySelector(".video__timeline");
+			var x = event.center.x - timeline.getBoundingClientRect().x;  
 			var progress = Math.min(Math.max( x / document.querySelector(".video__timeline").offsetWidth, 0), 1) * 100;
-			TweenMax.set('.video__progress', {width: progress+"%"});
-			v.currentTime = a.currentTime = v.duration * progress/100;
-
-
-		}
-
-		document.addEventListener("mouseup", timelineMoveEnd)
-		document.addEventListener("touchend", timelineMoveEnd)
-
-		function timelineMoveEnd(event) {
-			if( isMousedown ) {
-				event.preventDefault();
-				// var progress = parseInt(document.querySelector(".video__progress").style.width);
-				// v.currentTime = v.duration * progress/100;
-				if( beforeSeekIsPlaying ) {
-					v.play();
-					a.play();
-				}
-				isMousedown = false;
-			}
-		}
-
-		document.addEventListener("mousemove", timelineMoveing)
-		document.addEventListener("touchmove", timelineMoveing)
-
-		function timelineMoveing(event) {
-			if( isMousedown ) {
-				event.preventDefault();
-				var x;
-				if( event.touches ) {
-					x = event.touches[0].pageX;
-				} else {
-					x = event.pageX;
-				}
-
-				var timeline = document.querySelector(".video__timeline");
-				var progress = Math.min(Math.max( (x - timeline.getBoundingClientRect().x) / timeline.offsetWidth, 0), 1) * 100;
-
+			updateProgressBar(progress);
+			timer = setTimeout(function() {
 				v.currentTime = a.currentTime = v.duration * progress/100;
+				console.log("change");
+			}, 100)
+			
+		});
 
-				// var progress = Math.min(Math.max( (event.offsetX+1) / timeline.offsetWidth, 0), 1) * 100;
-				TweenMax.set('.video__progress', {width: progress+"%"});
-			}
-		}
+		// document.querySelector(".video__timeline").addEventListener("mousedown", timelineMoveStart)
+		// document.querySelector(".video__timeline").addEventListener("touchstart", timelineMoveStart)
 
-		// document.addEventListener("touchstart", function(event) {
+		// function timelineMoveStart(event) {
 		// 	event.preventDefault();
+		// 	var x;
+		// 	if( event.touches ) {
+		// 		x = event.touches[0].offsetX+1;
+		// 	} else {
+		// 		x = event.offsetX+1;
+		// 	}
+			
+		// 	if( v.paused ) {
+		// 		beforeSeekIsPlaying = false;
+		// 	} else {
+		// 		beforeSeekIsPlaying = true;
+		// 	}
+		// 	v.pause();
+		// 	a.pause();
+		// 	isMousedown = true;
 
-		// });
+		// 	var progress = Math.min(Math.max( x / document.querySelector(".video__timeline").offsetWidth, 0), 1) * 100;
+		// 	TweenMax.set('.video__progress', {width: progress+"%"});
+		// 	v.currentTime = a.currentTime = v.duration * progress/100;
 
 
-		function updateProgressBar() {
-			var progress = v.currentTime / v.duration * 100;
+		// }
+
+		// document.addEventListener("mouseup", timelineMoveEnd)
+		// document.addEventListener("touchend", timelineMoveEnd)
+
+		// function timelineMoveEnd(event) {
+		// 	if( isMousedown ) {
+		// 		event.preventDefault();
+		// 		// var progress = parseInt(document.querySelector(".video__progress").style.width);
+		// 		// v.currentTime = v.duration * progress/100;
+		// 		if( beforeSeekIsPlaying ) {
+		// 			v.play();
+		// 			a.play();
+		// 		}
+		// 		isMousedown = false;
+		// 	}
+		// }
+
+		// document.addEventListener("mousemove", timelineMoveing)
+		// document.addEventListener("touchmove", timelineMoveing)
+
+		// function timelineMoveing(event) {
+		// 	if( isMousedown ) {
+		// 		event.preventDefault();
+		// 		var x;
+		// 		if( event.touches ) {
+		// 			x = event.touches[0].pageX;
+		// 		} else {
+		// 			x = event.pageX;
+		// 		}
+
+		// 		var timeline = document.querySelector(".video__timeline");
+		// 		var progress = Math.min(Math.max( (x - timeline.getBoundingClientRect().x) / timeline.offsetWidth, 0), 1) * 100;
+
+		// 		v.currentTime = a.currentTime = v.duration * progress/100;
+
+		// 		// var progress = Math.min(Math.max( (event.offsetX+1) / timeline.offsetWidth, 0), 1) * 100;
+		// 		TweenMax.set('.video__progress', {width: progress+"%"});
+		// 	}
+		// }
+
+		function updateProgressBar(progress) {
+			// var progress = v.currentTime / v.duration * 100;
 			TweenMax.set('.video__progress', {width: progress+"%"});
 		}
 
 		update();
-		function update() {
-			updateProgressBar();
+		function update() {			
 			requestAnimationFrame(update);
+			if( isPaning ) return;
+			var progress = v.currentTime / v.duration * 100;
+			updateProgressBar(progress);
 		}
 	};
 
