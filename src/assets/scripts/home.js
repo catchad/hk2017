@@ -163,7 +163,7 @@ $(function() {
           }
           break;
         default:
-          alert('發生錯誤。' + response.code);
+          alert('請輸入3個字的中文姓名。' + response.code);
       }
       console.log(response);
     })
@@ -172,10 +172,10 @@ $(function() {
       var response = $.parseJSON(jqXHR.responseText);
       switch (response.code) {
         case 400:
-          alert('輸入資料有誤。' + response.message);
+          alert(response.message);
           break;
         default:
-          alert('發生錯誤。' + response.code);
+          alert('請輸入3個字的中文姓名。' + response.code);
       }
     });
   }
@@ -212,7 +212,7 @@ $(function() {
           }
           break;
         default:
-          alert('發生錯誤。' + response.code);
+          alert('請輸入3個字的中文姓名。' + response.code);
       }
       console.log(response);
     })
@@ -221,10 +221,10 @@ $(function() {
       var response = $.parseJSON(jqXHR.responseText);
       switch (response.code) {
         case 400:
-          alert('輸入資料有誤。' + response.message);
+          alert( response.message);
           break;
         default:
-          alert('發生錯誤。' + response.code);
+          alert('請輸入3個字的中文姓名。' + response.code);
       }
     });
   }
@@ -249,7 +249,7 @@ $(function() {
 				apiMusic(name);
 			}
 			else{
-				alert('姓名輸入錯誤');
+				alert('請輸入3個字的中文姓名');
 			}
 		}
 	}
