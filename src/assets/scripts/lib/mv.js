@@ -56,7 +56,6 @@ var mv = function() {
 
 		}
 		
-
 		function pixiInit() {
 			var w = 850;
 			var h = 400;
@@ -193,7 +192,7 @@ var mv = function() {
 
 	function VideoNameTransform() {
 		var self = this;
-
+		self.nowActiveID = 0;
 		self.nowImgID = 0;
 
 		// Math.min(window.width, 1150)
@@ -206,7 +205,6 @@ var mv = function() {
 			self.screenHeight = document.querySelector('.video__screen').offsetHeight;
 		}
 
-		console.log(self.screenWidth );
 		var controlPoints = [
 		    { x: 0, y: 0 },
 		    { x: 1, y: 0 },
@@ -368,6 +366,8 @@ var mv = function() {
 		    // params.ratio.x y
 		    // params.position.x y
 		    // params.type
+		    // params.clear
+
 
 		    var image = screenImgElement;
 		    var extent = { w: image.naturalWidth, h: image.naturalHeight };
@@ -385,13 +385,22 @@ var mv = function() {
 
 		    if( params == undefined ) {
 		    	loadScreenCtx.drawImage(image, 0, 0, image.width, image.height);
-		    	
 		    } else {
-		    	loadScreenCtx.drawImage(image, image.width*params.position.x, image.height*params.position.y, image.width*params.ratio.x, image.height*params.ratio.y);
+		    	if( params.clear ) {
+		    		// console.log("clear");
+		    		// console.log(image);
+		    		// loadScreenCtx.drawImage(image, 0, 0, image.width, image.height);
+		    		self.nowActiveID = -1;
 
-		    	if( params.mask !== undefined ) {
-		    		loadScreenCtx.drawImage(maskArray[params.mask], 0, 0, image.width, image.height);
+		    		// loadScreenCtx.clearRect(0,0, image.width, image.height);
+		    	} else {
+			    	loadScreenCtx.drawImage(image, image.width*params.position.x, image.height*params.position.y, image.width*params.ratio.x, image.height*params.ratio.y);
+
+			    	if( params.mask !== undefined ) {
+			    		loadScreenCtx.drawImage(maskArray[params.mask], 0, 0, image.width, image.height);
+			    	}
 		    	}
+
 		    	
 		    }
 		    
@@ -575,10 +584,24 @@ var mv = function() {
 			container.appendChild(errMessage);
 		}
 
-		this.changeTexture = function(imgID, params) {
-			self.nowImgID = imgID;
-			screenImgElement = imgArray[self.nowImgID];
-			loadScreenTexture(params);
+		this.changeTexture = function(activeID, imgID, params) {
+			if( params == undefined ) {
+				if( activeID == self.nowActiveID ) return;
+				self.nowActiveID = activeID;
+				self.nowImgID = imgID;
+				screenImgElement = imgArray[self.nowImgID];
+				loadScreenTexture();
+			} else {
+				self.nowActiveID = activeID;
+				self.nowImgID = imgID;
+				screenImgElement = imgArray[self.nowImgID];
+				loadScreenTexture(params);
+			}
+
+		}
+		this.clearTexture = function() {
+			loadScreenTexture({clear:true});
+			console.log("CCCCC");
 		}
 
 	}
@@ -633,6 +656,9 @@ var mv = function() {
 		})
 		mc.on("panend", function(event) {
 			isPaning = false;
+
+
+			// v.currentTime = a.currentTime = v.duration * progress/100;
 			if( beforeSeekIsPlaying ) {
 				a.play();
 				v.play();
@@ -644,13 +670,14 @@ var mv = function() {
 			// clearTimeout(timer);
 
 			var timeline =  document.querySelector(".video__timeline");
-			var x = event.center.x - timeline.getBoundingClientRect().x;  
+			var x = event.center.x - timeline.getBoundingClientRect().left;
 			var progress = Math.min(Math.max( x / document.querySelector(".video__timeline").offsetWidth, 0), 1) * 100;
 			updateProgressBar(progress);
+			// document.querySelector(".msg").innerHTML = timeline.getBoundingClientRect().left;
 			// timer = setTimeout(function() {
 				v.currentTime = a.currentTime = v.duration * progress/100;
 				// console.log("change");
-			// }, 100)
+			// }, 1000)
 			
 		});
 
@@ -790,14 +817,20 @@ var mv = function() {
 
 		function mediaReady() {
 			var frameRate = 24;
-			var isFire = false;
-			getCurrentVideoFrame();
+			var isFire = false;			
 			var transformData = {};
 			var lastCurrentFrame = 0;
+			var isActive = false;
+			var lastActive = false;
+			var targetKeyFrameID;
+
+			getCurrentVideoFrame();
 			function getCurrentVideoFrame() {
 				requestAnimationFrame(getCurrentVideoFrame);
 			    var curTime = v.currentTime;
 			    var theCurrentFrame = Math.floor(curTime*frameRate);
+			    // var targetKeyFrame;
+			    
 			    if( theCurrentFrame == lastCurrentFrame ) return;
 			    lastCurrentFrame = theCurrentFrame;
 			    if( f.loadComplete ) {
@@ -812,113 +845,98 @@ var mv = function() {
 				    }
 			    }
 
-			    var isShow = false;
+			    isActive = false;
+			    // var isShow = false;
 			    loop1:
 			    for( var i=0; i<keyFrameData.length; i++ ) {
-
 			    		loop2:
 			   			for( var j=1; j<keyFrameData[i].data[0].length; j++ ) {
-
-			   				if( keyFrameData[i].data[0][j][0] == theCurrentFrame ) { // j-1
-
-			   					// test.visibility = true;
-			   					// test.set({cornersData: [keyFrameData[i].data[0][j][1], keyFrameData[i].data[0][j][2], keyFrameData[i].data[1][j][1], keyFrameData[i].data[1][j][2], keyFrameData[i].data[2][j][1], keyFrameData[i].data[2][j][2], keyFrameData[i].data[3][j][1], keyFrameData[i].data[3][j][2]]})
-
-			   		// 			vntf.updatePoint([
-								//     { x: keyFrameData[i].data[0][j][1], y: keyFrameData[i].data[0][j][2] },
-								//     { x: keyFrameData[i].data[1][j][1], y: keyFrameData[i].data[1][j][2] },
-								//     { x: keyFrameData[i].data[3][j][1], y: keyFrameData[i].data[3][j][2] },
-								//     { x: keyFrameData[i].data[2][j][1], y: keyFrameData[i].data[2][j][2] }						    
-								// ]);
-
+			   				if( keyFrameData[i].data[0][j][0] == theCurrentFrame ) {
+			   					targetKeyFrameID =  i;
 			   					vntf.updatePoint([
 								    { x: vntf.screenWidth*keyFrameData[i].data[0][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[0][j][2]/1080 },
 								    { x: vntf.screenWidth*keyFrameData[i].data[1][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[1][j][2]/1080 },
 								    { x: vntf.screenWidth*keyFrameData[i].data[3][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[3][j][2]/1080 },
 								    { x: vntf.screenWidth*keyFrameData[i].data[2][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[2][j][2]/1080 }						    
 								]);
-			   					
-								if( keyFrameData[i].img !== vntf.nowImgID ) {
-									TweenMax.killTweensOf(transformData.position);
-									
-
-									if( keyFrameData[i].marquee !== undefined ) {
-										transformData = {
-											mask: keyFrameData[i].marquee.mask,
-											position: {
-												x: 0,
-												y: 0
-											},
-											ratio: {
-												x: keyFrameData[i].marquee.ratio.x,
-												y: keyFrameData[i].marquee.ratio.y,
-											},
-											type: keyFrameData[i].marquee.type
-										};
-
-										var tweenFrom = {
-											x: keyFrameData[i].marquee.position.start.x,
-											y: keyFrameData[i].marquee.position.start.y
-										}
-
-										var tweenTo = {
-											x: keyFrameData[i].marquee.position.end.x,
-											y: keyFrameData[i].marquee.position.end.y,
-											ease: Power1.easeOut,
-											onUpdate: function() {
-												vntf.changeTexture(keyFrameData[i].img, transformData);
-												// console.log( transformData );
-											}
-										}
-
-										TweenMax.fromTo(transformData.position, keyFrameData[i].marquee.duration, tweenFrom, tweenTo);
-										// TweenMax.fromTo(transformData.position, keyFrameData[i].marquee.duration, {x:keyFrameData[i].marquee.position.start.x, y:keyFrameData[i].marquee.position.start.y}, {x:keyFrameData[i].marquee.position.end.x, y:keyFrameData[i].marquee.position.end.x});
-									} else {
-										vntf.changeTexture(keyFrameData[i].img);
-									}
-								}
-								// redrawImg();
-								// loadScreenTexture();
-								isShow = true;
+								isActive = true;
 								break loop1;
-			   				} else {
-
 			   				}
-
-			   			}
-			   			
+			   			}			   			
 			    }
 
-			    if( isShow ) {
-			    	TweenMax.set("#screen", {opacity: 1});
-			    } else {
-			    	TweenMax.set("#screen", {opacity: 0});
+			    if( isActive !== lastActive ) {
+			    	// console.log("change");
+			    	if( isActive ) {
+			    		// 出現貼圖
+						var targetKeyFrameData = keyFrameData[targetKeyFrameID];
+						TweenMax.killTweensOf(transformData.position);	
+
+						if( targetKeyFrameData.marquee !== undefined ) {
+							// 需要做跑馬燈動畫
+							transformData = {
+								mask: targetKeyFrameData.marquee.mask,
+								position: {
+									x: 0,
+									y: 0
+								},
+								ratio: {
+									x: targetKeyFrameData.marquee.ratio.x,
+									y: targetKeyFrameData.marquee.ratio.y,
+								},
+								type: targetKeyFrameData.marquee.type
+							};
+
+							var tweenFrom = {
+								x: targetKeyFrameData.marquee.position.start.x,
+								y: targetKeyFrameData.marquee.position.start.y
+							}
+
+							var tweenTo = {
+								x: targetKeyFrameData.marquee.position.end.x,
+								y: targetKeyFrameData.marquee.position.end.y,
+								ease: Power1.easeOut,
+								onUpdate: function() {
+									// console.log(i);
+									// console.log(targetKeyFrameID, targetKeyFrameData.img, transformData);
+									vntf.changeTexture(targetKeyFrameID, targetKeyFrameData.img, transformData);
+									// console.log( transformData );
+								}
+							}
+
+							TweenMax.fromTo(transformData.position, targetKeyFrameData.marquee.duration, tweenFrom, tweenTo);
+
+						} else {
+	
+							vntf.changeTexture(targetKeyFrameID, targetKeyFrameData.img);
+						}
+	
+			    	} else {
+			    		// 沒有出現貼圖
+			    		TweenMax.killTweensOf(transformData.position);
+			    		vntf.clearTexture();
+			    	}
 			    }
 
-			    
 
-			    
+			    lastActive = isActive;
+		    
 			}
-
 			var syncChecker = 0;
 			mediaSync();
 			function mediaSync() {
 				syncChecker++;
-
 				if( syncChecker == 60 ) {
 					// document.querySelector(".msg").innerHTML = Math.abs(a.currentTime - v.currentTime );
 					// console.log( Math.abs(a.currentTime - v.currentTime ) );
 					if( Math.abs(a.currentTime - v.currentTime ) > 0.4 ) {
 						a.currentTime = v.currentTime;
-						console.log("sync!!");
+						// console.log("sync!!");
 					}
 					syncChecker = 0;
 				}
-
-
 				requestAnimationFrame(mediaSync);
 			}
-
 			completeFn();
 		}
 	}
@@ -929,7 +947,6 @@ var mv = function() {
 	var ui = new PlayerUI();
 
 	self.start = function(params) {
-		console.log("start");
 		var checker = 0;
 		main.loadAssets(params.music, complete);
 		vntf.loadAssets([params.img[0], params.img[1], params.img[2], params.img[3], params.img[4], params.img[5], params.img[6]], complete);
@@ -947,8 +964,11 @@ var mv = function() {
 	}
 
 	self.seekTo = function(number) {
-		document.querySelector(".video__cover").classList.remove("video__cover--active");
-		v.currentTime = a.currentTime = number; 
+		// vntf.clearTexture();
+		// document.querySelector(".video__cover").classList.remove("video__cover--active");
+		// v.currentTime = a.currentTime = number;
+		// alert(v.currentTime);
+		// alert(a.currentTime);
 		// a.play();
 	}
 
