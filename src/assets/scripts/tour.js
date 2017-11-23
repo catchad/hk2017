@@ -143,12 +143,12 @@ $(function() {
   $('#register-form').on('submit', function (e) {
     e.preventDefault();
     if ( !isRunning ) {
-      isRunning = true;
       if ( $('#user_agree').is(":checked") ) {
+        isRunning = true;
         sendUser();
       }
       else{
-        alert('尚未同意相關活動辦法與隱私權政策。')
+        alert('尚未同意相關活動辦法與隱私權政策。');
       }
 
     }

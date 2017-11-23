@@ -400,14 +400,9 @@ footer{
 			display: inline-block;
 			width:46px; height:46px;
 			overflow:hidden;
-			background-repeat: no-repeat;
-			background-image:url(../images/icons.png);
 			margin: 0 7px;
-			background-size: 100% auto;
 		}
-		.fb { background-position: 0px -88px}
-		.ig { background-position: 0px -44px}
-		.utube { background-position: 0px 0px}
+		img{ width:100%; }
 	}
 
 	.policy{
@@ -433,6 +428,7 @@ footer{
 
 			@include tablet {
 				margin: 23px 11.5px;
+				width: 143px;
 			}
 		}
 		img{

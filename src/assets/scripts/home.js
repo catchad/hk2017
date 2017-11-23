@@ -102,7 +102,7 @@ $(function() {
 		} else {
 			TweenMax.set(page, { display: 'block',delay: delay });
 		}
-		
+
 		TweenMax.fromTo(page, .3, { alpha: 0 }, { alpha: 1, delay: delay+.05, onComplete:function(){
 			isRunning = false;
 			if (page == '#step2') {
@@ -233,7 +233,6 @@ $(function() {
 	$('.step .btn-to_step2').on('click', function(){
 		if ( !isRunning ) {
 			isRunning = true;
-			console.log(isRunning);
 			pageHide();
 			pageShow('#step2', 0.5);
 			pageTrack('page-Home-inputname');
@@ -244,10 +243,9 @@ $(function() {
 	// step2
 	function getName(){
 		if ( !isRunning ) {
-			isRunning = true;
-			console.log(isRunning);
 			var name = $('#name1').val();
 			if ( name.length == 3) {
+				isRunning = true;
 				apiMusic(name);
 			}
 			else{
