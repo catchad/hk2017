@@ -174,7 +174,7 @@ $(function() {
     var spotId = $(this).attr('data-spot');
     var spot = spotData[spotId];
     pageTrack('page-Spot-'+spotId);
-    console.log(spot);
+    // console.log(spot);
 
     spotInner.find('h2 .name').text(spot.name);
     spotInner.find('.style').text(spot.style);

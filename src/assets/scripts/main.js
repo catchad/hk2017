@@ -45,7 +45,7 @@ $(function() {
 	//resize
 	function onResize(){
 		ww = window.innerWidth;
-		console.log(ww);
+		// console.log(ww);
 	}
 
 	//image loader
