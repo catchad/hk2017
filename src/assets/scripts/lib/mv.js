@@ -62,7 +62,7 @@ var mv = function() {
 			var h = 400;
 			var app = new PIXI.Application(w, h, {forceCanvas: false, view: document.getElementById('firework'), transparent:true});
 
-			var texture = PIXI.Texture.fromImage('/tc/assets/images/test/particle2.png');
+			var texture = PIXI.Texture.fromImage('/tc/assets/images/mv/particle.png');
 
 			var container = new PIXI.particles.ParticleContainer(10000, {
 			    scale: false,
@@ -76,7 +76,7 @@ var mv = function() {
 
 			app.stage.addChild(container);
 
-			container.x = w/2 - c.width/2;
+			container.x = w/2 - c.width/2 ;
 			container.y = 30;
 			var timer;
 
@@ -118,19 +118,30 @@ var mv = function() {
 				for( var i=0; i<pixels.length; i++ ) {
 					// TweenMax.to(pixels[i], Math.random()*2+2, {y:"+=100", alpha:0});
 					// var rnd1 = 0;
-					var rndDelay = Math.random()*0.3;
+					var rndDelay = Math.random()*0.75;
 					TweenMax.killTweensOf(pixels[i]);
 
-				    pixels[i].x = pixels[i].data.x; 
-				    pixels[i].y = pixels[i].data.y+10;
+
+				    // pixels[i].x = pixels[i].data.x; 
+				    // pixels[i].y = pixels[i].data.y+10;
+				    var p = getPoint(angleBetween({x:pixels[i].data.x, y:pixels[i].data.y}, {x:c.width/2, y:c.height/2}) , distanceBetween({x:pixels[i].data.x, y:pixels[i].data.y}, {x:c.width/2, y:c.height/2})/2.5);
+				    pixels[i].x = pixels[i].data.x + p.x; 
+				    pixels[i].y = pixels[i].data.y + p.y;
+
+
+				    var p2 = getPoint( (pixels[i].x - c.width/2)*0.005 , 100);
+				    
+				    // console.log(p);
+
 				    pixels[i].scale.x = pixels[i].scale.y = pixels[i].data.scale;
 				    pixels[i].alpha = 0;
 				    pixels[i].tint = pixels[i].data.tint;
 
-				    TweenMax.to(pixels[i], 1.5, {x:pixels[i].data.x, y:pixels[i].data.y, alpha:1, ease:Power2.easeOut});
-				    
-				    TweenMax.to(pixels[i], 3+Math.random()*1, {x:pixels[i].data.x, y:pixels[i].data.y+100, ease:Power2.easeIn, delay:2});
-				    TweenMax.to(pixels[i], 1+Math.random()*2, {alpha:0, ease:Power2.easeIn, delay:2.5});
+				    TweenMax.to(pixels[i], 2.5, {x:pixels[i].data.x, y:pixels[i].data.y, alpha:1, ease:Power2.easeOut, delay:rndDelay});
+
+				    TweenMax.to(pixels[i], 3, {x:pixels[i].data.x, y:pixels[i].data.y+100, alpha:0, ease:Power2.easeIn, delay:2.5+rndDelay});
+				    // TweenMax.to(pixels[i], 1+Math.random()*2, {alpha:0, ease:Power2.easeIn, delay:2.5});
+
 
 				    // TweenMax.to(pixels[i], 3, {colorProps:{tint: 0xff0000} });
 					// TweenMax.to(pixels[i].scale, 3+Math.random()*2, {x: 0.5, y: 0.5, ease:Linear.easeNone, delay:2});
@@ -152,6 +163,20 @@ var mv = function() {
 
 			self.loadComplete = true;
 			completeFn();
+
+			function getPoint(theta, r) {
+				var x = (r *Math.sin(theta));
+				var y = (r *Math.cos(theta));
+				return {x:x, y:y};
+			}
+
+			function angleBetween(point1, point2) {
+				return Math.atan2( point2.x - point1.x, point2.y - point1.y );
+			}
+			function distanceBetween(point1, point2) {
+				return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
+			}
+
 			// app.stage.addChild(graphics);
 		}
 
@@ -245,7 +270,7 @@ var mv = function() {
 				var mask = new Image();
 				maskArray.push(mask);
 				mask.onload = imgLoaded;
-				mask.src = "/tc/assets/images/test/mask"+(i+1)+"-mobile.png";
+				mask.src = "/tc/assets/images/mv/mask"+(i+1)+"-mobile.png";
 			}
 
 		}
@@ -775,14 +800,13 @@ var mv = function() {
 			    var theCurrentFrame = Math.floor(curTime*frameRate);
 			    if( theCurrentFrame == lastCurrentFrame ) return;
 			    lastCurrentFrame = theCurrentFrame;
-			    // console.log( theCurrentFrame );
 			    if( f.loadComplete ) {
-				    if( theCurrentFrame >= 2904 && theCurrentFrame <= 2993 && !f.isShooting) {
+				    if( theCurrentFrame >= 2846 && theCurrentFrame <= 2993 && !f.isShooting) {
 						f.show();
 						f.shot();
 						// console.log("SHOT");
 				    }
-				    if( theCurrentFrame < 2904 || theCurrentFrame > 2993 ) {
+				    if( theCurrentFrame < 2846 || theCurrentFrame > 2993 ) {
 				    	f.hide();
 				    	f.isShooting = false;
 				    }
