@@ -200,8 +200,8 @@ $(function() {
 					pageShow('#step3', 0.5);
 			userTicket = response.data.Ticket;
           if (response.data.MusicFile != null) {
-          	console.log('mp3 return');
-          	console.log(response.data.MusicFile);
+          	// console.log('mp3 return');
+          	// console.log(response.data.MusicFile);
           	// 之前產生過 有資料可以直接用
           	// 等待影片 音樂下載完畢才顯示下一段
           	mvStart(response);
