@@ -94,13 +94,13 @@
 	    height: 30px;
 		flex: 0 0 auto;
 		cursor: pointer;
-		background-image: url(/assets/images/norepeat.svg);
+		background-image: url(/tc/assets/images/norepeat.svg);
 		background-size: contain;
 		background-position: center center;
 		background-repeat: no-repeat;
 	}
 	&__repeat--active {
-		background-image: url(/assets/images/repeat.svg);
+		background-image: url(/tc/assets/images/repeat.svg);
 	}
 
 
