@@ -34,7 +34,10 @@ $(function() {
 	}
 	// popup close
 	popClose = function(page){
-		body.removeClass('lock');
+		if ( $('.popup.show').length ==1 ) {
+			body.removeClass('lock');
+		}
+
 		TweenMax.fromTo( page, .5, { x:'0%', alpha:1 }, { x:'-50%', alpha:0 });
 		TweenMax.set( page, { className: '-=show', delay: .51});
 		isRunning = false;
@@ -87,7 +90,7 @@ $(function() {
 			pageTrack('page-Menu-open');
 		}
 	});
-	$('.poprule').on('click', function(e){
+	$('.poprule, .check_rule').on('click', function(e){
 		e.preventDefault();
 		popShow('#rules');
 		pageTrack('page-Rule');

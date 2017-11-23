@@ -1083,6 +1083,7 @@ footer{
 }
 #rules{
 	overflow: auto;
+	z-index: 750;
 	-webkit-overflow-scrolling: touch;
 
 	&.show{ display: block; }
@@ -1318,7 +1319,7 @@ footer{
 			margin-right: .5rem;
 			vertical-align: top;
 			font-size: 12px;
-			line-height: 20px;
+			line-height: 17px;
 		}
 		&:checked + label:before{
 			content: '✔'
@@ -1326,6 +1327,10 @@ footer{
 	}
 	label{
 		position: relative;
+	}
+	.check_rule{
+		text-decoration: underline;
+		cursor: pointer;
 	}
 	.btn{
 		margin-top: 2rem;

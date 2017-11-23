@@ -71,21 +71,21 @@ $(function() {
   }
 
 
-	$('.btn-vote').on('click', function(){
+  $('.btn-vote').on('click', function(){
     if ( !isRunning ) {
       isRunning = true;
       pageTrack('page-Tour-vote');
       popShow('#user_data');
     }
 
-	});
-	$('.btn-promote').on('click', function(){
+  });
+  $('.btn-promote').on('click', function(){
     if ( !isRunning ) {
       isRunning = true;
-  		pageTrack('page-Tour-promote');
+      pageTrack('page-Tour-promote');
       popShow('#promote_code');
     }
-	});
+  });
 
 
 
@@ -98,50 +98,59 @@ $(function() {
     }
     return headers;
   }
+  function sendUser(){
+    var formData = {
+      name: $('#user_name').val(),
+      email: $('#user_email').val(),
+      mobile: $('#user_tel').val()
+    };
+    // jquery >= 1.9
+    var jqxhr = $.ajax({
+      url: '/tc/api/users',
+      method: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify(formData),
+      headers: getAuthHeaders(),
+      dataType: 'json'
+    })
+    .done(function (response, textStatus, jqXHR) {
+      isRunning = false;
+      switch (response.code) {
+        case 200:
+        case 201:
+          console.log('save user data OK');
+          pageTrack('page-Tour-savedata');
+          alert('參加成功。');
+          popClose('#user_data');
+          break;
+        default:
+          alert('發生錯誤。' + response.code);
+      }
+      console.log(response);
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+      isRunning = false;
+      var response = $.parseJSON(jqXHR.responseText);
+      switch (response.code) {
+        case 400:
+          alert('輸入資料有誤。' + response.message);
+          break;
+        default:
+          alert('發生錯誤。' + response.code);
+      }
+    });
+  }
   $('#register-form').on('submit', function (e) {
     e.preventDefault();
     if ( !isRunning ) {
       isRunning = true;
-      var formData = {
-        name: $('#user_name').val(),
-        email: $('#user_email').val(),
-        mobile: $('#user_tel').val()
-      };
-      // jquery >= 1.9
-      var jqxhr = $.ajax({
-        url: '/tc/api/users',
-        method: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(formData),
-        headers: getAuthHeaders(),
-        dataType: 'json'
-      })
-      .done(function (response, textStatus, jqXHR) {
-        isRunning = false;
-        switch (response.code) {
-          case 200:
-          case 201:
-            console.log('save user data OK');
-            pageTrack('page-Tour-savedata');
-            alert('參加成功。');
-  					popClose('#user_data');
-            break;
-          default:
-            alert('發生錯誤。' + response.code);
-        }
-        console.log(response);
-      })
-      .fail(function (jqXHR, textStatus, errorThrown) {
-        isRunning = false;
-        var response = $.parseJSON(jqXHR.responseText);
-        switch (response.code) {
-          case 400:
-            alert('輸入資料有誤。' + response.message);
-            break;
-          default:
-            alert('發生錯誤。' + response.code);
-        }
-      });
+      if ( $('#user_agree').is(":checked") ) {
+        sendUser();
+      }
+      else{
+        alert('尚未同意相關活動辦法與隱私權政策。')
+      }
+
     }
   });
 
