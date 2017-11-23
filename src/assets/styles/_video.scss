@@ -58,7 +58,7 @@
 	&__firework {
 		position: absolute;
 		top: 30%;
-		left: 50%;
+		left: 51%;
 		width: 45%;
 		height: auto;
 		transform: translate(-50%, -50%);
@@ -90,15 +90,19 @@
 
 	&__repeat {
 		position: relative;
-		width: 40px;
-		height: auto;
+	    width: 40px;
+	    height: 30px;
 		flex: 0 0 auto;
-		opacity: 0.5;
 		cursor: pointer;
+		background-image: url(/assets/images/norepeat.svg);
+		background-size: contain;
+		background-position: center center;
+		background-repeat: no-repeat;
 	}
 	&__repeat--active {
-		opacity: 1;
+		background-image: url(/assets/images/repeat.svg);
 	}
+
 
 	&__timeline {
 		position: relative;
