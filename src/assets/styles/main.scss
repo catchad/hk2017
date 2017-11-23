@@ -427,12 +427,12 @@ footer{
 	.logo{
 		a{
 			display: inline-block;
-			margin: 17px;
+			margin: 17px 8.5px;
 			width: 35%;
 			max-width: 143px;
 
 			@include tablet {
-				margin: 23px;
+				margin: 23px 11.5px;
 			}
 		}
 		img{
