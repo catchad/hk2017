@@ -671,7 +671,7 @@ var mv = function() {
 			completeFn = complete;
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
-			req.open('GET', '/tc/assets/videos/mv.mp4', true);
+			req.open('GET', '/tc/assets/videos/mv.mp4?v1', true);
 			req.responseType = 'blob';
 			req.onload = function() {
 			   if (this.status === 200) {
