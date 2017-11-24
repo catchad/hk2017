@@ -291,7 +291,6 @@ $(function() {
 	});
 
 	function mvStart(response) {
-		console.log("mvstart");
 		var imgData;
 		if( ww > 1024 ) {
 			imgData = [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[14]];
