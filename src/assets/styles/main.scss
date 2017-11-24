@@ -723,7 +723,7 @@ footer{
 			max-width: 290px;
 
 			@include mobile_s {
-				max-width: 200px;
+				max-width: 100px;
 			}
 			@include desktop_s {
 				display: none;
