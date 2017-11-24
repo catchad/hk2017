@@ -5,7 +5,7 @@ var mv = function() {
 	var self = this;
 
 	var ww = window.width;
-	var v = document.getElementById("myVideo"); 
+	var v = document.getElementById("mv"); 
 	var a = document.querySelector(".video__audioElement");
 	// var globalParams = params;
 
@@ -26,7 +26,6 @@ var mv = function() {
 			ctx.drawImage(textImg, 0, 0, textImg.width, textImg.height);
 
 			var imgData = ctx.getImageData(0, 0, c.width, c.height);
-
 			for( var i=0; i<imgData.data.length; i+=4 ) {
 				var r = imgData.data[i];
 				var g = imgData.data[i+1];
@@ -36,22 +35,10 @@ var mv = function() {
 				var x = ((i/4)%c.width);
 				var y = Math.floor( (i/4) / c.width );
 				
-
 				if( a !== 0 ) {
 					pointData.push({x:x, y:y});
 				}
-
 			}
-
-			// var c2 = document.createElement("canvas");
-			// var ctx2 = c2.getContext("2d");
-			// c2.width = c.width;
-			// c2.height = c.height;
-			// for( var i=0; i<dd.length; i++ ) {
-			// 	ctx2.fillRect(dd[i].x, dd[i].y, 1, 1);
-			// }
-			// document.querySelector("body").append(c2);
-
 			pixiInit();
 
 		}
@@ -81,14 +68,8 @@ var mv = function() {
 
 			var pixels = [];
 
-			var pixelColors = [0xff0000];
 
-			var usedPoint = [];
 			for( var i=0; i<3500; i++ ) {
-				// var rnd;
-				// do {
-				// 	rnd = Math.floor(Math.random()*pointData.length);
-				// } while( usedPoint.indexOf(rnd) !== -1 )
 				var rnd = Math.floor(Math.random()*pointData.length);
 
 			    var pixel = new PIXI.Sprite(texture);
@@ -126,12 +107,8 @@ var mv = function() {
 				    var p = getPoint(angleBetween({x:pixels[i].data.x, y:pixels[i].data.y}, {x:c.width/2, y:c.height/2}) , distanceBetween({x:pixels[i].data.x, y:pixels[i].data.y}, {x:c.width/2, y:c.height/2})/2.5);
 				    pixels[i].x = pixels[i].data.x + p.x; 
 				    pixels[i].y = pixels[i].data.y + p.y;
-
-
-				    var p2 = getPoint( (pixels[i].x - c.width/2)*0.005 , 100);
-				    
+			    
 				    // console.log(p);
-
 				    pixels[i].scale.x = pixels[i].scale.y = pixels[i].data.scale;
 				    pixels[i].alpha = 0;
 				    pixels[i].tint = pixels[i].data.tint;
@@ -566,15 +543,6 @@ var mv = function() {
 		    return numeric.transpose(numeric.dot(numeric.inv(A), b))[0];
 		}
 
-		// function syncQualityOptions() {
-		//     qualityOptions.anisotropicFiltering = !!(anisotropicFilteringElement.checked);
-		//     qualityOptions.mipMapping = !!(mipMappingFilteringElement.checked);
-		//     qualityOptions.linearFiltering = !!(linearFilteringElement.checked);
-		    
-		//     // re-load the texture if possible
-		//     loadScreenTexture();
-		// }
-
 		function addError(message)
 		{
 		    var container = document.getElementById('errors');
@@ -656,8 +624,6 @@ var mv = function() {
 		})
 		mc.on("panend", function(event) {
 			isPaning = false;
-
-
 			// v.currentTime = a.currentTime = v.duration * progress/100;
 			if( beforeSeekIsPlaying ) {
 				a.play();
@@ -680,73 +646,6 @@ var mv = function() {
 			// }, 1000)
 			
 		});
-
-		// document.querySelector(".video__timeline").addEventListener("mousedown", timelineMoveStart)
-		// document.querySelector(".video__timeline").addEventListener("touchstart", timelineMoveStart)
-
-		// function timelineMoveStart(event) {
-		// 	event.preventDefault();
-		// 	var x;
-		// 	if( event.touches ) {
-		// 		x = event.touches[0].offsetX+1;
-		// 	} else {
-		// 		x = event.offsetX+1;
-		// 	}
-			
-		// 	if( v.paused ) {
-		// 		beforeSeekIsPlaying = false;
-		// 	} else {
-		// 		beforeSeekIsPlaying = true;
-		// 	}
-		// 	v.pause();
-		// 	a.pause();
-		// 	isMousedown = true;
-
-		// 	var progress = Math.min(Math.max( x / document.querySelector(".video__timeline").offsetWidth, 0), 1) * 100;
-		// 	TweenMax.set('.video__progress', {width: progress+"%"});
-		// 	v.currentTime = a.currentTime = v.duration * progress/100;
-
-
-		// }
-
-		// document.addEventListener("mouseup", timelineMoveEnd)
-		// document.addEventListener("touchend", timelineMoveEnd)
-
-		// function timelineMoveEnd(event) {
-		// 	if( isMousedown ) {
-		// 		event.preventDefault();
-		// 		// var progress = parseInt(document.querySelector(".video__progress").style.width);
-		// 		// v.currentTime = v.duration * progress/100;
-		// 		if( beforeSeekIsPlaying ) {
-		// 			v.play();
-		// 			a.play();
-		// 		}
-		// 		isMousedown = false;
-		// 	}
-		// }
-
-		// document.addEventListener("mousemove", timelineMoveing)
-		// document.addEventListener("touchmove", timelineMoveing)
-
-		// function timelineMoveing(event) {
-		// 	if( isMousedown ) {
-		// 		event.preventDefault();
-		// 		var x;
-		// 		if( event.touches ) {
-		// 			x = event.touches[0].pageX;
-		// 		} else {
-		// 			x = event.pageX;
-		// 		}
-
-		// 		var timeline = document.querySelector(".video__timeline");
-		// 		var progress = Math.min(Math.max( (x - timeline.getBoundingClientRect().x) / timeline.offsetWidth, 0), 1) * 100;
-
-		// 		v.currentTime = a.currentTime = v.duration * progress/100;
-
-		// 		// var progress = Math.min(Math.max( (event.offsetX+1) / timeline.offsetWidth, 0), 1) * 100;
-		// 		TweenMax.set('.video__progress', {width: progress+"%"});
-		// 	}
-		// }
 
 		function updateProgressBar(progress) {
 			// var progress = v.currentTime / v.duration * 100;
@@ -846,7 +745,7 @@ var mv = function() {
 			    }
 
 			    isActive = false;
-			    // var isShow = false;
+
 			    loop1:
 			    for( var i=0; i<keyFrameData.length; i++ ) {
 			    		loop2:
