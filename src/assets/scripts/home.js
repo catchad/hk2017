@@ -291,14 +291,15 @@ $(function() {
 	});
 
 	function mvStart(response) {
-
 		var imgData;
 		if( ww > 1024 ) {
 			imgData = [response.data.NameFiles[0], response.data.NameFiles[1], response.data.NameFiles[2], response.data.NameFiles[3], response.data.NameFiles[4], response.data.NameFiles[5], response.data.NameFiles[6], response.data.NameFiles[14]];
 		} else {
 			imgData = [response.data.NameFiles[7], response.data.NameFiles[8], response.data.NameFiles[9], response.data.NameFiles[10], response.data.NameFiles[11], response.data.NameFiles[12], response.data.NameFiles[13], response.data.NameFiles[14]];
 		}
-
+		if( userTicket !== undefined ) {
+			history.replaceState({}, 'video', '/tc/video/'+userTicket);
+		}
 		myMv.start({
 			img: imgData,
 			music: response.data.MusicFile,

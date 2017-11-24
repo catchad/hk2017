@@ -569,7 +569,6 @@ var mv = function() {
 		}
 		this.clearTexture = function() {
 			loadScreenTexture({clear:true});
-			console.log("CCCCC");
 		}
 
 	}
