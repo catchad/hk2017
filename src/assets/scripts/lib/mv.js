@@ -48,7 +48,7 @@ var mv = function() {
 			var h = 400;
 			var app = new PIXI.Application(w, h, {forceCanvas: false, view: document.getElementById('firework'), transparent:true});
 
-			var texture = PIXI.Texture.fromImage('/tc/assets/images/mv/particle.png');
+			var texture = PIXI.Texture.fromImage('/assets/images/mv/particle.png');
 
 			var container = new PIXI.particles.ParticleContainer(10000, {
 			    scale: false,
@@ -245,7 +245,7 @@ var mv = function() {
 				var mask = new Image();
 				maskArray.push(mask);
 				mask.onload = imgLoaded;
-				mask.src = "/tc/assets/images/mv/mask"+(i+1)+"-mobile.png";
+				mask.src = "/assets/images/mv/mask"+(i+1)+"-mobile.png";
 			}
 
 		}
@@ -671,7 +671,7 @@ var mv = function() {
 			completeFn = complete;
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
-			req.open('GET', '/tc/assets/videos/mv.mp4', true);
+			req.open('GET', '/assets/videos/mv.mp4', true);
 			req.responseType = 'blob';
 			req.onload = function() {
 			   if (this.status === 200) {
