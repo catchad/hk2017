@@ -11,7 +11,9 @@ $(function() {
       spotData = result;
 
       // page tour and map
-      imgLoading( $('main') );
+      imgLoading( spotInner, function(){
+	      popShow(spotInner);
+	    } );
 			google.maps.event.addDomListener(window, 'load', initMap);
     }
   });

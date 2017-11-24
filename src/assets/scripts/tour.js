@@ -191,7 +191,9 @@ $(function() {
     $('.btn-linkto').text( spot.links_name[0]);
 
     setImgshow();
-    imgLoading( spotInner, popShow(spotInner) );
+    imgLoading( spotInner, function(){
+      popShow(spotInner);
+    } );
   });
   $('#img_show .flex').on('click', '.item', function(){
     if ( !isRunning ) {

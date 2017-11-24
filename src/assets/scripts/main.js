@@ -55,9 +55,10 @@ $(function() {
 		  .always( function( instance ) {
 		    console.log('all images loaded');
 		    TweenMax.set(mainLoader, {className: '-=show'});
-		    TweenMax.set(page, {className: '+=show', delay: 1, onComplete:function(){
-		    	if ( typeof cont === 'function')
+		    TweenMax.set(page, {className: '+=show', delay: .5, onComplete:function(){
+		    	if ( typeof cont === 'function'){
           	cont();
+		    	}
 		    }});
 
 
