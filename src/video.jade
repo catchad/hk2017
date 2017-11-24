@@ -10,7 +10,7 @@ html(lang="zh-tw")
 		.video
 			.video__screen
 				video.video__videoElement(id="mv", muted, playsinline)
-				audio.video__audioElement
+				audio.video__audioElement(controls, style="display:block; position:fixed; bottom:0; left:0; width:100%;")
 				canvas.video__overlay(id="screen", width="600", height="338")
 				canvas.video__firework(id="firework")
 				img.video__cover.video__cover--active(src="/assets/images/video-cover.png")

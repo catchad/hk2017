@@ -48,7 +48,7 @@ var mv = function() {
 			var h = 400;
 			var app = new PIXI.Application(w, h, {forceCanvas: false, view: document.getElementById('firework'), transparent:true});
 
-			var texture = PIXI.Texture.fromImage('/tc/assets/images/mv/particle.png');
+			var texture = PIXI.Texture.fromImage('/tc/assets//images/mv/particle.png');
 
 			var container = new PIXI.particles.ParticleContainer(10000, {
 			    scale: false,
@@ -245,7 +245,7 @@ var mv = function() {
 				var mask = new Image();
 				maskArray.push(mask);
 				mask.onload = imgLoaded;
-				mask.src = "/tc/assets/images/mv/mask"+(i+1)+"-mobile.png";
+				mask.src = "/tc/assets//images/mv/mask"+(i+1)+"-mobile.png";
 			}
 
 		}
@@ -671,7 +671,7 @@ var mv = function() {
 			completeFn = complete;
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
-			req.open('GET', '/tc/assets/videos/mv.mp4?v1', true);
+			req.open('GET', '/tc/assets//videos/mv.mp4?v1', true);
 			req.responseType = 'blob';
 			req.onload = function() {
 			   if (this.status === 200) {
@@ -715,7 +715,7 @@ var mv = function() {
 
 		function mediaReady() {
 			var frameRate = 24;
-			var isFire = false;			
+			var isFire = false;
 			var transformData = {};
 			var lastCurrentFrame = 0;
 			var isActive = false;
@@ -820,6 +820,7 @@ var mv = function() {
 			    lastActive = isActive;
 		    
 			}
+			var syncTimes = 0;
 			var syncChecker = 0;
 			mediaSync();
 			function mediaSync() {
@@ -827,11 +828,15 @@ var mv = function() {
 				if( syncChecker == 60 ) {
 					// document.querySelector(".msg").innerHTML = Math.abs(a.currentTime - v.currentTime );
 					// console.log( Math.abs(a.currentTime - v.currentTime ) );
-					if( Math.abs(a.currentTime - v.currentTime ) > 0.4 ) {
-						a.currentTime = v.currentTime;
+					// document.querySelector(".msg").innerHTML = "同步次數: "+syncTimes+ " 目前誤差: " + Math.abs(a.currentTime - v.currentTime );
+					if( Math.abs(a.currentTime - v.currentTime ) > 0.1 ) {
+						v.currentTime = a.currentTime;
+						// syncTimes++;
 						// console.log("sync!!");
+						// document.querySelector(".msg").innerHTML = "同步次數: "+syncTimes;
 					}
 					syncChecker = 0;
+
 				}
 				requestAnimationFrame(mediaSync);
 			}
