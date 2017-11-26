@@ -59,32 +59,19 @@
       @Html.AntiForgeryToken()
     </form>
     <div class="full_loader show">
-      <div class="loader">
-        <div class="sk-fading-circle">
-          <div class="sk-circle sk-circle1"></div>
-          <div class="sk-circle sk-circle2"></div>
-          <div class="sk-circle sk-circle3"></div>
-          <div class="sk-circle sk-circle4"></div>
-          <div class="sk-circle sk-circle5"></div>
-          <div class="sk-circle sk-circle6"></div>
-          <div class="sk-circle sk-circle7"></div>
-          <div class="sk-circle sk-circle8"></div>
-          <div class="sk-circle sk-circle9"></div>
-          <div class="sk-circle sk-circle10"></div>
-          <div class="sk-circle sk-circle11"></div>
-          <div class="sk-circle sk-circle12"></div>
-        </div>
-      </div>
+      <img src="/tc/assets/images/main-loading-firework.png" alt=""/>
+      <div class="loading-line"></div>
+      <p>下載中...</p>
     </div>
     <header><img src="/tc/assets/images/logo.png" alt="" class="logo"/>
       <nav id="menu">
         <ul class="flex"><img src="/tc/assets/images/menu-title.png" alt="" class="title"/>
-          <li><a href="/tc/">回首頁看影片</a></li>
-          <li><a href="/tc/tour/">選路線抽機票拿折扣</a></li>
-          <li><a href="/tc/map/">旺福聖誕地圖</a></li>
-          <li><a href="#" class="poprule">活動辦法</a></li>
-          <li><a href="http://www.discoverhongkong.com/tc/index.jsp" target="_blank">香港旅遊發展局</a></li>
-          <li><a href="https://www.facebook.com/discoverhongkong.tw/" target="_blank">香港逗陣行粉絲團</a></li>
+          <li><a class="ga-event" data-cate="menu" data-label="menu-to-home" href="/tc/">回首頁看影片</a></li>
+          <li><a class="ga-event" data-cate="menu" data-label="menu-to-tour" href="/tc/tour/">選路線抽機票拿折扣</a></li>
+          <li><a class="ga-event" data-cate="menu" data-label="menu-to-map" href="/tc/map/">旺福聖誕地圖</a></li>
+          <li><a data-cate="menu" data-label="menu-popup-rule" href="#" class="poprule ga-event">活動辦法</a></li>
+          <li><a class="ga-event" data-cate="menu" data-label="menu-link-hk" href="http://www.discoverhongkong.com/tc/index.jsp" target="_blank">香港旅遊發展局</a></li>
+          <li><a class="ga-event" data-cate="menu" data-label="menu-link-hkfb" href="https://www.facebook.com/discoverhongkong.tw/" target="_blank">香港逗陣行粉絲團</a></li>
         </ul>
       </nav>
       <div class="menu-switch">
@@ -188,7 +175,7 @@
         <div class="inner">
           <h3>機票折扣碼</h3>
           <p class="code">2017HK</p>
-          <h4>於華航網站購買香港來回機票<br/>輸入折扣碼，可折抵150元</h4><a href="https://goo.gl/FajXDr" target="_blank" class="btn btn-buy">前往購買</a>
+          <h4>於華航網站購買香港來回機票<br/>輸入折扣碼，可折抵150元</h4><a href="https://goo.gl/FajXDr" target="_blank" class="btn btn-buy ga-event" data-cate="tour-btn" data-label="btn-to-buy">前往購買</a>
           <div class="detail">
             <p class="desc">說明事項：</p>
             <p class="list">1.凡於華航網站購買香港來回機票，輸入折扣代碼2017HK，可享由台灣區(桃園/高雄/台中/台南)出發至香港，每張機票減價TWD 150元之折扣優惠。</p>
@@ -224,7 +211,7 @@
               <input type="checkbox" name="agree" id="user_agree"/>
               <label for="user_agree">我已閱讀並同意相關<span class='check_rule'>活動辦法與隱私權政策</span></label>
             </div>
-            <button class="btn btn-submit">確認送出</button>
+            <button class="btn btn-submit ga-event" data-cate="tour-btn" data-label="btn-submit-form">確認送出</button>
           </form>
         </div>
       </section>
@@ -377,28 +364,28 @@
           <h3 class="sub_title">選擇一個聖誕路線，就有機會<span class="color_red">獲得香港來回機票</span></h3>
           <div class="vote quarter">
             <div class="flex_inner">
-              <div class="btn btn-vote color-1">
+              <div class="btn btn-vote ga-event color-1" data-cate="tour-btn" data-label="vote-1">
                 <div class="circle_box">
                   <p class="text"><span>我要選</span>氣質<br/>路線</p>
                 </div>
               </div>
             </div>
             <div class="flex_inner">
-              <div class="btn btn-vote color-2">
+              <div class="btn btn-vote ga-event color-2" data-cate="tour-btn" data-label="vote-2">
                 <div class="circle_box">
                   <p class="text"><span>我要選</span>大餐<br/>路線</p>
                 </div>
               </div>
             </div>
             <div class="flex_inner">
-              <div class="btn btn-vote color-3">
+              <div class="btn btn-vote ga-event color-3" data-cate="tour-btn" data-label="vote-3">
                 <div class="circle_box">
                   <p class="text"><span>我要選</span>逛街<br/>路線</p>
                 </div>
               </div>
             </div>
             <div class="flex_inner">
-              <div class="btn btn-vote color-4">
+              <div class="btn btn-vote ga-event color-4" data-cate="tour-btn" data-label="vote-4">
                 <div class="circle_box">
                   <p class="text"><span>我要選</span>玩耍<br/>路線</p>
                 </div>
@@ -406,9 +393,9 @@
             </div>
           </div>
           <div class="row">
-            <div class="btn btn-promote"><span>抽完機票</span><img src="/tc/assets/images/icon-promote.png" alt=""/><span>再拿機票折扣碼</span></div>
+            <div class="btn btn-promote ga-event" data-cate="tour-btn" data-label="btn-popup-promote"><span>抽完機票</span><img src="/tc/assets/images/icon-promote.png" alt=""/><span>再拿機票折扣碼</span></div>
           </div>
-          <div class="row"><a href="/tc/" class="btn btn-home">回首頁看影片</a></div>
+          <div class="row"><a href="/tc/" class="btn btn-home ga-event" data-cate="tour-btn" data-label="btn-to-home">回首頁看影片</a></div>
         </div>
       </section>
     </main>
@@ -418,7 +405,7 @@
         <div class="policy">
           <p>版權所有©2017香港旅遊發展局。</p><a href="http://www.discoverhongkong.com/tc/about-hktb/privacy-policy.jsp" target="_blank">資料隱私政策</a><a href="http://www.discoverhongkong.com/tc/about-hktb/cookies-policy.jsp" target="_blank">記錄精靈(Cookies)政策</a><a href="http://www.discoverhongkong.com/tc/about-hktb/terms-of-use.jsp" target="_blank">網站使用條款</a>
         </div>
-        <div class="logo"><a href="http://www.brandhk.gov.hk/html/tc/" target="_blank"><img src="/tc/assets/images/logo-b1.svg" alt=""/></a><a href="http://www.discoverhongkong.com/tc/index.jsp" target="_blank"><img src="/tc/assets/images/logo-b2.svg" alt=""/></a></div>
+        <div class="logo"><a href="http://www.brandhk.gov.hk/html/tc/" target="_blank" data-cate="footer" data-label="logo1" class="ga-event"><img src="/tc/assets/images/logo-b1.svg" alt=""/></a><a href="http://www.discoverhongkong.com/tc/index.jsp" target="_blank" data-cate="footer" data-label="logo2" class="ga-event"><img src="/tc/assets/images/logo-b2.svg" alt=""/></a></div>
       </div>
     </footer>
 

@@ -1,4 +1,5 @@
 $(function() {
+	var tips= ['等一下下喔  下載即將完成', '再等一下 正在辨識你的名字喔', '小民正在編曲中  等他一下啦', '推機正在緩慢地拿起貝斯  不要催她啦','瑪靡清一下喉嚨  等一下下喔' ,'肚皮正在找他的鼓棒  快要找到了'];
 	if (ww <= 768) {
 		var cw = 800,
 				ch = 704;
@@ -24,19 +25,22 @@ $(function() {
 		loader
 		  .add('/tc/assets/images/sprite/01m.json')
 		  .add('/tc/assets/images/sprite/04m.json')
+		  .add('/tc/assets/images/name_input.png')
 		  .load(onAssetsLoaded);
+
 	}
 	else{
 		loader
 		  .add('/tc/assets/images/sprite/01.json')
 		  .add('/tc/assets/images/sprite/04.json')
+		  .add('/tc/assets/images/name_input.png')
 		  .load(onAssetsLoaded);
 	}
 
 	// loader
 	pageTrack('page-Home-loading');
 	loader.onProgress.add(function(e){
-		countText.text( e.progress );
+		countText.text( e.progress.toFixed(0) );
 	});
 
 	function onAssetsLoaded(){
@@ -91,14 +95,26 @@ $(function() {
 
 
 	function pageHide(){
-
 		TweenMax.fromTo(currentPage, .3, { alpha: 1 }, { alpha: 0 });
 		TweenMax.set(currentPage, { display: 'none', delay: .3 });
-
 	}
+
+	var tipTimer, tipCount = 0;
+
 	function pageShow(page, delay){
+		if (page == "#step3") {
+
+			tipTimer = setInterval( function(){
+				tipCount = (tipCount >4)? 0 : tipCount+1;
+				$('.tips').text( tips[tipCount] );
+			}, 2000);
+		}
+		else{
+			clearInterval(tipTimer);
+		}
+
 		if( page == "#step5" ) {
-			TweenMax.set(page, { display: 'block', visibility:'visible', delay: delay });
+			TweenMax.set(page, { display: 'block', visibility:'visible', height:'auto', position:'relative', delay: delay });
 		} else {
 			TweenMax.set(page, { display: 'block',delay: delay });
 		}

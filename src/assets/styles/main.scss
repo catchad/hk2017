@@ -42,7 +42,6 @@ main{
 	@include box-sizing(border-box);
 	position: relative;
 	min-height: calc(100vh - #{$page_gap});
-	overflow: hidden;
 	opacity: 0;
 	&.show{
 		opacity: 1;
@@ -82,7 +81,7 @@ a{
 }
 .sub_title{
 	position: relative;
-	font-size: 1.15rem;
+	font-size: 1.1rem;
 	line-height: 1.5rem;
 	margin-top: 1.3rem;
 }
@@ -117,8 +116,8 @@ a{
 	position: relative;
 
 	.flex_inner{
-		max-width: 21%;
-		margin: 0 2%;
+		max-width: 22%;
+		margin: 0 1%;
 		@include desktop_m {
 			margin: 0 4%;
 		}
@@ -165,20 +164,45 @@ a{
 .full_loader{
 	@include translate( -50%, -50%);
 	position: fixed;
-	left: 50%; top: 40%;
+	left: 50%; top: 47%;
 	z-index: 999;
 	text-align: center;
 	display: none;
 
 	&.show{
 		display: block;
+
+		.loading-line{
+			@include animation( loading_line 2s infinite linear both);
+		}
 	}
 
 	p{
-		font-size: 1.5rem;
-		line-height: 2rem;
+		font-size: 1rem;
+		line-height: 1.5rem;
 		color: #434242;
 	}
+	img{
+		width: 200px;
+		@include desktop_s {
+			width: 400px;
+		}
+	}
+	.loading-line{
+		margin: 1rem 0;
+		width: 250px;
+		height: 3.5px;
+		background: url('../images/main-loading-line.png') repeat-x;
+		background-position: 0% 50%;
+		background-size: 200px auto;
+
+		@include desktop_s {
+			width: 400px;
+			height: 7px;
+			background-size: 350px auto;
+		}
+	}
+
 }
 
 .sk-fading-circle{
@@ -462,13 +486,17 @@ footer{
 	height: calc(100vh - #{$page_gap});
 	left: 0;
 	background-color: $home_bg;
+	overflow: hidden;
 	canvas{
 		@include translate(-50%, -50%);
 		position: absolute;
-		left: 50%; top: 50%;
+		left: 50%; top: 60%;
 		width: 100%;
+	}
 
-		@include desktop_s {
+	@include desktop_s {
+		height: calc(100vh - #{$page_gap-d});
+		canvas{
 			top: 62%;
 		}
 	}
@@ -687,11 +715,8 @@ footer{
 		.loading{
 			@include translate(-50%, -50%);
 			position: absolute;
-			left: 50%; top: 38%;
+			left: 50%; top: 45%;
 
-			@include desktop_s {
-				 top: 44%;
-			}
 			@include desktop_m {
 				 top: 40%;
 			}
@@ -718,6 +743,7 @@ footer{
 		display: block;
 		opacity: 0;
 		visibility: hidden;
+
 		.title{
 			width: 55%;
 			max-width: 290px;
@@ -736,6 +762,9 @@ footer{
 		    left: 0;
 		    bottom: 0;
 		    margin-top: 10px;
+		    @include desktop_s {
+					margin-bottom: 2rem;
+				}
 		}
 
 		.btn{
@@ -788,21 +817,21 @@ footer{
 
 	.seat{
 		position: relative;
-		margin-top: 3%;
-
 		background-image: url('../images/bg_airplane.jpg'), url('../images/bg_plane_top.jpg');
 		background-position: bottom center, top center;
 		background-repeat: no-repeat;
 		background-size: 200% auto;
 		background-color: $air_gary;
 		padding-bottom: 6%;
+		margin-top: 3%;
+		overflow: hidden;
 
 		@include desktop_s {
 			background-size: 1920px auto;
 		}
 
 		.bg{
-			// @include animation(cloud_moving 10s infinite alternate linear);
+			@include animation(cloud_moving 10s infinite alternate linear);
 			@include translate( -50%, -50%);
 			position: absolute;
 			left: 50%; top: 55%;
@@ -1002,22 +1031,19 @@ footer{
 	.btn-promote{
 		@include btn-box;
 		margin-top: 4.5rem;
+		padding: .5rem 1.5rem;
 		transition: .3s;
 		&:hover{
 			background-color: #f60202;
 			border-color: transparent;
 		}
 
-		.s_text{
-			font-size: 12px;
-			line-height: 12px;
-		}
 		img{
 			max-width: 40px;
 			padding: 0 .5rem;
 		}
 		span{
-			font-size: 20px;
+			font-size: 1.4rem;
 		}
 	}
 	.btn-home{
@@ -1043,6 +1069,7 @@ footer{
 
 // popup page
 .popup{
+	@include translateX(-100%);
 	@include flex-center;
 	display: none;
 	position: fixed;
@@ -1053,7 +1080,17 @@ footer{
 	text-align: center;
 	z-index: 700;
 
-	&.show{ @include flex-box; }
+	.inner{
+		opacity: 0;
+		transition: .5s .5s;
+	}
+
+	&.show{
+		@include flex-box;
+	}
+	&.loaded .inner{
+		opacity: 1;
+	}
 
 	h3{
 		font-size: 2.5rem;
@@ -1339,10 +1376,19 @@ footer{
 @include keyframes(cloud_moving) {
 	0%,
 	100% {
-		@include translate(-50%, -52%);
+		@include translate(-50%, -51%);
 	}
 	50%{
-		@include translate(-50%, -48%);
+		@include translate(-50%, -49%);
+	}
+}
+@include keyframes(loading_line) {
+	0%
+  {
+		background-position-x: 0%;
+	}
+	100%{
+		background-position-x: 100%;
 	}
 }
 

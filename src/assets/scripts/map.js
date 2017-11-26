@@ -4,6 +4,7 @@ $(function() {
 	// get spot info
   var spotData,
       spotInner = $('#spot_info');
+
   $.ajax({
     dataType: "json",
     url: '/tc/assets/spot.json',
@@ -11,9 +12,8 @@ $(function() {
       spotData = result;
 
       // page tour and map
-      imgLoading( spotInner, function(){
-	      popShow(spotInner);
-	    } );
+      imgLoading( $('main') );
+
 			google.maps.event.addDomListener(window, 'load', initMap);
     }
   });
@@ -254,6 +254,8 @@ $(function() {
 
 
   function getSpotinfo(spotId){
+  	popShow(spotInner, false);
+    mainLoader.addClass('show');
     var spot = spotData[spotId];
     pageTrack('page-Spot-'+spotId);
 
@@ -272,7 +274,9 @@ $(function() {
     $('.btn-linkto').text( spot.links_name[0]);
 
     setImgshow();
-    imgLoading( spotInner, popShow(spotInner) );
+    imgLoading( spotInner, function(){
+      spotInner.addClass('loaded');
+    } );
   }
   $('#img_show .flex').on('click', '.item', function(){
     if ( !isRunning ) {
@@ -286,7 +290,8 @@ $(function() {
   // tour and map page bind pan event
   function setImgshow(){
     var item = $('#img_show .item');
-    maxShow_w = (ww * .6) * item.length + ww * .1 * (item.length-1) - ww*.6
+    maxShow_w = (ww * .6) * item.length + ww * .1 * (item.length-1) - ww*.6;
+    TweenMax.set('#img_show .flex', {x: 0});
   }
 
   var pan_tar = document.getElementById('img_show');

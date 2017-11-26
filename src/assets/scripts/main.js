@@ -13,7 +13,7 @@ $(function() {
 
 	// tracking
 	pageTrack = function (page){
-		console.log('/tc/'+page);
+		// console.log('/tc/'+page);
 	  dcsMultiTrack('DCS.dcsuri','/tc/'+page);
 	  ga('send', 'pageview', page );
 	}
@@ -21,15 +21,20 @@ $(function() {
 	  var _cate = tar.attr('data-cate'),
 	      _label = tar.attr('data-label');
 
-	  if (_cate)
+	  if (_cate){
 	    ga('send', 'event', _cate, 'click', _label);
+	    // console.log(_cate, _label);
+	  }
 	}
 
 	//popup show
-	popShow = function(page){
+	popShow = function(page, loaded){
 		body.addClass('lock');
 		TweenMax.set( page, { className: '+=show'});
-		TweenMax.fromTo( page, .5, { x:'-50%', alpha:0 }, { x:'0%', alpha:1 });
+		if (loaded)
+			TweenMax.set( page, { className: '+=loaded'});
+
+		TweenMax.fromTo( page, .5, { x:'-100%' }, { x:'0%' });
 		isRunning = false;
 	}
 	// popup close
@@ -37,8 +42,8 @@ $(function() {
 		if ( $('.popup.show').length ==1 ) {
 			body.removeClass('lock');
 		}
-
-		TweenMax.fromTo( page, .5, { x:'0%', alpha:1 }, { x:'-50%', alpha:0 });
+		TweenMax.fromTo( page, .5, { x:'0%' }, { x:'-100%' });
+		TweenMax.set( page, { className: '-=loaded'});
 		TweenMax.set( page, { className: '-=show', delay: .51});
 		isRunning = false;
 	}
@@ -54,8 +59,9 @@ $(function() {
 		page.imagesLoaded()
 		  .always( function( instance ) {
 		    console.log('all images loaded');
-		    TweenMax.set(mainLoader, {className: '-=show'});
+
 		    TweenMax.set(page, {className: '+=show', delay: .5, onComplete:function(){
+		    	TweenMax.set(mainLoader, {className: '-=show'});
 		    	if ( typeof cont === 'function'){
           	cont();
 		    	}
@@ -93,10 +99,16 @@ $(function() {
 	});
 	$('.poprule, .check_rule').on('click', function(e){
 		e.preventDefault();
-		popShow('#rules');
+		popShow('#rules', true);
 		pageTrack('page-Rule');
 	});
 
+	$('.ga-event').on('click', function(){
+		eventTrack( $(this) );
+	})
+	$('#spot_info').on('click', '.btn-linkto', function(){
+		ga('send', 'event', 'tour-info', 'click', 'bnt-link-'+ $(this).attr('href'));
+	});
 
 
 

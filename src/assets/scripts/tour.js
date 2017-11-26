@@ -1,4 +1,10 @@
 $(function() {
+
+
+  // var app_snow = new PIXI.Application(window.innerWidth, window.innerHeight, {transparent : true});
+
+
+
   var canvas = document.getElementById('bg_tour');
   var snowObj = new Image();
 
@@ -19,11 +25,18 @@ $(function() {
     }
 
     Particle.prototype.reset = function() {
-      this.y = Math.random() * height;
+      var base = Math.random();
+      var base_x = base * .5;
+      var base_y = base + .2;
+      this.y = (Math.random() * height) -50;
       this.x = Math.random() * width;
-      this.dx = (Math.random() * 0.4) - 0.2;
-      this.dy = (Math.random() * 0.6) + 0.2;
-      this.w = this.h = (Math.random() * 30) + 20;
+      this.w = this.h = (base * 30) + 20;
+
+      this.dx = (Math.random() - .5) * base;
+      if (ww > 768)
+        this.dy = (base * 0.5) + .5;
+      else
+        this.dy = (base * 0.5) + .3;
     }
 
     function createParticles(count) {
@@ -41,7 +54,10 @@ $(function() {
       el.width = width;
       el.height = height;
 
-      createParticles((width * height) / 50000);
+      if (ww>768)
+        createParticles((width * height) / 50000);
+      else
+        createParticles((width * height) / 25000);
     }
 
     function updateParticles() {
@@ -51,7 +67,7 @@ $(function() {
         particle.x += particle.dx;
 
         if (particle.y > height) {
-          particle.y = 0;
+          particle.y = -50;
         }
 
         if (particle.x > width) {
@@ -75,7 +91,7 @@ $(function() {
     if ( !isRunning ) {
       isRunning = true;
       pageTrack('page-Tour-vote');
-      popShow('#user_data');
+      popShow('#user_data', true);
     }
 
   });
@@ -83,7 +99,7 @@ $(function() {
     if ( !isRunning ) {
       isRunning = true;
       pageTrack('page-Tour-promote');
-      popShow('#promote_code');
+      popShow('#promote_code', true);
     }
   });
 
@@ -170,6 +186,8 @@ $(function() {
   });
 
   $('.tour-list .btn').on('click', function(){
+    popShow(spotInner, false);
+    mainLoader.addClass('show');
 
     var spotId = $(this).attr('data-spot');
     var spot = spotData[spotId];
@@ -192,7 +210,7 @@ $(function() {
 
     setImgshow();
     imgLoading( spotInner, function(){
-      popShow(spotInner);
+      spotInner.addClass('loaded');
     } );
   });
   $('#img_show .flex').on('click', '.item', function(){
@@ -200,14 +218,15 @@ $(function() {
       isRunning = true;
       var img = $(this).attr('data-img');
       $('#spot_image img').attr('src', '/tc/assets/images/spot/'+img);
-      popShow('#spot_image');
+      popShow('#spot_image', true);
     }
   });
 
   // tour and map page bind pan event
   function setImgshow(){
     var item = $('#img_show .item');
-    maxShow_w = (ww * .6) * item.length + ww * .1 * (item.length-1) - ww*.6
+    maxShow_w = (ww * .6) * item.length + ww * .1 * (item.length-1) - ww*.6;
+    TweenMax.set('#img_show .flex', {x: 0});
   }
 
   var pan_tar = document.getElementById('img_show');
