@@ -3,7 +3,6 @@ var keyFrameData = [];
 // 00:32
 keyFrameData.push({
   img: 0,
-  view: 1,
   data: [
     // point 1
     [
@@ -288,7 +287,6 @@ keyFrameData.push({
 // 00:33
 keyFrameData.push({
   img: 0,
-  view: 1,
   data: [
     // point 1
     [
@@ -643,7 +641,6 @@ keyFrameData.push({
 // 00:49
 keyFrameData.push({
   img: 1,
-  view: 1,
   data: [
     // point 1
     [
@@ -812,7 +809,6 @@ keyFrameData.push({
 // 01:01
 keyFrameData.push({
   img: 6,
-  view: 1,
   marquee: {
     type: "horizontal",
     duration: 1.2,
@@ -1029,7 +1025,6 @@ keyFrameData.push({
 // 01:34
 keyFrameData.push({
   img: 2,
-  view: 1,
   data: [
     // point 1
     [
@@ -1190,7 +1185,6 @@ keyFrameData.push({
 // 01:36
 keyFrameData.push({
   img: 6,
-  view: 1,
   marquee: {
     type: "horizontal",
     duration: 1,
@@ -1423,7 +1417,6 @@ keyFrameData.push({
 // 01:42
 keyFrameData.push({
   img: 5,
-  view: 1,
   data: [
     // point 1
     [
@@ -1572,7 +1565,6 @@ keyFrameData.push({
 // 01:58
 keyFrameData.push({
   img: 4,
-  view: 1,
   marquee: {
     type: "vertical",
     duration: 1.8,
@@ -1974,7 +1966,6 @@ keyFrameData.push({
 // 02:11
 keyFrameData.push({
   img: 3,
-  view: 1,
   data: [
     // point 1
     [
