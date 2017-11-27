@@ -1,5 +1,5 @@
 $(function() {
-	var tips= ['等一下下喔  下載即將完成', '再等一下 正在辨識你的名字喔', '小民正在編曲中  等他一下啦', '推機正在緩慢地拿起貝斯  不要催她啦','瑪靡清一下喉嚨  等一下下喔' ,'肚皮正在找他的鼓棒  快要找到了'];
+	var tips= ['等一下下喔，下載即將完成', '再等一下，正準備在辨識你的名字喔', '小民正在編曲中，等他一下啦', '推機正在緩慢地拿起貝斯，不要催她啦','瑪靡清一下喉嚨，等一下下喔' ,'肚皮正在找他的鼓棒，快要找到了','再10秒鐘，曲子就做好了'];
 	if (ww <= 768) {
 		var cw = 800,
 				ch = 704;
@@ -105,7 +105,7 @@ $(function() {
 		if (page == "#step3") {
 
 			tipTimer = setInterval( function(){
-				tipCount = (tipCount >4)? 0 : tipCount+1;
+				tipCount = (tipCount >5)? 0 : tipCount+1;
 				$('.tips').text( tips[tipCount] );
 			}, 2000);
 		}
