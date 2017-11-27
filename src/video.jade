@@ -12,6 +12,7 @@ html(lang="zh-tw")
 				video.video__videoElement(id="mv", muted, playsinline)
 				audio.video__audioElement(controls, style="display:block; position:fixed; bottom:0; left:0; width:100%;")
 				canvas.video__overlay(id="screen", width="600", height="338")
+				canvas.video__overlay(id="screen2", width="600", height="338")
 				canvas.video__firework(id="firework")
 				img.video__cover.video__cover--active(src="/assets/images/video-cover.png")
 			.video__controls
@@ -35,18 +36,20 @@ html(lang="zh-tw")
 		//- script(src="assets/scripts/keyframedata/keyframedata0142.js")
 		//- script(src="assets/scripts/keyframedata/keyframedata0158.js")
 		//- script(src="assets/scripts/keyframedata/keyframedata0211.js")
+		
+		script(src="assets/scripts/lib.js")
+		//- script(src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js")
+		//- script(src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js")
 
-		script(src="//cdnjs.cloudflare.com/ajax/libs/pixi.js/4.6.1/pixi.min.js")
-		script(src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js")
 		//- script(src="//s3-us-west-2.amazonaws.com/s.cdpn.io/106114/ColorPropsPlugin.js")
-		script(src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js")
+		//- script(src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js")
 		//- script(src="http://www.numericjs.com/lib/numeric-1.2.6.min.js")
 		script(src="assets/scripts/mv.js")
 		script.
 			var myMv = new mv();
 
 			myMv.start({
-				img: ['assets/images/test/testname1-mobile.png', 'assets/images/test/testname2-mobile.png', 'assets/images/test/testname3-mobile.png', 'assets/images/test/testname4-mobile.png', 'assets/images/test/testname5-mobile.png', 'assets/images/test/testname6-mobile.png', 'assets/images/test/testname7-mobile.png', 'assets/images/test/fireworktext.png'],
+				img: ['//hkt1.catchad.com.tw/tc/_upload/name/Si/Wu/Liu/468b56eb2374600def3a067c8296af372dd1ecd6/name1.png', 'assets/images/test/testname2-mobile.png', 'assets/images/test/testname3-mobile.png', 'assets/images/test/testname4-mobile.png', 'assets/images/test/testname5-mobile.png', 'assets/images/test/testname6-mobile.png', 'assets/images/test/testname7-mobile.png', 'assets/images/test/fireworktext.png'],
 				music: 'assets/videos/testaudio2.mp3',
 				complete: function() {
 					alert("OK");

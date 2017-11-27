@@ -20,6 +20,7 @@ var mv = function() {
 		var completeFn;
 
 		var textImg = new Image();
+		textImg.crossOrigin = "";
 		textImg.onload = function() {
 			c.width = textImg.width;
 			c.height = textImg.height;
@@ -48,7 +49,7 @@ var mv = function() {
 			var h = 400;
 			var app = new PIXI.Application(w, h, {forceCanvas: false, view: document.getElementById('firework'), transparent:true});
 
-			var texture = PIXI.Texture.fromImage('/tc/assets//images/mv/particle.png');
+			var texture = PIXI.Texture.fromImage('/tc/assets/images/mv/particle.png');
 
 			var container = new PIXI.particles.ParticleContainer(10000, {
 			    scale: false,
@@ -167,7 +168,7 @@ var mv = function() {
 	
 
 
-	function VideoNameTransform() {
+	function VideoNameTransform(params) {
 		var self = this;
 		self.nowActiveID = 0;
 		self.nowImgID = 0;
@@ -197,7 +198,7 @@ var mv = function() {
 			linearFiltering: true
 		};
 
-		var screenCanvasElement = document.getElementById('screen');
+		var screenCanvasElement = params.view;
 		screenCanvasElement.setAttribute('width', self.screenWidth);
 		screenCanvasElement.setAttribute('height', self.screenHeight);
 		
@@ -236,6 +237,7 @@ var mv = function() {
 			imgArray = [];
 			for( var i=0; i<img.length; i++ ) {
 				var text = new Image();
+				text.crossOrigin = "";
 				imgArray.push(text);
 				text.onload = imgLoaded;
 				text.src = img[i];
@@ -243,6 +245,7 @@ var mv = function() {
 
 			for( var i=0; i<3; i++ ) {
 				var mask = new Image();
+				mask.crossOrigin = "";
 				maskArray.push(mask);
 				mask.onload = imgLoaded;
 				mask.src = "/tc/assets//images/mv/mask"+(i+1)+"-mobile.png";
@@ -581,6 +584,8 @@ var mv = function() {
 				// supports iOS 2.0 and later: <https://bit.ly/TJjs1V>
 				var v = (navigator.appVersion).match(/OS (\d+)_(\d+)_?(\d+)?/);
 				return [parseInt(v[1], 10), parseInt(v[2], 10), parseInt(v[3] || 0, 10)];
+			} else {
+				return undefined; 
 			}
 		}
 
@@ -619,7 +624,8 @@ var mv = function() {
 			}
 		})
 
-		if( iosV[0] > 10 ) {
+		// console.log( iosV);
+		if( device.desktop() || iosV[0] > 10 ) {
 			var mc = new Hammer(document.querySelector(".video__timeline"));
 			mc.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
 			mc.on("panstart", function(event) {
@@ -674,7 +680,6 @@ var mv = function() {
 		}
 	};
 
-
 	function Main() {
 		var self = this;
 
@@ -685,7 +690,7 @@ var mv = function() {
 			completeFn = complete;
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
-			req.open('GET', '/tc/assets//videos/mv.mp4?v1', true);
+			req.open('GET', '/tc/assets/videos/mv.mp4', true);
 			req.responseType = 'blob';
 			req.onload = function() {
 			   if (this.status === 200) {
@@ -740,7 +745,7 @@ var mv = function() {
 			function getCurrentVideoFrame() {
 				requestAnimationFrame(getCurrentVideoFrame);
 			    var curTime = v.currentTime;
-			    var theCurrentFrame = Math.floor(curTime*frameRate);
+			    var theCurrentFrame = Math.round(curTime*frameRate);
 			    // var targetKeyFrame;
 			    
 			    if( theCurrentFrame == lastCurrentFrame ) return;
@@ -765,12 +770,25 @@ var mv = function() {
 			   			for( var j=1; j<keyFrameData[i].data[0].length; j++ ) {
 			   				if( keyFrameData[i].data[0][j][0] == theCurrentFrame ) {
 			   					targetKeyFrameID =  i;
+
+
 			   					vntf.updatePoint([
 								    { x: vntf.screenWidth*keyFrameData[i].data[0][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[0][j][2]/1080 },
 								    { x: vntf.screenWidth*keyFrameData[i].data[1][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[1][j][2]/1080 },
 								    { x: vntf.screenWidth*keyFrameData[i].data[3][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[3][j][2]/1080 },
 								    { x: vntf.screenWidth*keyFrameData[i].data[2][j][1]/1920, y: vntf.screenHeight*keyFrameData[i].data[2][j][2]/1080 }						    
 								]);
+		   					
+
+			   					if( keyFrameData[i].data2 !== undefined ) {
+				   					vntf2.updatePoint([
+									    { x: vntf2.screenWidth*keyFrameData[i].data2[0][j][1]/1920, y: vntf2.screenHeight*keyFrameData[i].data2[0][j][2]/1080 },
+									    { x: vntf2.screenWidth*keyFrameData[i].data2[1][j][1]/1920, y: vntf2.screenHeight*keyFrameData[i].data2[1][j][2]/1080 },
+									    { x: vntf2.screenWidth*keyFrameData[i].data2[3][j][1]/1920, y: vntf2.screenHeight*keyFrameData[i].data2[3][j][2]/1080 },
+									    { x: vntf2.screenWidth*keyFrameData[i].data2[2][j][1]/1920, y: vntf2.screenHeight*keyFrameData[i].data2[2][j][2]/1080 }						    
+									]);
+			   					}
+			   					
 								isActive = true;
 								break loop1;
 			   				}
@@ -819,14 +837,18 @@ var mv = function() {
 							TweenMax.fromTo(transformData.position, targetKeyFrameData.marquee.duration, tweenFrom, tweenTo);
 
 						} else {
-	
-							vntf.changeTexture(targetKeyFrameID, targetKeyFrameData.img);
+							vntf.changeTexture(targetKeyFrameID, targetKeyFrameData.img);							
+							if( targetKeyFrameData.data2 !== undefined ) {
+								vntf2.changeTexture(targetKeyFrameID, targetKeyFrameData.img);
+							}
 						}
 	
 			    	} else {
 			    		// 沒有出現貼圖
 			    		TweenMax.killTweensOf(transformData.position);
 			    		vntf.clearTexture();
+						vntf2.clearTexture();
+			    		
 			    	}
 			    }
 
@@ -859,7 +881,8 @@ var mv = function() {
 	}
 
 	var f = new FireWorkEffect();
-	var vntf = new VideoNameTransform();
+	var vntf = new VideoNameTransform({view:document.getElementById('screen')});
+	var vntf2 = new VideoNameTransform({view:document.getElementById('screen2')});
 	var main = new Main();
 	var ui = new PlayerUI();
 
@@ -867,11 +890,12 @@ var mv = function() {
 		var checker = 0;
 		main.loadAssets(params.music, complete);
 		vntf.loadAssets([params.img[0], params.img[1], params.img[2], params.img[3], params.img[4], params.img[5], params.img[6]], complete);
+		vntf2.loadAssets([params.img[0], params.img[1], params.img[2], params.img[3], params.img[4], params.img[5], params.img[6]], complete);
 		f.loadAssets(params.img[7], complete);
 
 		function complete() {
 			checker++;
-			if( checker == 3 ) params.complete();
+			if( checker == 4 ) params.complete();
 		}
 	}
 
