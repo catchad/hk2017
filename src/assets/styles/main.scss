@@ -780,9 +780,8 @@ footer{
 	text-align: center;
 	background-color: $sky_blue;
 	padding-top: 2.5rem;
+	overflow: hidden;
 
-	background-color: #030426; // Old browsers
-	@include filter-gradient(#030426, #00053c, vertical); // IE6-9
 	@include background-image(linear-gradient(top, #030426 0%,#00053c 100%));
 
 	#bg_tour{
@@ -824,7 +823,6 @@ footer{
 		background-color: $air_gary;
 		padding-bottom: 6%;
 		margin-top: 3%;
-		overflow: hidden;
 
 		@include desktop_s {
 			background-size: 1920px auto;

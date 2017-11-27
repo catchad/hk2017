@@ -34,7 +34,7 @@ $(function() {
 		if (loaded)
 			TweenMax.set( page, { className: '+=loaded'});
 
-		TweenMax.fromTo( page, .5, { x:'-100%' }, { x:'0%' });
+		TweenMax.fromTo( page, .5, { x:'100%' }, { x:'0%' });
 		isRunning = false;
 	}
 	// popup close
@@ -42,7 +42,7 @@ $(function() {
 		if ( $('.popup.show').length ==1 ) {
 			body.removeClass('lock');
 		}
-		TweenMax.fromTo( page, .5, { x:'0%' }, { x:'-100%' });
+		TweenMax.fromTo( page, .5, { x:'0%' }, { x:'100%' });
 		TweenMax.set( page, { className: '-=loaded'});
 		TweenMax.set( page, { className: '-=show', delay: .51});
 		isRunning = false;

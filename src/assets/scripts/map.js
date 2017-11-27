@@ -254,8 +254,6 @@ $(function() {
 
 
   function getSpotinfo(spotId){
-  	popShow(spotInner, false);
-    mainLoader.addClass('show');
     var spot = spotData[spotId];
     pageTrack('page-Spot-'+spotId);
 
@@ -272,6 +270,9 @@ $(function() {
     $('#img_show .flex').html(imgs);
     $('.btn-linkto').attr('href', spot.links[0]);
     $('.btn-linkto').text( spot.links_name[0]);
+
+    mainLoader.addClass('show');
+    popShow(spotInner, false);
 
     setImgshow();
     imgLoading( spotInner, function(){
