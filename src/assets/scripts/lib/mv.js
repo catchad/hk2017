@@ -248,7 +248,7 @@ var mv = function() {
 				mask.crossOrigin = "";
 				maskArray.push(mask);
 				mask.onload = imgLoaded;
-				mask.src = "/tc/assets//images/mv/mask"+(i+1)+"-mobile.png";
+				mask.src = "/tc/assets/images/mv/mask"+(i+1)+"-mobile.png";
 			}
 
 		}
@@ -694,7 +694,6 @@ var mv = function() {
 				req.open('GET', '/tc/assets/videos/mv.mp4', true);
 			} else {
 				req.open('GET', '/tc/assets/videos/mv-mobile.mp4', true);
-				console.log("mv-mobile");
 			}
 			
 			req.responseType = 'blob';
