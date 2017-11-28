@@ -690,7 +690,13 @@ var mv = function() {
 			completeFn = complete;
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
-			req.open('GET', '/tc/assets/videos/mv.mp4', true);
+			if( ww > 1024 ) {
+				req.open('GET', '/tc/assets/videos/mv.mp4', true);
+			} else {
+				req.open('GET', '/tc/assets/videos/mv-mobile.mp4', true);
+				console.log("mv-mobile");
+			}
+			
 			req.responseType = 'blob';
 			req.onload = function() {
 			   if (this.status === 200) {
