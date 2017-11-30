@@ -298,10 +298,21 @@ header{
 			height: 46px;
 		}
 	}
+	.menu-promote{
+		display: inline-block;
+		width: 89px; height: 24px;
+		background: url('../images/menu-promote.png') center no-repeat;
+		background-size: 100% auto;
+		margin-left: auto;
+		cursor: pointer;
+		@include mobile_s {
+			width: 50px; height: 14px;
+		}
+	}
 
 	.menu-switch{
 		@include btn-close;
-		margin-left: auto;
+		// margin-left: auto;
 		padding-right: 10px;
 		z-index: 100;
 
