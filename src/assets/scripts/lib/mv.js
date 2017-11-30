@@ -690,8 +690,9 @@ var mv = function() {
 			completeFn = complete;
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
-			if( ww > 1024 ) {
+			if( window.innerWidth > 1024 ) {
 				req.open('GET', '/tc/assets/videos/mv.mp4', true);
+				console.log("pc video")
 			} else {
 				req.open('GET', '/tc/assets/videos/mv-mobile.mp4', true);
 			}

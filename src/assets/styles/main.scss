@@ -768,7 +768,12 @@ footer{
 		}
 
 		.btn{
-			margin: .5rem;
+		    margin: .5rem;
+
+			@include desktop_m {
+			    padding: 1rem 5rem;
+			}
+
 		}
 	}
 }
