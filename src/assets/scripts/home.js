@@ -85,7 +85,8 @@ $(function() {
 			nextAni();
 			pageShow('#step3', 0.5);
 			checkStatus(window.ticket);
-			$('#step5 .btn-share').text("換我，製作我的影片");
+			userTicket = window.ticket;
+			// $('#step5 .btn-share').text("換我，製作我的影片");
 		} else {
 			steps[0].visible = true;
 			// steps[2].loop = false;
@@ -292,9 +293,9 @@ $(function() {
 
 	// step5
 	$('#step5 .btn-share').on('click', function(event) {
-		if( window.ticket !== undefined ) {
-			location.href = "https://hkwonderful.discoverhongkong.com/tc/";
-		} else {
+		// if( window.ticket !== undefined ) {
+		// 	location.href = "https://hkwonderful.discoverhongkong.com/tc/";
+		// } else {
 			FB.ui({
 				method: 'share',
 				href: 'https://hkwonderful.discoverhongkong.com/tc/video/'+userTicket,
@@ -302,7 +303,7 @@ $(function() {
 			function(response) {
 
 			});
-		}
+		// }
 
 	});
 
