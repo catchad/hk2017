@@ -687,9 +687,6 @@ footer{
 				font-size: 1.25rem;
 			}
 		}
-		.content{
-			top: 85%;
-		}
 	}
 
 	#step3{
@@ -776,7 +773,6 @@ footer{
 			@include desktop_m {
 			    padding: 1rem 5rem;
 			}
-
 		}
 	}
 }
