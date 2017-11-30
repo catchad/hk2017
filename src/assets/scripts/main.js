@@ -102,6 +102,11 @@ $(function() {
 		popShow('#rules', true);
 		pageTrack('page-Rule');
 	});
+	$('.menu-promote').on('click', function(e){
+		e.preventDefault();
+		pageTrack('page-Tour-promote');
+    popShow('#promote_code', true);
+	});
 
 	$('.ga-event').on('click', function(){
 		eventTrack( $(this) );
