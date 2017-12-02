@@ -284,7 +284,7 @@ $(function() {
       isRunning = true;
       var img = $(this).attr('data-img');
       $('#spot_image img').attr('src', '/tc/assets/images/spot/'+img);
-      popShow('#spot_image');
+      popShow('#spot_image', true);
     }
   });
 

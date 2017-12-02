@@ -45,7 +45,6 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     ga('create', 'UA-70440485-4', 'auto');
-    ga('send', 'pageview', 'page-Home-init');
 
     </script>
     <!-- End Google Analytics -->
@@ -245,10 +244,10 @@
           </div>
           <div class="content">
             <div class="half">
-              <div class="btn btn-share"><span> 求你，分享一下影片</span></div>
+              <div class="btn btn-share ga-event" data-cate="home-btn" data-label="btn-share"><span> 求你，分享一下影片</span></div>
             </div>
-            <div class="half"><a href="/tc/tour/" class="btn btn-tour"><span>選路線，抽機票</span><img src="/tc/assets/images/icon-promote.png"/></a></div>
-            <div class="full"><a href="/tc/" class="btn btn-back"><span>換個名字，再唱一次</span></a></div>
+            <div class="half"><a href="/tc/tour/" class="btn btn-tour ga-event" data-cate="home-btn" data-label="btn-to-tour"><span>選路線，抽機票</span><img src="/tc/assets/images/icon-promote.png"/></a></div>
+            <div class="full"><a href="/tc/" class="btn btn-back ga-event" data-cate="home-btn" data-label="btn-restart"><span>換個名字，再唱一次</span></a></div>
           </div>
         </div>
       </section>
