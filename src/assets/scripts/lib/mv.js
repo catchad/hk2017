@@ -7,7 +7,20 @@ var mv = function() {
 	var ww = window.width;
 	var v = document.getElementById("mv"); 
 	var a = document.querySelector(".video__audioElement");
-	// var globalParams = params;
+
+	var mvRoot = "/tc/assets/videos/";
+
+	// switch ( Math.floor(Math.random()*2) ) {
+	// 	case 0:
+	// 		mvRoot = "/tc/assets/videos/";
+	// 		break;
+	// 	case 1:
+	// 		mvRoot = "https://event.catchad.com.tw/hkwonderful/";
+	// 		break;
+	// }
+
+	// console.log(mvRoot);
+
 
 	function FireWorkEffect() {
 		var self = this;
@@ -691,10 +704,9 @@ var mv = function() {
 			loadedCounter = 0;
 			var req = new XMLHttpRequest();
 			if( window.innerWidth > 1024 ) {
-				req.open('GET', '/tc/assets/videos/mv.mp4', true);
-				console.log("pc video")
+				req.open('GET', mvRoot+'mv.mp4', true);
 			} else {
-				req.open('GET', '/tc/assets/videos/mv-mobile.mp4', true);
+				req.open('GET', mvRoot+'mv-mobile.mp4', true);
 			}
 			
 			req.responseType = 'blob';
@@ -727,8 +739,6 @@ var mv = function() {
 			}
 			req2.send();
 		}
-
-
 
 		function sourceLoaded() {
 			loadedCounter++;

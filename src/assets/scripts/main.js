@@ -8,6 +8,14 @@ var mainLoader = $('.full_loader'),
 		body= $('body');
 var isRunning = false;
 
+var ios = false;
+
+if( navigator.userAgent.toUpperCase().indexOf("IPHONE") !== -1 || navigator.userAgent.toUpperCase().indexOf("IPAD") !== -1 || navigator.userAgent.toUpperCase().indexOf("IPOD") !== -1  ) {
+	ios = true;
+	$("#user_data").addClass('ios');
+}
+
+
 $(function() {
 	var header = $('header');
 
@@ -31,10 +39,23 @@ $(function() {
 	popShow = function(page, loaded){
 		body.addClass('lock');
 		TweenMax.set( page, { className: '+=show'});
+		if( page == "#user_data" && ios == true) {
+			TweenMax.set(page, {top: window.scrollY - 60});
+			console.log("1123");
+		}
+	   
+
+
 		if (loaded)
 			TweenMax.set( page, { className: '+=loaded'});
 
-		TweenMax.fromTo( page, .5, { x:'100%' }, { x:'0%' });
+		TweenMax.fromTo( page, .5, { x:'100%' }, { x:'0%' , onComplete: function() {
+			// if( page == "#user_data" ) {
+			// 	$("#tour").hide();
+			// 	$("main").css("height", "0px");
+			// 	$("main").css("min-height", "0px");
+			// }
+		}});
 		isRunning = false;
 	}
 	// popup close
@@ -78,6 +99,10 @@ $(function() {
 	// bind event
 	$(window).on('resize', onResize);
 	$('.popup .btn-close').on('click', function(){
+		// if( $(this).parents(".popup").attr("id") == "user_data" ) {
+		// 	$("#tour").show();
+		// 	$("main").attr("style", "");
+		// }
 		if ( !isRunning ){
 			isRunning = true;
 			var page = $(this).parents('.popup');
@@ -105,7 +130,7 @@ $(function() {
 	$('.menu-promote').on('click', function(e){
 		e.preventDefault();
 		pageTrack('page-Tour-promote');
-    popShow('#promote_code', true);
+    	popShow('#promote_code', true);
 	});
 
 	$('.ga-event').on('click', function(){
@@ -117,9 +142,14 @@ $(function() {
 
 
 
+	$(".winner__close").on('click', function(event) {
+		$(".winner").removeClass("winner--active");
+	});
 
 
-
+	$(".btn-winner").on('click', function(event) {
+		$(".winner").addClass("winner--active");
+	});
 
 
 });

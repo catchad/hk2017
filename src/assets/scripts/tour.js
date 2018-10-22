@@ -88,7 +88,7 @@ $(function() {
 
 
   $('.btn-vote').on('click', function(){
-    if ( !isRunning ) {
+    if ( !isRunning ) { 
       isRunning = true;
       pageTrack('page-Tour-vote');
       popShow('#user_data', true);
